@@ -51,9 +51,9 @@ module.exports.titleStyles = {
   display: 'inline-block',
   width: '140px',
   overflow: 'hidden',
-  textAlign: 'right',
+  textAlign: 'left',
   padding: 0,
-  paddingRight: '6px'
+  paddingLeft: '6px'
 };
 
 // Buttons styles
