@@ -28,7 +28,7 @@ const buttonsContainerStyles = {
   width: '290px',
   position: 'relative',
   top: '-9px'
-}
+};
 
 const buttonStyles = {
   display: 'inline-block',
@@ -46,7 +46,7 @@ class Buttons extends events.EventEmitter {
   constructor(legend, labels) {
     super();
 
-    this.legend = legend
+    this.legend = legend;
     this.labels = labels;
   }
 

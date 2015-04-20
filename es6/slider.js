@@ -51,7 +51,7 @@ const unitStyles = {
   top: '-7px',
   paddingLeft: '5px',
   color: '#565656'
-}
+};
 
 class Slider extends events.EventEmitter {
   constructor(legend, min = 0, max = 1, step = 0.01, defaultValue = 0, unit = '') {
