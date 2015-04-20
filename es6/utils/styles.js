@@ -49,7 +49,7 @@ module.exports.titleStyles = {
   lineHeight: '22px',
   height: '22px',
   display: 'inline-block',
-  width: '140px',
+  width: '660px',
   overflow: 'hidden',
   textAlign: 'left',
   padding: 0,
