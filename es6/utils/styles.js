@@ -35,6 +35,14 @@ module.exports.legendStyles = {
   paddingRight: '6px'
 };
 
+// Title styles
+module.exports.titleContainerStyles = {
+  display: 'inline-block',
+  width: '490px',
+  position: 'relative',
+  top: '-8px'
+};
+
 // Buttons styles
 module.exports.buttonsContainerStyles = {
   display: 'inline-block',

@@ -2,27 +2,19 @@
 
 A set of basic controllers for rapid prototyping
 
-### Slider
+### Title
 
 ```js
-const { Slider } = require('waves-basic-controllers');
-const $container = document.querySelector('#container');
+const { Title } = require('waves-basic-controllers');
+const $container  = document.querySelector('#container');
 
-const slider = new Slider(legend, min, max, step, defaultValue, unit, size);
-$container.appendChild(slider.render());
-
-slider.on('change', (value) => {
-  // ...do stuff
-});
+const title = new Title(legend);
+$container.appendChild(title.render());
 
 // ... or simply
 
-new Slider(legend, min, max, step, defaultValue, unit, size, $container, () => {
-  //do stuff
-});
+new Title(legend, $container);
 ```
-
-_`size` can be 'large' or 'default'_
 
 ### Buttons
 
@@ -67,6 +59,28 @@ new Toggle(legend, defaultValue, $container, () => {
   // ...do stuff
 });
 ```
+
+### Slider
+
+```js
+const { Slider } = require('waves-basic-controllers');
+const $container = document.querySelector('#container');
+
+const slider = new Slider(legend, min, max, step, defaultValue, unit, size);
+$container.appendChild(slider.render());
+
+slider.on('change', (value) => {
+  // ...do stuff
+});
+
+// ... or simply
+
+new Slider(legend, min, max, step, defaultValue, unit, size, $container, () => {
+  //do stuff
+});
+```
+
+_`size` can be 'large' or 'default'_
 
 
 _`$container` can be a DOMElement or a css selector_
