@@ -19,8 +19,8 @@ slider.on('change', (value) => {
 ### buttons
 
 ```js
-const { Slider } = require('waves-basic-controllers');
-const $container = document.querySelector('#container');
+const { Buttons } = require('waves-basic-controllers');
+const $container  = document.querySelector('#container');
 
 const buttons = new wavesBasicControllers.Buttons(label, [...ids]);
 $container.appendChild(buttons.render());
