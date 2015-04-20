@@ -2,31 +2,67 @@
 
 A set of basic controllers for rapid prototyping
 
-### slider
+### Slider
 
 ```js
 const { Slider } = require('waves-basic-controllers');
 const $container = document.querySelector('#container');
 
-const slider = new wavesBasicControllers.Slider(label, min, max, step, defaultValue, unit);
+const slider = new Slider(legend, min, max, step, defaultValue, unit);
 $container.appendChild(slider.render());
 
 slider.on('change', (value) => {
   // ...do stuff
 });
+
+// ... or simply
+
+new Slider(legend, min, max, step, defaultValue, unit, $container, () => {
+  //do stuff
+});
 ```
 
-### buttons
+### Buttons
 
 ```js
 const { Buttons } = require('waves-basic-controllers');
 const $container  = document.querySelector('#container');
 
-const buttons = new wavesBasicControllers.Buttons(label, [...ids]);
+const buttons = new Buttons(legend, [...ids]);
 $container.appendChild(buttons.render());
 
-buttons.on('click', (id) => {
+buttons.on('change', (id) => {
   switch (id) {
     // ...do stuff
   }
 });
+
+// ... or simply
+
+new Buttons(legend, [...ids], $container, (id) => {
+  switch (id) {
+    // ...do stuff
+  }
+})
+```
+
+### Toggle
+
+```js
+const { Toggle } = require('waves-basic-controllers');
+const $container  = document.querySelector('#container');
+
+const toggle = new Toggle(legend, defaultState);
+$container.appendChild(toggle.render());
+
+toggle.on('change', function(active) {
+  // ...do stuff
+});
+
+// ... or simply
+
+new Toggle(legend, defaultValue, $container, () => {
+  // ...do stuff
+});
+```
+

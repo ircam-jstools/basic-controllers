@@ -1,46 +1,5 @@
 const events = require('events');
-
-const containerStyles = {
-  width: '440px',
-  height: '30px',
-  display: 'block',
-  padding: '4px',
-  margin: '2px',
-  backgroundColor: '#efefef',
-  border: '1px solid #aaaaaa',
-};
-
-const legendStyles = {
-  color: '#464646',
-  font: 'normal bold 12px arial',
-  lineHeight: '22px',
-  height: '22px',
-  display: 'inline-block',
-  width: '140px',
-  overflow: 'hidden',
-  textAlign: 'right',
-  padding: 0,
-  paddingRight: '6px'
-};
-
-const buttonsContainerStyles = {
-  display: 'inline-block',
-  width: '290px',
-  position: 'relative',
-  top: '-9px'
-};
-
-const buttonStyles = {
-  display: 'inline-block',
-  font: 'normal normal 12px arial',
-  height: '22px',
-  border: 'none',
-  backgroundColor: '#464646',
-  clickedBackgroundColor: '#686868',
-  color: '#ffffff',
-  borderRight: '4px solid #efefef',
-  boxSizing: 'border-box'
-};
+const styles = require('./utils/styles');
 
 class Buttons extends events.EventEmitter {
   constructor(legend, labels, $container = null, callback = null) {
@@ -70,30 +29,30 @@ class Buttons extends events.EventEmitter {
     this.$buttonsContainer = this.$el.querySelector('.buttons-container');
     this.$buttons = Array.from(this.$el.querySelectorAll('button'));
 
-    this.bindEvents();
     this.addStyles();
+    this.bindEvents();
 
     return this.$el;
   }
 
   addStyles() {
-    for (let attr in containerStyles) {
-      this.$el.style[attr] = containerStyles[attr];
+    for (let attr in styles.containerStyles) {
+      this.$el.style[attr] = styles.containerStyles[attr];
     }
 
-    for (let attr in legendStyles) {
-      this.$legend.style[attr] = legendStyles[attr];
+    for (let attr in styles.legendStyles) {
+      this.$legend.style[attr] = styles.legendStyles[attr];
     }
 
-    for (let attr in buttonsContainerStyles) {
-      this.$buttonsContainer.style[attr] = buttonsContainerStyles[attr];
+    for (let attr in styles.buttonsContainerStyles) {
+      this.$buttonsContainer.style[attr] = styles.buttonsContainerStyles[attr];
     }
 
     const buttonWidth = 100 / this.$buttons.length;
     this.$buttons.forEach((button) => {
       button.style.width = buttonWidth + '%';
-      for (let attr in buttonStyles) {
-        button.style[attr] = buttonStyles[attr];
+      for (let attr in styles.buttonStyles) {
+        button.style[attr] = styles.buttonStyles[attr];
       }
     });
   }
@@ -104,12 +63,12 @@ class Buttons extends events.EventEmitter {
 
       button.addEventListener('mousedown', (e) => {
         e.preventDefault();
-        button.style.backgroundColor = buttonStyles.clickedBackgroundColor;
+        button.style.backgroundColor = styles.buttonStyles.clickedBackgroundColor;
       });
 
       button.addEventListener('mouseup', (e) => {
         e.preventDefault();
-        button.style.backgroundColor = buttonStyles.backgroundColor;
+        button.style.backgroundColor = styles.buttonStyles.backgroundColor;
         this.emit('change', label);
       });
     });

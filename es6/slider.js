@@ -1,57 +1,5 @@
 const events = require('events');
-
-const containerStyles = {
-  width: '440px',
-  height: '30px',
-  display: 'block',
-  padding: '4px',
-  margin: '2px',
-  backgroundColor: '#efefef',
-  border: '1px solid #aaaaaa',
-};
-
-const legendStyles = {
-  color: '#464646',
-  font: 'normal bold 12px arial',
-  lineHeight: '22px',
-  height: '22px',
-  display: 'inline-block',
-  width: '140px',
-  overflow: 'hidden',
-  textAlign: 'right',
-  padding: 0,
-  paddingRight: '6px'
-};
-
-const rangeStyles = {
-  height: '22px',
-  width: '200px',
-  display: 'inline-block',
-};
-
-const numberStyles = {
-  height: '22px',
-  width: '54px',
-  position: 'relative',
-  top: '-7px',
-  left: '5px',
-  font: 'normal normal 12px arial',
-  border: 'none',
-  background: 'none',
-  paddingLeft: '4px',
-  display: 'inline-block',
-};
-
-const unitStyles = {
-  font: 'italic normal 12px arial',
-  lineHeight: '22px',
-  height: '22px',
-  display: 'inline-block',
-  position: 'relative',
-  top: '-7px',
-  paddingLeft: '5px',
-  color: '#565656'
-};
+const styles = require('./utils/styles');
 
 class Slider extends events.EventEmitter {
   constructor(legend, min = 0, max = 1, step = 0.01, defaultValue = 0, unit = '', $container = null, callback = null) {
@@ -102,24 +50,24 @@ class Slider extends events.EventEmitter {
   }
 
   addStyles() {
-    for (let attr in containerStyles) {
-      this.$el.style[attr] = containerStyles[attr];
+    for (let attr in styles.containerStyles) {
+      this.$el.style[attr] = styles.containerStyles[attr];
     }
 
-    for (let attr in legendStyles) {
-      this.$legend.style[attr] = legendStyles[attr];
+    for (let attr in styles.legendStyles) {
+      this.$legend.style[attr] = styles.legendStyles[attr];
     }
 
-    for (let attr in rangeStyles) {
-      this.$range.style[attr] = rangeStyles[attr];
+    for (let attr in styles.rangeStyles) {
+      this.$range.style[attr] = styles.rangeStyles[attr];
     }
 
-    for (let attr in numberStyles) {
-      this.$number.style[attr] = numberStyles[attr];
+    for (let attr in styles.numberStyles) {
+      this.$number.style[attr] = styles.numberStyles[attr];
     }
 
-    for (let attr in unitStyles) {
-      this.$unit.style[attr] = unitStyles[attr];
+    for (let attr in styles.unitStyles) {
+      this.$unit.style[attr] = styles.unitStyles[attr];
     }
   }
 
