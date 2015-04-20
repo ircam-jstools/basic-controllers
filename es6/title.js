@@ -17,11 +17,12 @@ class Title extends events.EventEmitter {
   }
 
   render() {
-    let content = `<span class="legend">${this.legend}</span>` +
-      `<div class="title-container">`;
+    let content = `<span class="legend">${this.legend}</span>`;
+
+    this.$el = document.createElement('label');
+    this.$el.innerHTML = content;
 
     this.$legend = this.$el.querySelector('.legend');
-    this.$buttonsContainer = this.$el.querySelector('.title-container');
 
     this.addStyles();
 
