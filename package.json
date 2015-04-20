@@ -18,7 +18,7 @@
   "license": "BSD-3",
   "repository": {
     "type": "git",
-    "url": "https://github.com/wavesjs/ui"
+    "url": "https://github.com/wavesjs/basic-controllers.git"
   },
   "jshintConfig": {
     "esnext": true,

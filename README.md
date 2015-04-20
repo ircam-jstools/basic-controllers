@@ -2,9 +2,9 @@
 
 A set of basic controllers for rapid prototyping
 
-## slider
+### slider
 
-```
+```js
 let $container = document.querySelector('#container');
 
 let slider = new wavesBasicControllers.Slider(label, min, max, step, defaultValue, unit);
@@ -15,9 +15,9 @@ slider.on('change', (value) => {
 });
 ```
 
-## buttons
+### buttons
 
-```
+```js
 let $container = document.querySelector('#container');
 
 let buttons = new wavesBasicControllers.Buttons(label, [...ids]);
