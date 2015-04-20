@@ -1,7 +1,7 @@
 
 // common styles
 module.exports.containerStyles = {
-  width: '460px',
+  width: '660px',
   height: '30px',
   display: 'block',
   padding: '3px',
@@ -38,7 +38,7 @@ module.exports.legendStyles = {
 // Buttons styles
 module.exports.buttonsContainerStyles = {
   display: 'inline-block',
-  width: '290px',
+  width: '490px',
   position: 'relative',
   top: '-8px'
 };
@@ -79,6 +79,7 @@ module.exports.numberStyles = {
   background: 'none',
   paddingLeft: '4px',
   display: 'inline-block',
+  textAlign: 'right'
 };
 
 module.exports.unitStyles = {
@@ -96,38 +97,40 @@ module.exports.unitStyles = {
 module.exports.toggleContainer = {
   padding: 0,
   margin: 0,
-  width: '23px',
-  height: '23px',
+  width: '19px',
+  height: '19px',
   backgroundColor: '#464646',
   display: 'inline-block',
-  cursor: 'pointer'
+  cursor: 'pointer',
+  position: 'relative',
+  top: '-1px'
 };
 
 module.exports.toggleActive = {
   padding: 0,
   margin: 0,
-  width: '23px',
-  height: '23px',
+  width: '19px',
+  height: '19px',
   // backgroundColor: 'green'
 };
 
 module.exports.x1 = {
   width: '1px',
-  height: '23px',
+  height: '19px',
   transform: 'rotate(45deg)',
   backgroundColor: '#efefef',
   position: 'relative',
-  left: '11px'
+  left: '9px'
 };
 
 module.exports.x2 = {
   width: '1px',
-  height: '23px',
+  height: '19px',
   transform: 'rotate(-45deg)',
   backgroundColor: '#efefef',
   position: 'relative',
-  left: '11px',
-  top: '-23px'
+  left: '9px',
+  top: '-19px'
 };
 
 
