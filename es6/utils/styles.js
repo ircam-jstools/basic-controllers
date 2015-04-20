@@ -11,17 +11,6 @@ module.exports.containerStyles = {
   boxSizing: 'border-box'
 };
 
-module.exports.containerLargeStyles = {
-  width: '660px',
-  height: '30px',
-  display: 'block',
-  padding: '3px',
-  margin: '2px',
-  backgroundColor: '#efefef',
-  border: '1px solid #aaaaaa',
-  boxSizing: 'border-box'
-};
-
 module.exports.legendStyles = {
   color: '#464646',
   font: 'italic bold 12px arial',
@@ -40,7 +29,9 @@ module.exports.titleContainerStyles = {
   display: 'inline-block',
   width: '660px',
   position: 'relative',
-  top: '-8px'
+  top: '-8px',
+  backgroundColor: '#ffffff',
+  border: '0px'
 };
 
 module.exports.titleStyles = {
