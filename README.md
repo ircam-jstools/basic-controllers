@@ -5,9 +5,10 @@ A set of basic controllers for rapid prototyping
 ### slider
 
 ```js
-let $container = document.querySelector('#container');
+const { Slider } = require('waves-basic-controllers');
+const $container = document.querySelector('#container');
 
-let slider = new wavesBasicControllers.Slider(label, min, max, step, defaultValue, unit);
+const slider = new wavesBasicControllers.Slider(label, min, max, step, defaultValue, unit);
 $container.appendChild(slider.render());
 
 slider.on('change', (value) => {
@@ -18,9 +19,10 @@ slider.on('change', (value) => {
 ### buttons
 
 ```js
-let $container = document.querySelector('#container');
+const { Slider } = require('waves-basic-controllers');
+const $container = document.querySelector('#container');
 
-let buttons = new wavesBasicControllers.Buttons(label, [...ids]);
+const buttons = new wavesBasicControllers.Buttons(label, [...ids]);
 $container.appendChild(buttons.render());
 
 buttons.on('click', (id) => {
