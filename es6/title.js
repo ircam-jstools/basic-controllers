@@ -23,6 +23,7 @@ class Title extends events.EventEmitter {
     this.$el.innerHTML = content;
 
     this.$legend = this.$el.querySelector('.legend');
+    this.$titleContainer = this.$el.querySelector('.title-container');
 
     this.addStyles();
 
@@ -39,7 +40,7 @@ class Title extends events.EventEmitter {
     }
 
     for (let attr in styles.titleContainerStyles) {
-      this.$buttonsContainer.style[attr] = styles.titleContainerStyles[attr];
+      this.$titleContainer.style[attr] = styles.titleContainerStyles[attr];
     }
   }
 }
