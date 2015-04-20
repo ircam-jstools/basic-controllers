@@ -24,7 +24,7 @@ module.exports.containerLargeStyles = {
 
 module.exports.legendStyles = {
   color: '#464646',
-  font: 'normal bold 12px arial',
+  font: 'normal 12px arial',
   lineHeight: '22px',
   height: '22px',
   display: 'inline-block',
