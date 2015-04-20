@@ -17,7 +17,8 @@ class Title extends events.EventEmitter {
   }
 
   render() {
-    let content = `<span class="legend">${this.legend}</span>`;
+    let content = `<span class="legend">${this.legend}</span>` +
+      `<div class="title-container">`;
 
     this.$el = document.createElement('label');
     this.$el.innerHTML = content;
