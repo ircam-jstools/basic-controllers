@@ -38,7 +38,7 @@ module.exports.legendStyles = {
 // Title styles
 module.exports.titleContainerStyles = {
   display: 'inline-block',
-  width: '490px',
+  width: '660px',
   position: 'relative',
   top: '-8px'
 };
