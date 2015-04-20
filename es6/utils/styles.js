@@ -43,6 +43,19 @@ module.exports.titleContainerStyles = {
   top: '-8px'
 };
 
+module.exports.titleStyles = {
+  color: '#464646',
+  font: 'italic bold 14px arial',
+  lineHeight: '22px',
+  height: '22px',
+  display: 'inline-block',
+  width: '140px',
+  overflow: 'hidden',
+  textAlign: 'right',
+  padding: 0,
+  paddingRight: '6px'
+};
+
 // Buttons styles
 module.exports.buttonsContainerStyles = {
   display: 'inline-block',
