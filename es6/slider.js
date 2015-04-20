@@ -54,7 +54,7 @@ const unitStyles = {
 };
 
 class Slider extends events.EventEmitter {
-  constructor(legend, min = 0, max = 1, step = 0.01, defaultValue = 0, unit = '') {
+  constructor(legend, min = 0, max = 1, step = 0.01, defaultValue = 0, unit = '', $container = null, callback = null) {
     super();
 
     this.legend = legend;
@@ -63,6 +63,9 @@ class Slider extends events.EventEmitter {
     this.step = step;
     this.unit = unit;
     this._value = defaultValue;
+
+    if ($container) { $container.appendChild(this.render()); }
+    if (callback) { this.on('change', callback); }
   }
 
   set value(value) {

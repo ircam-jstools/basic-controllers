@@ -43,11 +43,14 @@ const buttonStyles = {
 };
 
 class Buttons extends events.EventEmitter {
-  constructor(legend, labels) {
+  constructor(legend, labels, $container = null, callback = null) {
     super();
 
     this.legend = legend;
     this.labels = labels;
+
+    if ($container) { $container.appendChild(this.render()); }
+    if (callback) { this.on('change', callback); }
   }
 
   render() {
@@ -107,7 +110,7 @@ class Buttons extends events.EventEmitter {
       button.addEventListener('mouseup', (e) => {
         e.preventDefault();
         button.style.backgroundColor = buttonStyles.backgroundColor;
-        this.emit('click', label);
+        this.emit('change', label);
       });
     });
   }

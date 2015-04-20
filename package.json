@@ -2,7 +2,7 @@
   "name": "basic-controllers",
   "version": "1.0.0",
   "description": "basic-controllers for rapid prototyping",
-  "main": "waves-basic-controllers",
+  "main": "waves-basic-controllers.js",
   "standalone": "wavesBasicControllers",
   "scripts": {
     "transpile": "node ./bin/scripts.js --transpile",
