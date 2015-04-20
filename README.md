@@ -8,7 +8,7 @@ A set of basic controllers for rapid prototyping
 const { Slider } = require('waves-basic-controllers');
 const $container = document.querySelector('#container');
 
-const slider = new Slider(legend, min, max, step, defaultValue, unit);
+const slider = new Slider(legend, min, max, step, defaultValue, unit, size);
 $container.appendChild(slider.render());
 
 slider.on('change', (value) => {
@@ -17,10 +17,12 @@ slider.on('change', (value) => {
 
 // ... or simply
 
-new Slider(legend, min, max, step, defaultValue, unit, $container, () => {
+new Slider(legend, min, max, step, defaultValue, unit, size, $container, () => {
   //do stuff
 });
 ```
+
+_`size` can be 'large' or 'default'_
 
 ### Buttons
 
@@ -66,3 +68,5 @@ new Toggle(legend, defaultValue, $container, () => {
 });
 ```
 
+
+_`$container` can be a DOMElement or a css selector_

@@ -1,7 +1,7 @@
 
 // common styles
 module.exports.containerStyles = {
-  width: '440px',
+  width: '460px',
   height: '30px',
   display: 'block',
   padding: '3px',
@@ -12,7 +12,7 @@ module.exports.containerStyles = {
 };
 
 module.exports.containerLargeStyles = {
-  width: '640px',
+  width: '660px',
   height: '30px',
   display: 'block',
   padding: '3px',

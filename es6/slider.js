@@ -87,7 +87,7 @@ class Slider extends events.EventEmitter {
 
   bindEvents() {
     this.$range.addEventListener('input', () => {
-      let value = this.$range.value;
+      let value = parseFloat(this.$range.value);
       this.$number.value = value;
       this.value = value;
 
@@ -95,7 +95,7 @@ class Slider extends events.EventEmitter {
     }, false);
 
     this.$number.addEventListener('input', () => {
-      let value = this.$number.value;
+      let value = parseFloat(this.$number.value);
       this.$range.value = value;
       this.value = value;
 
