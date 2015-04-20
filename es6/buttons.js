@@ -8,7 +8,15 @@ class Buttons extends events.EventEmitter {
     this.legend = legend;
     this.labels = labels;
 
-    if ($container) { $container.appendChild(this.render()); }
+
+    if ($container) {
+      if (typeof $container === 'string') {
+        $container = document.querySelector($container);
+      }
+
+      $container.appendChild(this.render());
+    }
+
     if (callback) { this.on('change', callback); }
   }
 

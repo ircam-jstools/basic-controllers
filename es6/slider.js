@@ -2,7 +2,7 @@ const events = require('events');
 const styles = require('./utils/styles');
 
 class Slider extends events.EventEmitter {
-  constructor(legend, min = 0, max = 1, step = 0.01, defaultValue = 0, unit = '', $container = null, callback = null) {
+  constructor(legend, min = 0, max = 1, step = 0.01, defaultValue = 0, unit = '', size = 'default', $container = null, callback = null) {
     super();
 
     this.legend = legend;
@@ -10,9 +10,17 @@ class Slider extends events.EventEmitter {
     this.max = max;
     this.step = step;
     this.unit = unit;
+    this.size = size;
     this._value = defaultValue;
 
-    if ($container) { $container.appendChild(this.render()); }
+    if ($container) {
+      if (typeof $container === 'string') {
+        $container = document.querySelector($container);
+      }
+
+      $container.appendChild(this.render());
+    }
+
     if (callback) { this.on('change', callback); }
   }
 
@@ -35,7 +43,7 @@ class Slider extends events.EventEmitter {
       `<input type="number" min="${this.min}" max="${this.max}" step="${this.step}" value="${this.value}" /> ` +
       `<span class="unit">${this.unit}</span>`;
 
-    this.$el = document.createElement('legend');
+    this.$el = document.createElement('label');
     this.$el.innerHTML = content;
 
     this.$legend  = this.$el.querySelector('.legend');
@@ -50,16 +58,22 @@ class Slider extends events.EventEmitter {
   }
 
   addStyles() {
-    for (let attr in styles.containerStyles) {
-      this.$el.style[attr] = styles.containerStyles[attr];
+    const containerStyles = (this.size === 'large') ?
+      styles.containerLargeStyles : styles.containerStyles;
+
+    for (let attr in containerStyles) {
+      this.$el.style[attr] = containerStyles[attr];
     }
 
     for (let attr in styles.legendStyles) {
       this.$legend.style[attr] = styles.legendStyles[attr];
     }
 
-    for (let attr in styles.rangeStyles) {
-      this.$range.style[attr] = styles.rangeStyles[attr];
+    const rangeStyles = (this.size === 'large') ?
+      styles.rangeLargeStyles : styles.rangeDefaultStyles;
+
+    for (let attr in rangeStyles) {
+      this.$range.style[attr] = rangeStyles[attr];
     }
 
     for (let attr in styles.numberStyles) {

@@ -8,6 +8,18 @@ module.exports.containerStyles = {
   margin: '2px',
   backgroundColor: '#efefef',
   border: '1px solid #aaaaaa',
+  boxSizing: 'border-box'
+};
+
+module.exports.containerLargeStyles = {
+  width: '640px',
+  height: '30px',
+  display: 'block',
+  padding: '3px',
+  margin: '2px',
+  backgroundColor: '#efefef',
+  border: '1px solid #aaaaaa',
+  boxSizing: 'border-box'
 };
 
 module.exports.legendStyles = {
@@ -44,9 +56,15 @@ module.exports.buttonStyles = {
 };
 
 // Slider styles
-module.exports.rangeStyles = {
+module.exports.rangeDefaultStyles = {
   height: '22px',
   width: '200px',
+  display: 'inline-block',
+};
+
+module.exports.rangeLargeStyles = {
+  height: '22px',
+  width: '400px',
   display: 'inline-block',
 };
 
