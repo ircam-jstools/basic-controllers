@@ -33,7 +33,7 @@ class Title extends events.EventEmitter {
 
   addStyles() {
     for (let attr in styles.containerStyles) {
-      this.$el.style[attr] = styles.containerStyles[attr];
+      this.$el.style[attr] = styles.transparentContainerStyles[attr];
     }
 
     for (let attr in styles.titleStyles) {
