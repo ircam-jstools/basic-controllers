@@ -30,7 +30,7 @@ module.exports.titleContainerStyles = {
   width: '660px',
   position: 'relative',
   top: '-8px',
-  backgroundColor: '#ffffff',
+  backgroundColor: 'transparent',
   border: '0px'
 };
 
