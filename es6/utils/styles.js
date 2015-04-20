@@ -45,7 +45,7 @@ module.exports.titleContainerStyles = {
 
 module.exports.titleStyles = {
   color: '#464646',
-  font: 'italic bold 14px arial',
+  font: 'italic bold 13px arial',
   lineHeight: '22px',
   height: '22px',
   display: 'inline-block',

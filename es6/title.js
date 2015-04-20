@@ -2,10 +2,10 @@ const events = require('events');
 const styles = require('./utils/styles');
 
 class Title extends events.EventEmitter {
-  constructor(legend, $container = null) {
+  constructor(title, $container = null) {
     super();
 
-    this.legend = legend;
+    this.title = title;
 
     if ($container) {
       if (typeof $container === 'string') {
@@ -17,13 +17,13 @@ class Title extends events.EventEmitter {
   }
 
   render() {
-    let content = `<span class="legend">${this.legend}</span>` +
+    let content = `<span class="title">${this.title}</span>` +
       `<div class="title-container">`;
 
     this.$el = document.createElement('label');
     this.$el.innerHTML = content;
 
-    this.$legend = this.$el.querySelector('.legend');
+    this.$title = this.$el.querySelector('.title');
     this.$titleContainer = this.$el.querySelector('.title-container');
 
     this.addStyles();
@@ -36,8 +36,8 @@ class Title extends events.EventEmitter {
       this.$el.style[attr] = styles.containerStyles[attr];
     }
 
-    for (let attr in styles.legendStyles) {
-      this.$legend.style[attr] = styles.legendStyles[attr];
+    for (let attr in styles.titleStyles) {
+      this.$title.style[attr] = styles.titleStyles[attr];
     }
 
     for (let attr in styles.titleContainerStyles) {
