@@ -15,10 +15,10 @@ module.exports.transparentContainerStyles = {
   width: '660px',
   height: '30px',
   display: 'block',
-  padding: '3px',
-  margin: '6px 2px 2px 2px',
+  padding: '8px 0px 0px 0px;',
+  margin: '2px',
   backgroundColor: 'transparent',
-  border: '1px solid #aaaaaa',
+  border: '0px',
   boxSizing: 'border-box'
 };
 
@@ -41,6 +41,7 @@ module.exports.titleContainerStyles = {
   width: '660px',
   position: 'relative',
   top: '-8px',
+  padding: '8px 0px 0px 0px'
 };
 
 module.exports.titleStyles = {
@@ -49,11 +50,12 @@ module.exports.titleStyles = {
   lineHeight: '22px',
   height: '22px',
   display: 'inline-block',
-  width: '648px',
+  width: '660px',
   overflow: 'hidden',
   textAlign: 'left',
   padding: 0,
-  paddingLeft: '6px'
+  paddingLeft: '3px',
+  boxSizing: 'border-box'
 };
 
 // Buttons styles
