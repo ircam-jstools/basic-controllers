@@ -11,6 +11,17 @@ module.exports.containerStyles = {
   boxSizing: 'border-box'
 };
 
+module.exports.containerLargeStyles = {
+  width: '660px',
+  height: '30px',
+  display: 'block',
+  padding: '3px',
+  margin: '2px',
+  backgroundColor: '#efefef',
+  border: '1px solid #aaaaaa',
+  boxSizing: 'border-box'
+};
+
 module.exports.transparentContainerStyles = {
   width: '660px',
   height: '30px',
