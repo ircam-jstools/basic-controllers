@@ -15,7 +15,7 @@ module.exports.transparentContainerStyles = {
   width: '660px',
   height: '30px',
   display: 'block',
-  padding: '8px 0px 0px 0px;',
+  padding: '8px 0px 0px 0px',
   margin: '2px',
   backgroundColor: 'transparent',
   border: '0px',
