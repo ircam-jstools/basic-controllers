@@ -70,7 +70,7 @@ class Slider extends events.EventEmitter {
     }
 
     const rangeStyles = (this.size === 'large') ?
-      styles.rangeStyles : styles.rangeDefaultStyles;
+      styles.rangeLargeStyles : styles.rangeDefaultStyles;
 
     for (let attr in rangeStyles) {
       this.$range.style[attr] = rangeStyles[attr];
