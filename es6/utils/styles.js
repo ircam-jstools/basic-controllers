@@ -22,9 +22,20 @@ module.exports.containerLargeStyles = {
   boxSizing: 'border-box'
 };
 
+module.exports.transparentContainerStyles = {
+  width: '660px',
+  height: '30px',
+  display: 'block',
+  padding: '8px 0px 0px 0px',
+  margin: '2px',
+  backgroundColor: 'transparent',
+  border: '0px',
+  boxSizing: 'border-box'
+};
+
 module.exports.legendStyles = {
   color: '#464646',
-  font: 'normal bold 12px arial',
+  font: 'italic bold 12px arial',
   lineHeight: '22px',
   height: '22px',
   display: 'inline-block',
@@ -33,6 +44,29 @@ module.exports.legendStyles = {
   textAlign: 'right',
   padding: 0,
   paddingRight: '6px'
+};
+
+// Title styles
+module.exports.titleContainerStyles = {
+  display: 'inline-block',
+  width: '660px',
+  position: 'relative',
+  top: '-8px',
+  padding: '8px 0px 0px 0px'
+};
+
+module.exports.titleStyles = {
+  color: '#464646',
+  font: 'normal bold 12px arial',
+  lineHeight: '22px',
+  height: '22px',
+  display: 'inline-block',
+  width: '660px',
+  overflow: 'hidden',
+  textAlign: 'left',
+  padding: 0,
+  paddingLeft: '3px',
+  boxSizing: 'border-box'
 };
 
 // Buttons styles

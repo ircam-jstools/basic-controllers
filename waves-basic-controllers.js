@@ -1,9 +1,10 @@
 'use strict';
 
 var basicControllers = {
-  Slider: require('./dist/slider'),
+  Title: require('./dist/title'),
   Buttons: require('./dist/buttons'),
-  Toggle: require('./dist/toggle')
+  Toggle: require('./dist/toggle'),
+  Slider: require('./dist/slider')
 };
 
-module.exports = basicControllers
+module.exports = basicControllers;
