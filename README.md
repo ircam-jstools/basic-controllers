@@ -82,7 +82,7 @@ new Slider(legend, min, max, step, defaultValue, unit, size, $container, () => {
 });
 ```
 
-_`size` can be 'large' or 'default'_
+_`size` can be 'large', 'medium' or 'small' ('medium' is the default value)_
 
 
 ### Conventions
