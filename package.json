@@ -27,7 +27,7 @@
     "devel": true
   },
   "dependencies": {
-    "babel-runtime": "4.7.6"
+    "babel-runtime": "^5.4.4"
   },
   "devDependencies": {
     "fs-extra": "^0.16.3",
