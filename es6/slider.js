@@ -38,12 +38,18 @@ class Slider extends events.EventEmitter {
   }
 
   render() {
-    let content = `<span class="legend">${this.legend}</span>` +
-      `<input type="range" min="${this.min}" max="${this.max}" step="${this.step}" value="${this.value}" /> ` +
-      `<input type="number" min="${this.min}" max="${this.max}" step="${this.step}" value="${this.value}" /> ` +
-      `<span class="unit">${this.unit}</span>`;
+    let content = `<span class="legend">${this.legend}</span>
+      <div class="inner-wrapper ${this.size}">
+        <input class="range" type="range" min="${this.min}" max="${this.max}" step="${this.step}" value="${this.value}" />
+
+        <div class="number-controller">
+          <input type="number" class="number" min="${this.min}" max="${this.max}" step="${this.step}" value="${this.value}" />
+          <span class="unit">${this.unit}</span>
+        </div>
+      </div>`;
 
     this.$el = document.createElement('label');
+    this.$el.classList.add(styles.ns, 'slider');
     this.$el.innerHTML = content;
 
     this.$legend  = this.$el.querySelector('.legend');
@@ -58,31 +64,22 @@ class Slider extends events.EventEmitter {
   }
 
   addStyles() {
-    const containerStyles = (this.size === 'large') ?
-      styles.containerLargeStyles : styles.containerStyles;
+    styles.insertRules('.slider', styles.containerStyles);
+    styles.insertRules('.slider .legend', styles.legendStyles);
 
-    for (let attr in containerStyles) {
-      this.$el.style[attr] = containerStyles[attr];
-    }
+    styles.insertRules('.slider .inner-wrapper', styles.innerWrapper);
+    // styles.insertRules('.slider .inner-wrapper', styles.sliderInnerWrapper);
 
-    for (let attr in styles.legendStyles) {
-      this.$legend.style[attr] = styles.legendStyles[attr];
-    }
+    styles.insertRules('.slider .inner-wrapper .range', styles.rangeDefaultStyles);
+    styles.insertRules('.slider .inner-wrapper.large .range', styles.rangeLargeStyles);
+    styles.insertRules('.slider .inner-wrapper.small .range', styles.rangeSmallStyles);
 
-    const rangeStyles = (this.size === 'large') ?
-      styles.rangeLargeStyles : styles.rangeDefaultStyles;
+    styles.insertRules('.slider .inner-wrapper .number-controller', styles.numberDefaultController);
+    styles.insertRules('.slider .inner-wrapper.large .number-controller', styles.numberController);
+    styles.insertRules('.slider .inner-wrapper.small .number-controller', styles.numberController);
 
-    for (let attr in rangeStyles) {
-      this.$range.style[attr] = rangeStyles[attr];
-    }
-
-    for (let attr in styles.numberStyles) {
-      this.$number.style[attr] = styles.numberStyles[attr];
-    }
-
-    for (let attr in styles.unitStyles) {
-      this.$unit.style[attr] = styles.unitStyles[attr];
-    }
+    styles.insertRules('.slider .inner-wrapper .number-controller .number', styles.numberStyles);
+    styles.insertRules('.slider .inner-wrapper .number-controller .unit', styles.unitStyles);
   }
 
   bindEvents() {

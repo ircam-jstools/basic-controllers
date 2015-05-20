@@ -3,6 +3,7 @@ let styleSheet;
 // create a runtime css namespace
 const ns = 'waves-basic-controllers';
 const nsClass = `.${ns}`;
+
 module.exports.ns = ns;
 
 // create a style sheet to insert css rules
@@ -46,29 +47,6 @@ module.exports.containerStyles = {
   'color': '#464646'
 };
 
-// @TODO remove
-// module.exports.containerLargeStyles = {
-//   width: '660px',
-//   height: '30px',
-//   display: 'block',
-//   padding: '3px',
-//   margin: '2px',
-//   backgroundColor: '#efefef',
-//   border: '1px solid #aaaaaa',
-//   boxSizing: 'border-box'
-// };
-
-// module.exports.transparentContainerStyles = {
-//   width: '660px',
-//   height: '30px',
-//   display: 'block',
-//   padding: '8px 0px 0px 0px',
-//   margin: '2px',
-//   backgroundColor: 'transparent',
-//   border: '0px',
-//   boxSizing: 'border-box'
-// };
-
 module.exports.legendStyles = {
   'font': 'italic bold 12px arial',
   'line-height': '22px',
@@ -82,8 +60,6 @@ module.exports.legendStyles = {
   'white-space': 'nowrap'
 };
 
-// Buttons styles
-// @NOTE problem with strict mode => cannot redefine keys
 module.exports.innerWrapper = {
   'display': ['-webkit-inline-flex', 'inline-flex'],
   '-webkit-flex-wrap': 'no-wrap',
@@ -100,6 +76,7 @@ module.exports.titleContainerStyles = {
   'border': 'none',
   'margin-bottom': 0,
   'padding-bottom': 0,
+  'padding-top': '6px',
   'background-color': 'transparent',
   'height': '25px'
 };
@@ -110,7 +87,8 @@ module.exports.titleStyles = {
   'height': '22px',
   'overflow': 'hidden',
   'text-align': 'left',
-  'padding': '0 0 0 3px',
+  // 'padding': '0 0 0 3px',
+  'padding': '0',
   'box-sizing': 'border-box',
   '-webkit-flex-grow': 1,
   'flex-grow': 1
@@ -183,40 +161,71 @@ module.exports.x2 = {
 // Slider styles
 // ---------------------------------------------
 
+// module.exports.sliderInnerWrapper = {
+//   'justify-context': 'space-between',
+// };
+
 module.exports.rangeDefaultStyles = {
-  height: '22px',
-  width: '200px',
-  display: 'inline-block',
+  'height': '22px',
+  'display': 'inline-block',
+  'margin': 0,
+  '-webkit-flex-grow': 4,
+  'flex-grow': 4
 };
 
-module.exports.rangeLargeStyles = {
-  height: '22px',
-  width: '400px',
-  display: 'inline-block',
+module.exports.numberDefaultController = {
+  'display': 'inline',
+  'height': '22px',
+  'text-align': 'right',
+  '-webkit-flex-grow': 3,
+  'flex-grow': 3,
 };
+
+// large
+module.exports.rangeLargeStyles = {
+  '-webkit-flex-grow': 50,
+  'flex-grow': 50
+};
+
+module.exports.numberLargeController = {
+  '-webkit-flex-grow': 1,
+  'flex-grow': 1,
+};
+
+// small
+module.exports.rangeSmallStyles = {
+  '-webkit-flex-grow': 1,
+  'flex-grow': 1
+};
+
+module.exports.numberSmallController = {
+  '-webkit-flex-grow': 7,
+  'flex-grow': 7,
+};
+
 
 module.exports.numberStyles = {
-  height: '22px',
-  width: '54px',
-  position: 'relative',
-  top: '-7px',
-  left: '5px',
-  font: 'normal normal 12px arial',
-  border: 'none',
-  background: 'none',
-  paddingLeft: '4px',
-  display: 'inline-block',
-  textAlign: 'right'
+  'height': '22px',
+  'width': '54px',
+  'position': 'relative',
+  'left': '5px',
+  'font': 'normal normal 12px arial',
+  'border': 'none',
+  'background': 'none',
+  'padding': '0 0 0 4px',
+  'display': 'inline-block',
+  'text-align': 'right'
 };
 
 module.exports.unitStyles = {
-  font: 'italic normal 12px arial',
-  lineHeight: '22px',
-  height: '22px',
-  display: 'inline-block',
-  position: 'relative',
-  top: '-7px',
-  paddingLeft: '5px',
-  color: '#565656'
+  'font': 'italic normal 12px arial',
+  'lineHeight': '22px',
+  'height': '22px',
+  'width': '30px',
+  'display': 'inline-block',
+  'position': 'relative',
+  'padding-left': '5px',
+  'padding-right': '5px',
+  'color': '#565656'
 };
 
