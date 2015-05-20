@@ -30,17 +30,20 @@ class Toggle extends events.EventEmitter {
   }
 
   render() {
-    let content = `<span class="legend">${this.legend}</span>` +
-      `<div class="toggle-container"><div class="toggle-active">` +
-        `<div class="x-1"></div><div class="x-2"></div>` +
-      `</div></div>`;
+    let content = `<span class="legend">${this.legend}</span>
+      <div class="inner-wrapper">
+        <div class="toggle-container">
+          <div class="x x1"></div><div class="x x2"></div>
+        </div>
+      </div>`;
 
     this.$el = document.createElement('label');
+    this.$el.classList.add(styles.ns, 'toggle');
     this.$el.innerHTML = content;
 
     this.$legend = this.$el.querySelector('.legend');
-    this.$toggleContainer = this.$el.querySelector('.toggle-container');
-    this.$toggleActive = this.$el.querySelector('.toggle-active');
+    this.$innerWrapper = this.$el.querySelector('.inner-wrapper');
+    this.$toggle = this.$el.querySelector('.toggle-container');
 
     // draw a nice pretty crosshair
     this.$x1 = this.$el.querySelector('.x-1');
@@ -56,38 +59,24 @@ class Toggle extends events.EventEmitter {
   }
 
   updateBtn() {
-    var display = this.active ? 'block' : 'none';
-    this.$toggleActive.style.display = display;
+    var method = this.active ? 'add' : 'remove';
+    this.$toggle.classList[method]('active');
   }
 
   addStyles() {
-    for (let attr in styles.containerStyles) {
-      this.$el.style[attr] = styles.containerStyles[attr];
-    }
+    styles.insertRules('.toggle', styles.containerStyles);
+    styles.insertRules('.toggle .legend', styles.legendStyles);
+    styles.insertRules('.toggle .inner-wrapper', styles.innerWrapper);
+    styles.insertRules('.toggle .toggle-container', styles.toggleStyles);
 
-    for (let attr in styles.legendStyles) {
-      this.$legend.style[attr] = styles.legendStyles[attr];
-    }
-
-    for (let attr in styles.toggleContainer) {
-      this.$toggleContainer.style[attr] = styles.toggleContainer[attr];
-    }
-
-    for (let attr in styles.toggleActive) {
-      this.$toggleActive.style[attr] = styles.toggleActive[attr];
-    }
-
-    for (let attr in styles.x1) {
-      this.$x1.style[attr] = styles.x1[attr];
-    }
-
-    for (let attr in styles.x2) {
-      this.$x2.style[attr] = styles.x2[attr];
-    }
+    styles.insertRules('.toggle .toggle-container .x', styles.x);
+    styles.insertRules('.toggle .toggle-container .x1', styles.x1);
+    styles.insertRules('.toggle .toggle-container .x2', styles.x2);
+    styles.insertRules('.toggle .toggle-container.active .x', styles.xActive);
   }
 
   bindEvents() {
-    this.$toggleContainer.addEventListener('click', (e) => {
+    this.$toggle.addEventListener('click', (e) => {
       e.preventDefault();
       var active = this.active ? false : true;
       this.active = active;

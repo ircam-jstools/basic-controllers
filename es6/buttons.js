@@ -21,13 +21,13 @@ class Buttons extends events.EventEmitter {
 
   render() {
     let content = `<span class="legend">${this.legend}</span>
-      <div class="inner-wrapper">`;
+      <span class="inner-wrapper">`;
 
     content += this.labels.map((label) => {
       return `<button data-label="${label}">${label}</button>`;
     }).join('');
 
-    content += `</div>`;
+    content += `</span>`;
 
     this.$el = document.createElement('label');
     this.$el.classList.add(styles.ns, 'buttons');

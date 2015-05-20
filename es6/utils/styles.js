@@ -19,8 +19,9 @@ module.exports.insertRules = function(selector, styles) {
   var props = [];
 
   for (let key in styles) {
-    const value = styles[key];
-    props.push(`${key}: ${value}`);
+    let values = styles[key];
+    values = Array.isArray(values) ? values : [values];
+    values.forEach((value) => props.push(`${key}: ${value}`));
   }
 
   const rule = `${selector} { ${props.join(';\n')} }`;
@@ -35,15 +36,13 @@ module.exports.insertRules = function(selector, styles) {
 module.exports.containerStyles = {
   'width': '100%',
   'height': '30px',
-  'display': 'block',
   'padding': '3px',
   'margin': '2px',
   'background-color': '#efefef',
   'border': '1px solid #aaaaaa',
   'box-sizing': 'border-box',
   'border-radius': '2px',
-  'display': 'inline-flex',
-  'flex-wrap': 'no-wrap',
+  'display': 'block',
   'color': '#464646'
 };
 
@@ -75,15 +74,21 @@ module.exports.legendStyles = {
   'line-height': '22px',
   'overflow': 'hidden',
   'text-align': 'right',
-  'padding': '0 6px 0 0',
-  'flex-grow': 1
+  'padding': '0 8px 0 0',
+  'display': 'block',
+  'box-sizing': 'border-box',
+  'width': '24%',
+  'float': 'left'
 };
 
 // Buttons styles
+// @NOTE problem with strict mode => cannot redefine keys
 module.exports.innerWrapper = {
-  'display': 'inline-flex',
+  'display': ['-webkit-inline-flex', 'inline-flex'],
+  '-webkit-flex-wrap': 'no-wrap',
   'flex-wrap': 'no-wrap',
-  'flex-grow': 4
+  'width': '76%',
+  'float': 'left'
 };
 
 // ---------------------------------------------
@@ -106,6 +111,7 @@ module.exports.titleStyles = {
   'text-align': 'left',
   'padding': '0 0 0 3px',
   'box-sizing': 'border-box',
+  '-webkit-flex-grow': 1,
   'flex-grow': 1
 };
 
@@ -119,15 +125,56 @@ module.exports.buttonStyles = {
   'border': 'none',
   'background-color': '#464646',
   'color': '#ffffff',
-  'margin-right': '4px',
+  'margin': '0 4px 0 0',
   'box-sizing': 'border-box',
   'border-radius': '2px',
   'cursor': 'pointer',
+  '-webkit-flex-grow': 1,
   'flex-grow': 1
 };
 
 module.exports.buttonActiveStyles = {
   'background-color': '#686868'
+};
+
+
+// ---------------------------------------------
+// Toggle container
+// ---------------------------------------------
+
+module.exports.toggleStyles = {
+  'padding': 0,
+  'margin': 0,
+  'width': '19px',
+  'height': '19px',
+  'background-color': '#464646',
+  'flex-row': 1,
+  'position': 'relative',
+  'top': '1px',
+  'cursor': 'pointer'
+};
+
+module.exports.x = {
+  'width': '1px',
+  'height': '19px',
+  'background-color': '#efefef',
+  'position': 'absolute',
+  'left': '9px',
+  'display': 'none'
+};
+
+module.exports.xActive = {
+  'display': 'block'
+};
+
+module.exports.x1 = {
+  '-webkit-transform': 'rotate(45deg)',
+  'transform': 'rotate(45deg)',
+};
+
+module.exports.x2 = {
+  '-webkit-transform': 'rotate(-45deg)',
+  'transform': 'rotate(-45deg)',
 };
 
 // ---------------------------------------------
@@ -169,48 +216,5 @@ module.exports.unitStyles = {
   top: '-7px',
   paddingLeft: '5px',
   color: '#565656'
-};
-
-// ---------------------------------------------
-// Toggle container
-// ---------------------------------------------
-
-module.exports.toggleContainer = {
-  padding: 0,
-  margin: 0,
-  width: '19px',
-  height: '19px',
-  backgroundColor: '#464646',
-  display: 'inline-block',
-  cursor: 'pointer',
-  position: 'relative',
-  top: '-1px'
-};
-
-module.exports.toggleActive = {
-  padding: 0,
-  margin: 0,
-  width: '19px',
-  height: '19px',
-  // backgroundColor: 'green'
-};
-
-module.exports.x1 = {
-  width: '1px',
-  height: '19px',
-  transform: 'rotate(45deg)',
-  backgroundColor: '#efefef',
-  position: 'relative',
-  left: '9px'
-};
-
-module.exports.x2 = {
-  width: '1px',
-  height: '19px',
-  transform: 'rotate(-45deg)',
-  backgroundColor: '#efefef',
-  position: 'relative',
-  left: '9px',
-  top: '-19px'
 };
 
