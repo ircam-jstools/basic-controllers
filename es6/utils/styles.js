@@ -1,3 +1,29 @@
+// create a global stylesheet
+let styleSheet;
+// create a runtime css namespace
+// module.exports.cssNamespace =
+
+// create a style sheet to insert css rules
+function createStyleSheet() {
+  let styleEl = document.createElement('style');
+  document.head.appendChild(styleEl);
+  styleSheet = styleEl.sheet;
+}
+
+module.exports.insertRules = function(selector, styles) {
+  if (!styleSheet) { createStyleSheet(); }
+
+  var props = [];
+
+  for (let key in styles) {
+    const value = styles[key];
+    props.push(`${key}: ${value}`);
+  }
+
+  const rule = `${selector} { ${props.join(';\n')} }`;
+  styleSheet.insertRule(rule, styleSheet.cssRules.length);
+}
+
 
 // common styles
 module.exports.containerStyles = {
