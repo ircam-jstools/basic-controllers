@@ -8,7 +8,6 @@ class Buttons extends events.EventEmitter {
     this.legend = legend;
     this.labels = labels;
 
-    console.log(this);
     if ($container) {
       if (typeof $container === 'string') {
         $container = document.querySelector($container);

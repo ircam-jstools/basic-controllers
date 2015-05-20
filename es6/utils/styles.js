@@ -43,34 +43,34 @@ module.exports.containerStyles = {
   'box-sizing': 'border-box',
   'border-radius': '2px',
   'display': 'inline-flex',
-  'flex-wrap': 'no-wrap'
+  'flex-wrap': 'no-wrap',
+  'color': '#464646'
 };
 
 // @TODO remove
-module.exports.containerLargeStyles = {
-  width: '660px',
-  height: '30px',
-  display: 'block',
-  padding: '3px',
-  margin: '2px',
-  backgroundColor: '#efefef',
-  border: '1px solid #aaaaaa',
-  boxSizing: 'border-box'
-};
+// module.exports.containerLargeStyles = {
+//   width: '660px',
+//   height: '30px',
+//   display: 'block',
+//   padding: '3px',
+//   margin: '2px',
+//   backgroundColor: '#efefef',
+//   border: '1px solid #aaaaaa',
+//   boxSizing: 'border-box'
+// };
 
-module.exports.transparentContainerStyles = {
-  width: '660px',
-  height: '30px',
-  display: 'block',
-  padding: '8px 0px 0px 0px',
-  margin: '2px',
-  backgroundColor: 'transparent',
-  border: '0px',
-  boxSizing: 'border-box'
-};
+// module.exports.transparentContainerStyles = {
+//   width: '660px',
+//   height: '30px',
+//   display: 'block',
+//   padding: '8px 0px 0px 0px',
+//   margin: '2px',
+//   backgroundColor: 'transparent',
+//   border: '0px',
+//   boxSizing: 'border-box'
+// };
 
 module.exports.legendStyles = {
-  'color': '#464646',
   'font': 'italic bold 12px arial',
   'line-height': '22px',
   'overflow': 'hidden',
@@ -91,25 +91,22 @@ module.exports.innerWrapper = {
 // ---------------------------------------------
 
 module.exports.titleContainerStyles = {
-  display: 'inline-block',
-  width: '660px',
-  position: 'relative',
-  top: '-8px',
-  padding: '8px 0px 0px 0px'
+  'border': 'none',
+  'margin-bottom': 0,
+  'padding-bottom': 0,
+  'background-color': 'transparent',
+  'height': '25px'
 };
 
 module.exports.titleStyles = {
-  color: '#464646',
-  font: 'normal bold 12px arial',
-  lineHeight: '22px',
-  height: '22px',
-  display: 'inline-block',
-  width: '660px',
-  overflow: 'hidden',
-  textAlign: 'left',
-  padding: 0,
-  paddingLeft: '3px',
-  boxSizing: 'border-box'
+  'font': 'normal bold 13px arial',
+  'line-height': '22px',
+  'height': '22px',
+  'overflow': 'hidden',
+  'text-align': 'left',
+  'padding': '0 0 0 3px',
+  'box-sizing': 'border-box',
+  'flex-grow': 1
 };
 
 // ---------------------------------------------
