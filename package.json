@@ -30,8 +30,6 @@
     "babel-runtime": "4.7.6"
   },
   "devDependencies": {
-    "babel": "^4.5.0",
-    "browserify": "^9.0.3",
     "fs-extra": "^0.16.3",
     "jshint": "^2.6.0",
     "node-watch": "^0.3.4",

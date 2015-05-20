@@ -2,6 +2,8 @@
 
 A set of basic controllers for rapid prototyping
 
+## Documentation
+
 ### Title
 
 ```js
@@ -83,4 +85,29 @@ new Slider(legend, min, max, step, defaultValue, unit, size, $container, () => {
 _`size` can be 'large' or 'default'_
 
 
-_`$container` can be a DOMElement or a css selector_
+### Conventions
+
+- `$container` can be a `DOMElement` or a css selector
+
+## Contributing
+
+This module relies on `babel` and `browserify`, these modules should be installed globally.
+
+```
+sudo npm install -g babel
+sudo npm install -g browserify
+```
+
+and linked into your development folder
+
+```
+npm link babel
+npm link browserify
+```
+
+
+
+
+
+
+
