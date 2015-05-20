@@ -21,16 +21,17 @@ class Buttons extends events.EventEmitter {
   }
 
   render() {
-    let content = `<span class="legend">${this.legend}</span>` +
-      `<div class="buttons-container">`;
+    let content = `<span class="legend">${this.legend}</span>
+      <div class="inner-wrapper">`;
 
     content += this.labels.map((label) => {
       return `<button data-label="${label}">${label}</button>`;
     }).join('');
 
-    content += `</button>`;
+    content += `</div>`;
 
     this.$el = document.createElement('label');
+    this.$el.classList.add(styles.ns, 'buttons');
     this.$el.innerHTML = content;
 
     this.$legend = this.$el.querySelector('.legend');
@@ -44,25 +45,12 @@ class Buttons extends events.EventEmitter {
   }
 
   addStyles() {
-    for (let attr in styles.containerStyles) {
-      this.$el.style[attr] = styles.containerStyles[attr];
-    }
-
-    for (let attr in styles.legendStyles) {
-      this.$legend.style[attr] = styles.legendStyles[attr];
-    }
-
-    for (let attr in styles.buttonsContainerStyles) {
-      this.$buttonsContainer.style[attr] = styles.buttonsContainerStyles[attr];
-    }
-
-    const buttonWidth = 100 / this.$buttons.length;
-    this.$buttons.forEach((button) => {
-      button.style.width = buttonWidth + '%';
-      for (let attr in styles.buttonStyles) {
-        button.style[attr] = styles.buttonStyles[attr];
-      }
-    });
+    styles.insertRules('.buttons', styles.containerStyles);
+    styles.insertRules('.buttons .legend', styles.legendStyles);
+    styles.insertRules('.buttons .inner-wrapper', styles.innerWrapper);
+    styles.insertRules('.buttons button', styles.buttonStyles);
+    styles.insertRules('.buttons button.active', styles.buttonActiveStyles);
+    // styles.insertRules('.buttons button:focus', styles.buttonFocusStyles);
   }
 
   bindEvents() {
@@ -71,12 +59,12 @@ class Buttons extends events.EventEmitter {
 
       button.addEventListener('mousedown', (e) => {
         e.preventDefault();
-        button.style.backgroundColor = styles.buttonStyles.clickedBackgroundColor;
+        button.classList.add('active');
       });
 
       button.addEventListener('mouseup', (e) => {
         e.preventDefault();
-        button.style.backgroundColor = styles.buttonStyles.backgroundColor;
+        button.classList.remove('active');
         this.emit('change', label);
       });
     });

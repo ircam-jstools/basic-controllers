@@ -1,7 +1,9 @@
 // create a global stylesheet
 let styleSheet;
 // create a runtime css namespace
-// module.exports.cssNamespace =
+const ns = 'waves-basic-controllers';
+const nsClass = `.${ns}`;
+module.exports.ns = ns;
 
 // create a style sheet to insert css rules
 function createStyleSheet() {
@@ -13,6 +15,7 @@ function createStyleSheet() {
 module.exports.insertRules = function(selector, styles) {
   if (!styleSheet) { createStyleSheet(); }
 
+  selector = selector === null ? nsClass : `${nsClass}${selector}`;
   var props = [];
 
   for (let key in styles) {
@@ -22,21 +25,28 @@ module.exports.insertRules = function(selector, styles) {
 
   const rule = `${selector} { ${props.join(';\n')} }`;
   styleSheet.insertRule(rule, styleSheet.cssRules.length);
-}
-
-
-// common styles
-module.exports.containerStyles = {
-  width: '660px',
-  height: '30px',
-  display: 'block',
-  padding: '3px',
-  margin: '2px',
-  backgroundColor: '#efefef',
-  border: '1px solid #aaaaaa',
-  boxSizing: 'border-box'
 };
 
+
+// ---------------------------------------------
+// common styles
+// ---------------------------------------------
+
+module.exports.containerStyles = {
+  'width': '100%',
+  'height': '30px',
+  'display': 'block',
+  'padding': '3px',
+  'margin': '2px',
+  'background-color': '#efefef',
+  'border': '1px solid #aaaaaa',
+  'box-sizing': 'border-box',
+  'border-radius': '2px',
+  'display': 'inline-flex',
+  'flex-wrap': 'no-wrap'
+};
+
+// @TODO remove
 module.exports.containerLargeStyles = {
   width: '660px',
   height: '30px',
@@ -60,19 +70,26 @@ module.exports.transparentContainerStyles = {
 };
 
 module.exports.legendStyles = {
-  color: '#464646',
-  font: 'italic bold 12px arial',
-  lineHeight: '22px',
-  height: '22px',
-  display: 'inline-block',
-  width: '140px',
-  overflow: 'hidden',
-  textAlign: 'right',
-  padding: 0,
-  paddingRight: '6px'
+  'color': '#464646',
+  'font': 'italic bold 12px arial',
+  'line-height': '22px',
+  'overflow': 'hidden',
+  'text-align': 'right',
+  'padding': '0 6px 0 0',
+  'flex-grow': 1
 };
 
+// Buttons styles
+module.exports.innerWrapper = {
+  'display': 'inline-flex',
+  'flex-wrap': 'no-wrap',
+  'flex-grow': 4
+};
+
+// ---------------------------------------------
 // Title styles
+// ---------------------------------------------
+
 module.exports.titleContainerStyles = {
   display: 'inline-block',
   width: '660px',
@@ -95,27 +112,31 @@ module.exports.titleStyles = {
   boxSizing: 'border-box'
 };
 
+// ---------------------------------------------
 // Buttons styles
-module.exports.buttonsContainerStyles = {
-  display: 'inline-block',
-  width: '490px',
-  position: 'relative',
-  top: '-8px'
-};
+// ---------------------------------------------
 
 module.exports.buttonStyles = {
-  display: 'inline-block',
-  font: 'normal normal 12px arial',
-  height: '22px',
-  border: 'none',
-  backgroundColor: '#464646',
-  clickedBackgroundColor: '#686868',
-  color: '#ffffff',
-  borderRight: '4px solid #efefef',
-  boxSizing: 'border-box'
+  'font': 'normal normal 12px arial',
+  'height': '22px',
+  'border': 'none',
+  'background-color': '#464646',
+  'color': '#ffffff',
+  'margin-right': '4px',
+  'box-sizing': 'border-box',
+  'border-radius': '2px',
+  'cursor': 'pointer',
+  'flex-grow': 1
 };
 
+module.exports.buttonActiveStyles = {
+  'background-color': '#686868'
+};
+
+// ---------------------------------------------
 // Slider styles
+// ---------------------------------------------
+
 module.exports.rangeDefaultStyles = {
   height: '22px',
   width: '200px',
@@ -153,7 +174,10 @@ module.exports.unitStyles = {
   color: '#565656'
 };
 
+// ---------------------------------------------
 // Toggle container
+// ---------------------------------------------
+
 module.exports.toggleContainer = {
   padding: 0,
   margin: 0,
