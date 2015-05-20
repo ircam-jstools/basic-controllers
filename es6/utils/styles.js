@@ -78,7 +78,8 @@ module.exports.legendStyles = {
   'display': 'block',
   'box-sizing': 'border-box',
   'width': '24%',
-  'float': 'left'
+  'float': 'left',
+  'white-space': 'nowrap'
 };
 
 // Buttons styles
@@ -151,7 +152,8 @@ module.exports.toggleStyles = {
   'flex-row': 1,
   'position': 'relative',
   'top': '1px',
-  'cursor': 'pointer'
+  'cursor': 'pointer',
+  'border-radius': '2px'
 };
 
 module.exports.x = {
