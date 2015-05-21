@@ -6,7 +6,6 @@
   "standalone": "wavesBasicControllers",
   "scripts": {
     "transpile": "./bin/scripts --transpile",
-    "transpileCss": "./bin/scripts --transpileCss",
     "prebundle": "npm run hint && npm run transpile",
     "bundle": "./bin/scripts --bundle",
     "postbundle": "npm run uglify",

@@ -1,7 +1,10 @@
 'use strict';
 
+const styles = require('./dist/utils/styles');
 // insert styles
-require('./dist/utils/styles').insertStyleSheet();
+window.addEventListener('DOMContentLoaded', function() {
+  styles.insertStyleSheet();
+});
 
 var basicControllers = {
   Title: require('./dist/title'),

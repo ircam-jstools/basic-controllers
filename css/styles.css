@@ -42,11 +42,7 @@ _prefix_ .inner-wrapper {
 
 
 @media only screen and (max-width: 600px) {
-  /*
-      change flex orientation; etc...
-  */
   body {
-
     /* background-color: green; */
   }
 }
