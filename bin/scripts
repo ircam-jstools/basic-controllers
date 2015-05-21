@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 var pkg = require('../package.json');
 var childProcess = require('child_process');
 var util = require('util');
@@ -12,6 +13,10 @@ var uglifyJS = require('uglify-js');
 // -----------------------------------------------
 var srcDir = 'es6';
 var distDir = 'dist';
+
+// transpile css file to js string
+var cssSrcDir = 'css';
+var cssDistDir = distDir + '/' + cssSrcDir;
 
 // options for babel
 var babelOptions = {
@@ -56,8 +61,13 @@ switch (command) {
 
 // create filename from src to dist
 function createTargetName(filename) {
-  // replace source dir with target dir and '.es6.js' to '.js'
-  return filename.replace(new RegExp('^' + srcDir), distDir).replace('.es6.js', '.js');
+  // replace source dir with target dir
+  return filename.replace(new RegExp('^' + srcDir), distDir);
+}
+
+function createCssTargetName(filename) {
+  // replace source dir with target dir and '.css' to '.js'
+  return filename.replace(new RegExp('^' + cssSrcDir), cssDistDir).replace('.css', '.js');
 }
 
 // create filename from `pck.main` to `umd` version
@@ -75,8 +85,14 @@ function getMinName() {
 
 // watch source dir
 function watch() {
+  // watch es6 files
   nodeWatch(srcDir, function(filename) {
     transpile(filename);
+  });
+
+  // watch css files
+  nodeWatch(cssSrcDir, function(filename) {
+    transpileCss(filename);
   });
 }
 
@@ -113,14 +129,27 @@ function uglify() {
 
 // transpile all files in `srcDir`
 function transpileAll() {
-  var cmd = 'find '+ srcDir +' -type f';
+  // transpile all js files
+  var cmd1 = 'find '+ srcDir +' -type f';
 
-  childProcess.exec(cmd , function(err, stdout, stderr) {
+  childProcess.exec(cmd1, function(err, stdout, stderr) {
     var fileList = stdout.split('\n');
 
     fileList.forEach(function(file) {
       if (!file) { return; }
       transpile(file);
+    });
+
+    // then... transpile all css .... ugly but no side effects
+    var cmd2 = 'find '+ cssSrcDir +' -type f';
+
+    childProcess.exec(cmd2, function(err, stdout, stderr) {
+      var fileList = stdout.split('\n');
+
+      fileList.forEach(function(file) {
+        if (!file) { return; }
+        transpileCss(file);
+      });
     });
   });
 }
@@ -133,6 +162,29 @@ function transpile(src) {
     if (err) { return console.log(err.message); }
 
     fse.outputFile(target, res.code, function(err, res) {
+      if (err) { return console.log(err.message); }
+
+      console.log(util.format(green + '=> "%s" successfully transpiled to "%s"' + NC, src, target));
+    });
+  });
+}
+
+function transpileCss(src) {
+  var target = createCssTargetName(src);
+
+  fse.readFile(src, 'utf8', function(err, res) {
+    if (err) { return console.log(err.message); }
+
+    // replace `_prefix_` keyword in css file with `package.name`
+    res = res.replace(/_prefix_/gm, '.' + pkg.name);
+    // rmeove comments - http://upshots.org/javascript/javascript-regexp-to-remove-comments
+    res = res.replace(/(\/\*([\s\S]*?)\*\/)|(\/\/(.*)$)/gm, ''); // not so reliable
+    // clean white spaces
+    res = res.replace(/[\s]+/gm, ' ');
+    // prepare for js file
+    res = 'module.exports = "' + res.replace(/\n/gm, ' ') + '";';
+
+    fse.outputFile(target, res, function(err, res) {
       if (err) { return console.log(err.message); }
 
       console.log(util.format(green + '=> "%s" successfully transpiled to "%s"' + NC, src, target));
