@@ -8,6 +8,8 @@ class Buttons extends events.EventEmitter {
     this.legend = legend;
     this.labels = labels;
 
+    // styles.insertStyleSheet();
+
     if ($container) {
       if (typeof $container === 'string') {
         $container = document.querySelector($container);
@@ -20,36 +22,20 @@ class Buttons extends events.EventEmitter {
   }
 
   render() {
-    let content = `<span class="legend">${this.legend}</span>
-      <span class="inner-wrapper">`;
-
-    content += this.labels.map((label) => {
-      return `<button data-label="${label}">${label}</button>`;
-    }).join('');
-
-    content += `</span>`;
+    let content = `
+      <span class="legend">${this.legend}</span>
+      <div class="inner-wrapper">
+        ${this.labels.map((label) => `<button data-label="${label}">${label}</button>`).join('')}
+      </div>`;
 
     this.$el = document.createElement('label');
     this.$el.classList.add(styles.ns, 'buttons');
     this.$el.innerHTML = content;
 
-    this.$legend = this.$el.querySelector('.legend');
-    this.$buttonsContainer = this.$el.querySelector('.buttons-container');
     this.$buttons = Array.from(this.$el.querySelectorAll('button'));
-
-    this.addStyles();
     this.bindEvents();
 
     return this.$el;
-  }
-
-  addStyles() {
-    styles.insertRules('.buttons', styles.containerStyles);
-    styles.insertRules('.buttons .legend', styles.legendStyles);
-    styles.insertRules('.buttons .inner-wrapper', styles.innerWrapper);
-    styles.insertRules('.buttons button', styles.buttonStyles);
-    styles.insertRules('.buttons button.active', styles.buttonActiveStyles);
-    // styles.insertRules('.buttons button:focus', styles.buttonFocusStyles);
   }
 
   bindEvents() {

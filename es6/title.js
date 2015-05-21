@@ -23,17 +23,7 @@ class Title extends events.EventEmitter {
     this.$el.classList.add(styles.ns, 'title');
     this.$el.innerHTML = content;
 
-    this.$legend = this.$el.querySelector('.legend');
-
-    this.addStyles();
-
     return this.$el;
-  }
-
-  addStyles() {
-    styles.insertRules('.title', styles.containerStyles);
-    styles.insertRules('.title', styles.titleContainerStyles);
-    styles.insertRules('.title .legend', styles.titleStyles);
   }
 }
 

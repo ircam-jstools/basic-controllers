@@ -1,14 +1,28 @@
+const pkg = require('../../package.json');
+const styles = require('../css/styles.js');
 // create a global stylesheet
 let styleSheet;
 // create a runtime css namespace
-const ns = 'waves-basic-controllers';
+const ns = pkg.name;
 const nsClass = `.${ns}`;
+const cssMap = new Map();
 
 module.exports.ns = ns;
 
+module.exports.insertStyleSheet = function(...names) {
+  const $style = document.createElement('style');
+
+  $style.setAttribute('data-created-by', ns);
+  $style.innerHTML = styles;
+
+  document.body.appendChild($style);
+}
+
+// remove all the folowing...
+
 // create a style sheet to insert css rules
 function createStyleSheet() {
-  let styleEl = document.createElement('style');
+  const styleEl = document.createElement('style');
   document.head.appendChild(styleEl);
   styleSheet = styleEl.sheet;
 }
@@ -26,144 +40,17 @@ module.exports.insertRules = function(selector, styles) {
   }
 
   const rule = `${selector} { ${props.join(';\n')} }`;
-  styleSheet.insertRule(rule, styleSheet.cssRules.length);
+
+  // write a rule only once
+  if (cssMap.has(rule) && cssMap.get(rule) === selector) {
+    return;
+  }
+
+  cssMap.set(rule, selector);
+  // styleSheet.insertRule(rule, styleSheet.cssRules.length);
 };
 
 
-// ---------------------------------------------
-// common styles
-// ---------------------------------------------
-
-module.exports.containerStyles = {
-  'width': '100%',
-  'height': '30px',
-  'padding': '3px',
-  'margin': '2px',
-  'background-color': '#efefef',
-  'border': '1px solid #aaaaaa',
-  'box-sizing': 'border-box',
-  'border-radius': '2px',
-  'display': 'block',
-  'color': '#464646'
-};
-
-module.exports.legendStyles = {
-  'font': 'italic bold 12px arial',
-  'line-height': '22px',
-  'overflow': 'hidden',
-  'text-align': 'right',
-  'padding': '0 8px 0 0',
-  'display': 'block',
-  'box-sizing': 'border-box',
-  'width': '24%',
-  'float': 'left',
-  'white-space': 'nowrap'
-};
-
-module.exports.innerWrapper = {
-  'display': ['-webkit-inline-flex', 'inline-flex'],
-  '-webkit-flex-wrap': 'no-wrap',
-  'flex-wrap': 'no-wrap',
-  'width': '76%',
-  'float': 'left'
-};
-
-// ---------------------------------------------
-// Title styles
-// ---------------------------------------------
-
-module.exports.titleContainerStyles = {
-  'border': 'none',
-  'margin-bottom': 0,
-  'padding-bottom': 0,
-  'padding-top': '6px',
-  'background-color': 'transparent',
-  'height': '25px'
-};
-
-module.exports.titleStyles = {
-  'font': 'normal bold 13px arial',
-  'line-height': '22px',
-  'height': '22px',
-  'overflow': 'hidden',
-  'text-align': 'left',
-  // 'padding': '0 0 0 3px',
-  'padding': '0',
-  'box-sizing': 'border-box',
-  '-webkit-flex-grow': 1,
-  'flex-grow': 1
-};
-
-// ---------------------------------------------
-// Buttons styles
-// ---------------------------------------------
-
-module.exports.buttonStyles = {
-  'font': 'normal normal 12px arial',
-  'height': '22px',
-  'border': 'none',
-  'background-color': '#464646',
-  'color': '#ffffff',
-  'margin': '0 4px 0 0',
-  'box-sizing': 'border-box',
-  'border-radius': '2px',
-  'cursor': 'pointer',
-  '-webkit-flex-grow': 1,
-  'flex-grow': 1
-};
-
-module.exports.buttonActiveStyles = {
-  'background-color': '#686868'
-};
-
-
-// ---------------------------------------------
-// Toggle container
-// ---------------------------------------------
-
-module.exports.toggleStyles = {
-  'padding': 0,
-  'margin': 0,
-  'width': '19px',
-  'height': '19px',
-  'background-color': '#464646',
-  'flex-row': 1,
-  'position': 'relative',
-  'top': '1px',
-  'cursor': 'pointer',
-  'border-radius': '2px'
-};
-
-module.exports.x = {
-  'width': '1px',
-  'height': '19px',
-  'background-color': '#efefef',
-  'position': 'absolute',
-  'left': '9px',
-  'display': 'none'
-};
-
-module.exports.xActive = {
-  'display': 'block'
-};
-
-module.exports.x1 = {
-  '-webkit-transform': 'rotate(45deg)',
-  'transform': 'rotate(45deg)',
-};
-
-module.exports.x2 = {
-  '-webkit-transform': 'rotate(-45deg)',
-  'transform': 'rotate(-45deg)',
-};
-
-// ---------------------------------------------
-// Slider styles
-// ---------------------------------------------
-
-// module.exports.sliderInnerWrapper = {
-//   'justify-context': 'space-between',
-// };
 
 module.exports.rangeDefaultStyles = {
   'height': '22px',

@@ -1,0 +1,237 @@
+body {
+  /* background-color: red; */
+}
+
+/* -------------------------------------------
+   COMMON
+   ------------------------------------------- */
+_prefix_ {
+  width: 100%;
+  height: 30px;
+  padding: 3px;
+  margin: 2px;
+  background-color: #efefef;
+  border: 1px solid #aaaaaa;
+  box-sizing: border-box;
+  border-radius: 2px;
+  display: block;
+  color: #464646;
+}
+
+_prefix_ .legend {
+  font: italic bold 12px arial;
+  line-height: 22px;
+  overflow: hidden;
+  text-align: right;
+  padding: 0 8px 0 0;
+  display: block;
+  box-sizing: border-box;
+  width: 24%;
+  float: left;
+  white-space: nowrap;
+}
+
+_prefix_ .inner-wrapper {
+  display: -webkit-inline-flex;
+  display: inline-flex;
+  -webkit-flex-wrap: no-wrap;
+  flex-wrap: no-wrap;
+  width: 76%;
+  float: left;
+}
+
+
+@media only screen and (max-width: 600px) {
+  /*
+      change flex orientation; etc...
+  */
+  body {
+
+    /* background-color: green; */
+  }
+}
+
+/* -------------------------------------------
+   TITLE
+   ------------------------------------------- */
+
+_prefix_.title {
+  border: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+  padding-top: 6px;
+  background-color: transparent;
+  height: 25px;
+}
+
+_prefix_.title .legend {
+  font: normal bold 13px arial;
+  line-height: 22px;
+  height: 22px;
+  overflow: hidden;
+  text-align: left;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-flex-grow: 1;
+  flex-grow: 1;
+}
+
+/* -------------------------------------------
+   BUTTONS
+   ------------------------------------------- */
+
+_prefix_.buttons button {
+  font: normal normal 12px arial;
+  height: 22px;
+  border: none;
+  background-color: #464646;
+  color: #ffffff;
+  margin: 0 4px 0 0;
+  box-sizing: border-box;
+  border-radius: 2px;
+  cursor: pointer;
+  -webkit-flex-grow: 1;
+  flex-grow: 1;
+}
+
+_prefix_.buttons button.active {
+  background-color: #686868;
+}
+
+/* -------------------------------------------
+   TOGGLE
+   ------------------------------------------- */
+
+_prefix_.toggle .toggle-container {
+  padding: 0;
+  margin: 0;
+  width: 19px;
+  height: 19px;
+  background-color: #464646;
+  flex-row: 1;
+  position: relative;
+  top: 1px;
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+_prefix_.toggle .toggle-container .x {
+  width: 1px;
+  height: 19px;
+  background-color: #efefef;
+  position: absolute;
+  left: 9px;
+  display: none;
+}
+
+_prefix_.toggle .toggle-container.active .x {
+  display: block;
+}
+
+_prefix_.toggle .toggle-container .x.x1 {
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+_prefix_.toggle .toggle-container .x.x2 {
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+
+/* -------------------------------------------
+   SLIDER
+   ------------------------------------------- */
+
+_prefix_.slider .inner-wrapper .range {
+  height: 22px;
+  display: inline-block;
+  margin: 0;
+  -webkit-flex-grow: 4;
+  flex-grow: 4
+}
+
+_prefix_.slider .inner-wrapper .number-wrapper {
+  display: inline;
+  height: 22px;
+  text-align: right;
+  -webkit-flex-grow: 3;
+  flex-grow: 3;
+}
+
+/* large slider */
+_prefix_.slider .inner-wrapper.large .range {
+  -webkit-flex-grow: 50;
+  flex-grow: 50
+}
+
+_prefix_.slider .inner-wrapper.large .number-wrapper {
+  -webkit-flex-grow: 1;
+  flex-grow: 1;
+}
+
+/* small slider */
+_prefix_.slider .inner-wrapper.small .range {
+  -webkit-flex-grow: 1;
+  flex-grow: 1
+}
+
+_prefix_.slider .inner-wrapper.small .number-wrapper {
+  -webkit-flex-grow: 7;
+  flex-grow: 7;
+}
+
+_prefix_.slider .inner-wrapper .number-wrapper .number {
+  height: 22px;
+  width: 54px;
+  position: relative;
+  left: 5px;
+  font: normal normal 12px arial;
+  border: none;
+  background: none;
+  padding: 0 0 0 4px;
+  display: inline-block;
+  text-align: right
+}
+
+_prefix_.slider .inner-wrapper .number-wrapper .unit {
+  font: italic normal 12px arial;
+  line-height: 22px;
+  height: 22px;
+  width: 30px;
+  display: inline-block;
+  position: relative;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #565656
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

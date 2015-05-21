@@ -38,11 +38,11 @@ class Slider extends events.EventEmitter {
   }
 
   render() {
-    let content = `<span class="legend">${this.legend}</span>
+    let content = `
+      <span class="legend">${this.legend}</span>
       <div class="inner-wrapper ${this.size}">
         <input class="range" type="range" min="${this.min}" max="${this.max}" step="${this.step}" value="${this.value}" />
-
-        <div class="number-controller">
+        <div class="number-wrapper">
           <input type="number" class="number" min="${this.min}" max="${this.max}" step="${this.step}" value="${this.value}" />
           <span class="unit">${this.unit}</span>
         </div>
@@ -52,34 +52,12 @@ class Slider extends events.EventEmitter {
     this.$el.classList.add(styles.ns, 'slider');
     this.$el.innerHTML = content;
 
-    this.$legend  = this.$el.querySelector('.legend');
     this.$range  = this.$el.querySelector(`input[type="range"]`);
     this.$number = this.$el.querySelector(`input[type="number"]`);
-    this.$unit   = this.$el.querySelector('.unit');
 
     this.bindEvents();
-    this.addStyles();
 
     return this.$el;
-  }
-
-  addStyles() {
-    styles.insertRules('.slider', styles.containerStyles);
-    styles.insertRules('.slider .legend', styles.legendStyles);
-
-    styles.insertRules('.slider .inner-wrapper', styles.innerWrapper);
-    // styles.insertRules('.slider .inner-wrapper', styles.sliderInnerWrapper);
-
-    styles.insertRules('.slider .inner-wrapper .range', styles.rangeDefaultStyles);
-    styles.insertRules('.slider .inner-wrapper.large .range', styles.rangeLargeStyles);
-    styles.insertRules('.slider .inner-wrapper.small .range', styles.rangeSmallStyles);
-
-    styles.insertRules('.slider .inner-wrapper .number-controller', styles.numberDefaultController);
-    styles.insertRules('.slider .inner-wrapper.large .number-controller', styles.numberController);
-    styles.insertRules('.slider .inner-wrapper.small .number-controller', styles.numberController);
-
-    styles.insertRules('.slider .inner-wrapper .number-controller .number', styles.numberStyles);
-    styles.insertRules('.slider .inner-wrapper .number-controller .unit', styles.unitStyles);
   }
 
   bindEvents() {

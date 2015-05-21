@@ -5,12 +5,13 @@
   "main": "waves-basic-controllers.js",
   "standalone": "wavesBasicControllers",
   "scripts": {
-    "transpile": "node ./bin/scripts.js --transpile",
+    "transpile": "./bin/scripts --transpile",
+    "transpileCss": "./bin/scripts --transpileCss",
     "prebundle": "npm run hint && npm run transpile",
-    "bundle": "node ./bin/scripts.js --bundle",
+    "bundle": "./bin/scripts --bundle",
     "postbundle": "npm run uglify",
-    "uglify": "node ./bin/scripts.js --uglify",
-    "watch": "node ./bin/scripts.js --watch",
+    "uglify": "./bin/scripts --uglify",
+    "watch": "./bin/scripts --watch",
     "test": "tac6",
     "pretest": "npm run hint",
     "hint": "jshint ./es6; true"
