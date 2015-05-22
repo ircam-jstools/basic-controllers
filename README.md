@@ -4,6 +4,16 @@ A set of basic controllers for rapid prototyping
 
 ## Documentation
 
+### Themes
+
+Two themes are available: `'light'` _(default)_ and `'dark'`.
+The theme can be switched via the `setTheme` method of the namespace
+
+```js
+var wavesBasicControllers = require('waves-basic-controllers');
+wavesBasicControllers.setTheme('dark');
+```
+
 ### Title
 
 ```js
