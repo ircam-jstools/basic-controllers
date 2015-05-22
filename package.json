@@ -14,7 +14,7 @@
     "test": "tac6",
     "pretest": "npm run hint",
     "hint": "jshint ./es6; true",
-    "pretag": "branch=$(git symbolic-ref -q HEAD); if [ '$branch' != 'refs/heads/master' ]; then echo 'you should be in master branch to run this command'; exit 1; fi && npm run bundle && git commit -am 'rebundled'",
+    "pretag": "branch=$(git symbolic-ref -q HEAD); if [ '$branch' != 'refs/heads/master' ]; then echo '=> You must be in master branch to run this command'; exit 1; fi && npm run bundle && git commit -am 'rebundled'",
     "tag": "npm version $1",
     "posttag": "git push origin master && git push origin --tags"
   },
