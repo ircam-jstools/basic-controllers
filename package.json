@@ -14,7 +14,8 @@
     "test": "tac6",
     "pretest": "npm run hint",
     "hint": "jshint ./es6; true",
-    "tag": "npm version $1 && git push origin master && git push origin --tags"
+    "tag": "npm version $1",
+    "posttag": "git push origin master && git push origin --tags"
   },
   "license": "BSD-3",
   "repository": {
