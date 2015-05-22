@@ -11,6 +11,7 @@ window.addEventListener('resize', function() {
 class BaseController extends events.EventEmitter {
   constructor() {
     super();
+    if (stack.size === 0) { styles.insertStyleSheet(); }
     stack.add(this);
   }
 
@@ -21,6 +22,7 @@ class BaseController extends events.EventEmitter {
       }
 
       $container.appendChild(this.render());
+      setTimeout(() => this.onResize(), 0);
     }
 
     if (callback) { this.on('change', callback); }
@@ -29,7 +31,6 @@ class BaseController extends events.EventEmitter {
   render() {
     this.$el = document.createElement('label');
     this.$el.classList.add(styles.ns);
-    this.onResize();
 
     return this.$el;
   }
