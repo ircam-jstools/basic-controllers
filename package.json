@@ -1,6 +1,6 @@
 {
   "name": "waves-basic-controllers",
-  "version": "0.3.2",
+  "version": "0.3.1",
   "description": "basic-controllers for rapid prototyping",
   "main": "waves-basic-controllers.js",
   "standalone": "wavesBasicControllers",
@@ -14,7 +14,7 @@
     "test": "tac6",
     "pretest": "npm run hint",
     "hint": "jshint ./es6; true",
-    "tag": "npm version $1"
+    "tag": "npm version $1 && git push origin master && git push origin --tags"
   },
   "license": "BSD-3",
   "repository": {
