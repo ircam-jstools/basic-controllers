@@ -2,6 +2,7 @@ const events = require('events');
 const styles = require('./utils/styles');
 // store all instance in a stack
 const stack = new Set();
+let theme;
 
 // add a single listener on window to trigger update
 window.addEventListener('resize', function() {
@@ -11,7 +12,14 @@ window.addEventListener('resize', function() {
 class BaseController extends events.EventEmitter {
   constructor() {
     super();
+    if (stack.size === 0) { styles.insertStyleSheet(); }
     stack.add(this);
+  }
+
+  static set theme(value) {
+    stack.forEach((controller) => controller.$el.classList.remove(theme));
+    theme = value;
+    stack.forEach((controller) => controller.$el.classList.add(theme));
   }
 
   _applyOptionnalParameters($container = null, callback = null) {
@@ -21,6 +29,7 @@ class BaseController extends events.EventEmitter {
       }
 
       $container.appendChild(this.render());
+      setTimeout(() => this.onResize(), 0);
     }
 
     if (callback) { this.on('change', callback); }
@@ -47,5 +56,7 @@ class BaseController extends events.EventEmitter {
    */
   bindEvents() {}
 }
+
+BaseController.theme = 'light';
 
 module.exports = BaseController;
