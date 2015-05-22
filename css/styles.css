@@ -7,6 +7,7 @@ body {
    ------------------------------------------- */
 _prefix_ {
   width: 100%;
+  max-width: 800px;
   height: 30px;
   padding: 3px;
   margin: 4px 0;
@@ -186,7 +187,8 @@ _prefix_.slider .inner-wrapper .number-wrapper .number {
   background: none;
   padding: 0 0 0 4px;
   display: inline-block;
-  text-align: right
+  text-align: right;
+  vertical-align: top;
 }
 
 _prefix_.slider .inner-wrapper .number-wrapper .unit {
