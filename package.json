@@ -14,7 +14,7 @@
     "test": "tac6",
     "pretest": "npm run hint",
     "hint": "jshint ./es6; true",
-    "deploy": "npm version $1"
+    "tag": "npm version $1"
   },
   "license": "BSD-3",
   "repository": {
