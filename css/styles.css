@@ -1,10 +1,8 @@
-body {
-  /* background-color: red; */
-}
-
 /* -------------------------------------------
    COMMON
    ------------------------------------------- */
+/* default theme light */
+
 _prefix_ {
   width: 100%;
   max-width: 800px;
@@ -108,6 +106,10 @@ _prefix_.buttons button.active {
   background-color: #686868;
 }
 
+_prefix_.buttons button:focus {
+  outline: none;
+}
+
 /* -------------------------------------------
    TOGGLE
    ------------------------------------------- */
@@ -123,6 +125,14 @@ _prefix_.toggle .toggle-container {
   top: 1px;
   cursor: pointer;
   border-radius: 2px;
+}
+
+_prefix_.dark.toggle .toggle-container {
+  background-color: #efefef;
+}
+
+_prefix_.dark.toggle .toggle-container .x {
+  background-color: #464646;
 }
 
 _prefix_.toggle .toggle-container .x {
@@ -213,10 +223,45 @@ _prefix_.slider .inner-wrapper .number-wrapper .unit {
   position: relative;
   padding-left: 5px;
   padding-right: 5px;
-  color: #565656
+  color: #565656;
+}
+
+_prefix_.slider .inner-wrapper .number-wrapper .unit sup {
+  line-height: 7px;
 }
 
 
+/* -------------------------------------------
+   DARK THEME
+   ------------------------------------------- */
+
+_prefix_.dark {
+  background-color: #464646;
+  border: 1px solid #686868;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+_prefix_.dark.title {
+  background-color: transparent;
+  border: none;
+}
+
+_prefix_.dark.buttons button {
+  background-color: #efefef;
+  color: #464646;
+}
+
+_prefix_.dark.buttons button.active {
+  background-color: #cdcdcd;
+}
+
+_prefix_.dark.slider .inner-wrapper .number-wrapper .number {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+_prefix_.dark.slider .inner-wrapper .number-wrapper .unit {
+  color: #bcbcbc;
+}
 
 
 
