@@ -41,11 +41,20 @@ _prefix_ .inner-wrapper {
   float: left;
 }
 
+/* small display */
+_prefix_.small {
+  height: auto;
+}
 
-@media only screen and (max-width: 600px) {
-  body {
-    /* background-color: green; */
-  }
+_prefix_.small .legend {
+  width: 100%;
+  float: none;
+  text-align: left;
+}
+
+_prefix_.small .inner-wrapper {
+  width: 100%;
+  float: none;
 }
 
 /* -------------------------------------------
@@ -89,6 +98,10 @@ _prefix_.buttons button {
   cursor: pointer;
   -webkit-flex-grow: 1;
   flex-grow: 1;
+}
+
+_prefix_.buttons button:last-child {
+  margin: 0;
 }
 
 _prefix_.buttons button.active {

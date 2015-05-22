@@ -1,26 +1,21 @@
-const events = require('events');
+const BaseController = require('./base-controller');
 const styles = require('./utils/styles');
 
-class Title extends events.EventEmitter {
+class Title extends BaseController {
   constructor(legend, $container = null) {
     super();
 
+    this.type = 'title';
     this.legend = legend;
 
-    if ($container) {
-      if (typeof $container === 'string') {
-        $container = document.querySelector($container);
-      }
-
-      $container.appendChild(this.render());
-    }
+    super._applyOptionnalParameters($container);
   }
 
   render() {
     let content = `<span class="legend">${this.legend}</span>`;
 
-    this.$el = document.createElement('label');
-    this.$el.classList.add(styles.ns, 'title');
+    this.$el = super.render();
+    this.$el.classList.add(this.type);
     this.$el.innerHTML = content;
 
     return this.$el;

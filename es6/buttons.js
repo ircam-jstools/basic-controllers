@@ -1,24 +1,14 @@
-const events = require('events');
-const styles = require('./utils/styles');
+const BaseController = require('./base-controller');
 
-class Buttons extends events.EventEmitter {
+class Buttons extends BaseController {
   constructor(legend, labels, $container = null, callback = null) {
     super();
 
+    this.type = 'buttons';
     this.legend = legend;
     this.labels = labels;
 
-    // styles.insertStyleSheet();
-
-    if ($container) {
-      if (typeof $container === 'string') {
-        $container = document.querySelector($container);
-      }
-
-      $container.appendChild(this.render());
-    }
-
-    if (callback) { this.on('change', callback); }
+    super._applyOptionnalParameters($container, callback);
   }
 
   render() {
@@ -28,8 +18,8 @@ class Buttons extends events.EventEmitter {
         ${this.labels.map((label) => `<button data-label="${label}">${label}</button>`).join('')}
       </div>`;
 
-    this.$el = document.createElement('label');
-    this.$el.classList.add(styles.ns, 'buttons');
+    this.$el = super.render();
+    this.$el.classList.add(this.type);
     this.$el.innerHTML = content;
 
     this.$buttons = Array.from(this.$el.querySelectorAll('button'));

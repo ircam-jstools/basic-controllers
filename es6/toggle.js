@@ -1,23 +1,14 @@
-const events = require('events');
-const styles = require('./utils/styles');
+const BaseController = require('./base-controller');
 
-class Toggle extends events.EventEmitter {
+class Toggle extends BaseController {
   constructor(legend, active = false, $container = false, callback = null) {
     super();
 
+    this.type = 'toggle';
     this.legend = legend;
     this._active = active;
 
-
-    if ($container) {
-      if (typeof $container === 'string') {
-        $container = document.querySelector($container);
-      }
-
-      $container.appendChild(this.render());
-    }
-
-    if (callback) { this.on('change', callback); }
+    super._applyOptionnalParameters($container, callback);
   }
 
   set active(bool) {
@@ -41,8 +32,8 @@ class Toggle extends events.EventEmitter {
         </div>
       </div>`;
 
-    this.$el = document.createElement('label');
-    this.$el.classList.add(styles.ns, 'toggle');
+    this.$el = super.render();
+    this.$el.classList.add(this.type);
     this.$el.innerHTML = content;
 
     this.$toggle = this.$el.querySelector('.toggle-container');
