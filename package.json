@@ -1,6 +1,6 @@
 {
   "name": "waves-basic-controllers",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "basic-controllers for rapid prototyping",
   "main": "waves-basic-controllers.js",
   "standalone": "wavesBasicControllers",
