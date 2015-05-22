@@ -13,7 +13,8 @@
     "watch": "./bin/scripts --watch",
     "test": "tac6",
     "pretest": "npm run hint",
-    "hint": "jshint ./es6; true"
+    "hint": "jshint ./es6; true",
+    "deploy": "npm version $1 && git push origin master && git push --tags"
   },
   "license": "BSD-3",
   "repository": {
