@@ -7,6 +7,7 @@ body {
    ------------------------------------------- */
 _prefix_ {
   width: 100%;
+  max-width: 800px;
   height: 30px;
   padding: 3px;
   margin: 4px 0;
@@ -40,11 +41,20 @@ _prefix_ .inner-wrapper {
   float: left;
 }
 
+/* small display */
+_prefix_.small {
+  height: auto;
+}
 
-@media only screen and (max-width: 600px) {
-  body {
-    /* background-color: green; */
-  }
+_prefix_.small .legend {
+  width: 100%;
+  float: none;
+  text-align: left;
+}
+
+_prefix_.small .inner-wrapper {
+  width: 100%;
+  float: none;
 }
 
 /* -------------------------------------------
@@ -88,6 +98,10 @@ _prefix_.buttons button {
   cursor: pointer;
   -webkit-flex-grow: 1;
   flex-grow: 1;
+}
+
+_prefix_.buttons button:last-child {
+  margin: 0;
 }
 
 _prefix_.buttons button.active {
@@ -186,7 +200,8 @@ _prefix_.slider .inner-wrapper .number-wrapper .number {
   background: none;
   padding: 0 0 0 4px;
   display: inline-block;
-  text-align: right
+  text-align: right;
+  vertical-align: top;
 }
 
 _prefix_.slider .inner-wrapper .number-wrapper .unit {

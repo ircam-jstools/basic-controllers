@@ -1,10 +1,11 @@
-const events = require('events');
+const BaseController = require('./base-controller');
 const styles = require('./utils/styles');
 
-class Slider extends events.EventEmitter {
+class Slider extends BaseController {
   constructor(legend, min = 0, max = 1, step = 0.01, defaultValue = 0, unit = '', size = 'default', $container = null, callback = null) {
-    super();
+    super()
 
+    this.type = 'slider';
     this.legend = legend;
     this.min = min;
     this.max = max;
@@ -13,15 +14,7 @@ class Slider extends events.EventEmitter {
     this.size = size;
     this._value = defaultValue;
 
-    if ($container) {
-      if (typeof $container === 'string') {
-        $container = document.querySelector($container);
-      }
-
-      $container.appendChild(this.render());
-    }
-
-    if (callback) { this.on('change', callback); }
+    super._applyOptionnalParameters($container, callback);
   }
 
   set value(value) {
@@ -48,8 +41,8 @@ class Slider extends events.EventEmitter {
         </div>
       </div>`;
 
-    this.$el = document.createElement('label');
-    this.$el.classList.add(styles.ns, 'slider');
+    this.$el = super.render();
+    this.$el.classList.add(this.type);
     this.$el.innerHTML = content;
 
     this.$range  = this.$el.querySelector(`input[type="range"]`);
