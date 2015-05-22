@@ -40,19 +40,31 @@ _prefix_ .inner-wrapper {
 }
 
 /* small display */
-_prefix_.small {
+_prefix_.small:not(.toggle) {
   height: auto;
 }
 
-_prefix_.small .legend {
+_prefix_.small:not(.toggle) .legend {
   width: 100%;
   float: none;
   text-align: left;
 }
 
-_prefix_.small .inner-wrapper {
+_prefix_.small:not(.toggle) .inner-wrapper {
   width: 100%;
   float: none;
+}
+
+_prefix_.small.toggle .legend {
+  display: inline-block;
+  margin-right: 20px;
+  text-align: left;
+  width: auto;
+}
+
+_prefix_.small.toggle .inner-wrapper {
+  display: inline-block;
+  width: auto;
 }
 
 /* -------------------------------------------
@@ -127,14 +139,6 @@ _prefix_.toggle .toggle-container {
   border-radius: 2px;
 }
 
-_prefix_.dark.toggle .toggle-container {
-  background-color: #efefef;
-}
-
-_prefix_.dark.toggle .toggle-container .x {
-  background-color: #464646;
-}
-
 _prefix_.toggle .toggle-container .x {
   width: 1px;
   height: 19px;
@@ -157,6 +161,8 @@ _prefix_.toggle .toggle-container .x.x2 {
   -webkit-transform: rotate(-45deg);
   transform: rotate(-45deg);
 }
+
+/* --- */
 
 /* -------------------------------------------
    SLIDER
@@ -244,6 +250,14 @@ _prefix_.dark {
 _prefix_.dark.title {
   background-color: transparent;
   border: none;
+}
+
+_prefix_.dark.toggle .toggle-container {
+  background-color: #efefef;
+}
+
+_prefix_.dark.toggle .toggle-container .x {
+  background-color: #464646;
 }
 
 _prefix_.dark.buttons button {
