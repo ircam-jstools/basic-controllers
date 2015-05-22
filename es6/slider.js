@@ -3,7 +3,7 @@ const styles = require('./utils/styles');
 
 class Slider extends BaseController {
   constructor(legend, min = 0, max = 1, step = 0.01, defaultValue = 0, unit = '', size = 'default', $container = null, callback = null) {
-    super()
+    super();
 
     this.type = 'slider';
     this.legend = legend;

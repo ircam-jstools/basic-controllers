@@ -10,8 +10,7 @@ module.exports.insertStyleSheet = function(...names) {
   $style.setAttribute('data-namespace', ns);
   $style.innerHTML = styles;
 
-  // allow overriding by adding styles in <body>
-  document.head.appendChild($style);
+  document.body.appendChild($style);
 };
 
 module.exports.ns = ns;
