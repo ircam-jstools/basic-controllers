@@ -244,7 +244,7 @@ _prefix_.slider .inner-wrapper .number-wrapper .unit sup {
 _prefix_.dark {
   background-color: #464646;
   border: 1px solid #686868;
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(255, 255, 255, 0.95);
 }
 
 _prefix_.dark.title {

@@ -17,6 +17,7 @@ class BaseController extends events.EventEmitter {
   }
 
   static set theme(value) {
+    console.log(value);
     stack.forEach((controller) => controller.$el.classList.remove(theme));
     theme = value;
     stack.forEach((controller) => controller.$el.classList.add(theme));
@@ -36,8 +37,9 @@ class BaseController extends events.EventEmitter {
   }
 
   render() {
+    console.log(theme);
     this.$el = document.createElement('label');
-    this.$el.classList.add(styles.ns);
+    this.$el.classList.add(styles.ns, theme);
 
     return this.$el;
   }
