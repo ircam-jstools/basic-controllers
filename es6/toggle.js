@@ -46,10 +46,8 @@ class Toggle extends BaseController {
   bindEvents() {
     this.$toggle.addEventListener('click', (e) => {
       e.preventDefault();
-      var active = this.active ? false : true;
-      this.active = active;
-
-      this.emit('change', active);
+      this.active = !this.active;
+      this.emit('change', this.active);
     });
   }
 }

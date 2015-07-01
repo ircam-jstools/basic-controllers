@@ -28,6 +28,10 @@ _prefix_ .legend {
   width: 24%;
   float: left;
   white-space: nowrap;
+  -webkit-user-select: none;  /* Chrome all / Safari all */
+  -moz-user-select: none;     /* Firefox all */
+  -ms-user-select: none;      /* IE 10+ */
+  user-select: none;
 }
 
 _prefix_ .inner-wrapper {
@@ -87,6 +91,7 @@ _prefix_.title .legend {
   overflow: hidden;
   text-align: left;
   padding: 0;
+  width: 100%;
   box-sizing: border-box;
   -webkit-flex-grow: 1;
   flex-grow: 1;
@@ -236,6 +241,19 @@ _prefix_.slider .inner-wrapper .number-wrapper .unit sup {
   line-height: 7px;
 }
 
+/* -------------------------------------------
+   BREAKPOINT
+   ------------------------------------------- */
+
+_prefix_.breakpoint {
+  height: auto;
+  overflow: auto;
+}
+
+_prefix_.breakpoint .timeline {
+  background-color: #464646;
+  border-radius: 2px;
+}
 
 /* -------------------------------------------
    DARK THEME

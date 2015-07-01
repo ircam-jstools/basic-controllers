@@ -8,6 +8,7 @@ var basicControllers = {
   Buttons: require('./dist/buttons'),
   Toggle: require('./dist/toggle'),
   Slider: require('./dist/slider'),
+  Breakpoint: require('./dist/breakpoint'),
   setTheme: function(theme) {
     BaseController.theme = theme;
   }
