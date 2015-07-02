@@ -22,6 +22,10 @@ class BaseController extends events.EventEmitter {
     stack.forEach((controller) => controller.$el.classList.add(theme));
   }
 
+  static get theme() {
+    return theme;
+  }
+
   _applyOptionnalParameters($container = null, callback = null) {
     if ($container) {
       if (typeof $container === 'string') {
