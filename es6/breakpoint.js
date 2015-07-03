@@ -1,6 +1,6 @@
 const Timeline = require('waves-ui/dist/core/timeline');
 const Layer = require('waves-ui/dist/core/layer');
-const TimeContext = require('waves-ui/dist/core/time-context');
+const LayerTimeContext = require('waves-ui/dist/core/layer-time-context');
 const Line = require('waves-ui/dist/shapes/line');
 const Dot = require('waves-ui/dist/shapes/dot');
 const BreakpointBehavior = require('waves-ui/dist/behaviors/breakpoint-behavior');
@@ -118,7 +118,7 @@ class Breakpoint extends BaseController {
     this.timeline = new Timeline();
     this.timeline.registerContainer('main', this.$timeline, { height: 300 });
 
-    const breakpointTimeContext = new TimeContext(this.timeline.timeContext);
+    const breakpointTimeContext = new LayerTimeContext(this.timeline.timeContext);
     this.breakpointLayer = new Layer('collection', this.dots, { height: 300 });
     this.breakpointLayer.setTimeContext(breakpointTimeContext);
 
