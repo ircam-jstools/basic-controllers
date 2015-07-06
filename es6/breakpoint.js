@@ -52,7 +52,7 @@ class BreakpointState extends BaseState {
 
         layer.data.push(datum);
 
-        this.timeline.draw();
+        this.timeline.drawLayerShapes();
         this.timeline.update();
       } else {
         // if shift is pressed, remove the item
@@ -61,7 +61,7 @@ class BreakpointState extends BaseState {
           const datum = layer.getDatumFromItem(item);
           data.splice(data.indexOf(datum), 1);
 
-          this.timeline.draw();
+          this.timeline.drawLayerShapes();
           this.timeline.update();
         } else {
           this.currentEditedLayer = layer;
@@ -98,7 +98,6 @@ class Breakpoint extends BaseController {
     this.legend = legend;
 
     this.dots = defaultDots;
-    // console.log(this.dots);
 
     super._applyOptionnalParameters($container, callback);
   }
@@ -116,7 +115,7 @@ class Breakpoint extends BaseController {
     this.$timeline = this.$el.querySelector('.timeline');
     // create a timeline with a breakpoint function
     this.timeline = new Timeline();
-    this.timeline.registerContainer('main', this.$timeline, { height: 300 });
+    this.timeline.registerContainer(this.$timeline, { height: 300 });
 
     const breakpointTimeContext = new LayerTimeContext(this.timeline.timeContext);
     this.breakpointLayer = new Layer('collection', this.dots, { height: 300 });
@@ -153,10 +152,9 @@ class Breakpoint extends BaseController {
       datum[1] = Math.max(0, Math.min(datum[1], 1));
     });
 
-    this.timeline.addLayer(this.breakpointLayer, 'main');
+    this.timeline.addLayer(this.breakpointLayer);
 
-    this.timeline.render();
-    this.timeline.draw();
+    this.timeline.drawLayerShapes();
     this.timeline.update();
 
     this.timeline.setState(new BreakpointState(this.timeline));
