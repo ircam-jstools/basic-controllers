@@ -1,3 +1,5 @@
+console.log(wavesBasicControllers);
+
 new wavesBasicControllers.Title('Title example', '#container');
 
 new wavesBasicControllers.Buttons('Buttons example', ['light', 'dark'], '#container', function(theme) {
@@ -31,4 +33,8 @@ new wavesBasicControllers.Slider('Slider default / medium', 20, 1000, 1, 225, 'm
 
 new wavesBasicControllers.Slider('Slider small', 20, 1000, 1, 660, '', 'small', '#container', function(value) {
   console.log('SLIDER SMALL =>', value);
+});
+
+new wavesBasicControllers.Breakpoint('Breakpoint', [], '#container', function(dots) {
+  console.log(dots);
 });
