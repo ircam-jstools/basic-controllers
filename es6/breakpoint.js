@@ -4,7 +4,7 @@ const LayerTimeContext = require('waves-ui/dist/core/layer-time-context');
 const Line = require('waves-ui/dist/shapes/line');
 const Dot = require('waves-ui/dist/shapes/dot');
 const BreakpointBehavior = require('waves-ui/dist/behaviors/breakpoint-behavior');
-const BaseState = require('waves-ui/dist/timeline-states/base-state');
+const BaseState = require('waves-ui/dist/states/base-state');
 
 const BaseController = require('./base-controller');
 
@@ -46,14 +46,14 @@ class BreakpointState extends BaseState {
       if (item === null) {
         // create an item
         const datum = [
-          e.x / this.timeline.containersWidth,
+          e.x / this.timeline.visibleWidth,
           1 - (e.y / layer.params.height)
         ];
 
         layer.data.push(datum);
 
-        this.timeline.drawLayerShapes();
-        this.timeline.update();
+        this.timeline.tracks.render();
+        this.timeline.tracks.update();
       } else {
         // if shift is pressed, remove the item
         if (e.originalEvent.shiftKey) {
@@ -61,8 +61,8 @@ class BreakpointState extends BaseState {
           const datum = layer.getDatumFromItem(item);
           data.splice(data.indexOf(datum), 1);
 
-          this.timeline.drawLayerShapes();
-          this.timeline.update();
+          this.timeline.tracks.render();
+          this.timeline.tracks.update();
         } else {
           this.currentEditedLayer = layer;
           layer.select(item);
@@ -115,7 +115,7 @@ class Breakpoint extends BaseController {
     this.$timeline = this.$el.querySelector('.timeline');
     // create a timeline with a breakpoint function
     this.timeline = new Timeline();
-    this.timeline.registerContainer(this.$timeline, { height: 300 });
+    const track = this.timeline.createTrack(this.$timeline, 300, 'main');
 
     const breakpointTimeContext = new LayerTimeContext(this.timeline.timeContext);
     this.breakpointLayer = new Layer('collection', this.dots, { height: 300 });
@@ -152,12 +152,12 @@ class Breakpoint extends BaseController {
       datum[1] = Math.max(0, Math.min(datum[1], 1));
     });
 
-    this.timeline.addLayer(this.breakpointLayer);
+    this.timeline.addLayer(this.breakpointLayer, 'main');
 
-    this.timeline.drawLayerShapes();
-    this.timeline.update();
+    this.timeline.tracks.render();
+    this.timeline.tracks.update();
 
-    this.timeline.setState(new BreakpointState(this.timeline));
+    this.timeline.state = new BreakpointState(this.timeline);
 
     this.bindEvents();
 
@@ -168,9 +168,9 @@ class Breakpoint extends BaseController {
     super.onResize();
 
     const width = this.$timeline.getBoundingClientRect().width;
-    this.timeline.setContainersWidth(width);
+    this.timeline.visibleWidth = width;
     this.timeline.pixelsPerSecond = width;
-    this.timeline.update();
+    this.timeline.tracks.update();
   }
 
   bindEvents() {
