@@ -21,6 +21,10 @@ new wavesBasicControllers.Toggle('Toggle example', false, '#container', function
   console.log('TOGGLE =>', value);
 });
 
+new wavesBasicControllers.Toggle('Small', false, '#container', function(value) {
+  console.log('TOGGLE =>', value);
+});
+
 new wavesBasicControllers.Title('Sliders', '#container');
 
 new wavesBasicControllers.Slider('Slider large', 20, 1000, 1, 537, 'Hz', 'large', '#container', function(value) {

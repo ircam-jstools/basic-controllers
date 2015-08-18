@@ -9,7 +9,7 @@ var basicControllers = {
   Toggle: require('./dist/toggle'),
   Slider: require('./dist/slider'),
   // wait for UI develop
-  // Breakpoint: require('./dist/breakpoint'),
+  Breakpoint: require('./dist/breakpoint'),
   setTheme: function(theme) {
     BaseController.theme = theme;
   }
