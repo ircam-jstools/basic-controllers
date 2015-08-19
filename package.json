@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "babel-runtime": "^5.4.4",
-    "waves-ui": "git://github.com/wavesjs/ui"
+    "waves-ui": "git://github.com/wavesjs/ui.git#develop"
   },
   "devDependencies": {
     "fs-extra": "^0.16.3",
