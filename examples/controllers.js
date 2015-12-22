@@ -24,12 +24,16 @@ new wavesBasicControllers.NumberBox('NumberBox', 0, 10, 1, 5, '#container', func
   console.log('NUMBER =>', value);
 });
 
+var info = new wavesBasicControllers.Info('Info', 'read-only value', '#container');
+
 new wavesBasicControllers.SelectList('SelectList', ['standby', 'run', 'end'], 'run', '#container', function(value) {
   console.log('SELECT LIST =>', value);
+  info.value = value;
 });
 
 new wavesBasicControllers.SelectButtons('SelectButtons', ['standby', 'run', 'end'], 'run', '#container', function(value) {
   console.log('SELECT BUTTONS =>', value);
+  info.value = value;
 });
 
 new wavesBasicControllers.Title('Sliders', '#container');
