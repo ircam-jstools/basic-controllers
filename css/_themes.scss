@@ -2,26 +2,21 @@
 // DARK THEME
 // -----------------------------------------------------------
 
-$backgroundColor: #464646;
-$borderColor: #686868;
+$backgroundColor: #363636;
+$borderColor: #585858;
 $textColor: rgba(255, 255, 255, 0.95);
 $textColorLight: #bcbcbc;
 
 $btnBgColor: #efefef;
 $btnBgColorHover: #cdcdcd;
 $btnBgColorActive: #ababab;
-$btnTextColor: #464646;
-$btnLineColor: #464646;
+$btnTextColor: #363636;
+$btnLineColor: #363636;
 
 _prefix_.dark {
-  // general
   background-color: $backgroundColor;
   border: 1px solid $borderColor;
   color: $textColor;
-
-  // .legend {
-  //   font-weight: normal;
-  // }
 
   .toggle-element {
     background-color: $btnBgColor;
@@ -52,7 +47,7 @@ _prefix_.dark {
     }
   }
 
-  .number, select {
+  .number, select, input[type=text] {
     color: $textColor;
     background-color: lighten($backgroundColor, 6%);
   }

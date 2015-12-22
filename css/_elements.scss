@@ -80,7 +80,7 @@ _prefix_ .number {
   border: none;
   background: none;
   color: $textColor;
-  padding: 0 0 0 4px;
+  padding: 0 4px;
   background-color: lighten($backgroundColor, 4%);
   border-radius: 2px;
   box-sizing: border-box;
@@ -101,5 +101,16 @@ _prefix_ select {
   &:focus {
     outline: none;
   }
+}
+
+_prefix_ input[type=text] {
+  width: 100%;
+  height: $innerHeight + px;
+  line-height: $innerHeight + px;
+  border: 0;
+  padding: 0 4px;
+  background-color: lighten($backgroundColor, 4%);
+  border-radius: 2px;
+  color: $textColorLight;
 }
 
