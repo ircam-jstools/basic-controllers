@@ -1,0 +1,105 @@
+// -----------------------------------------------------------
+// REUSABLE ELEMENTS
+// -----------------------------------------------------------
+
+_prefix_ .arrow-right, _prefix_ .arrow-left {
+  border-radius: 2px;
+  width: 14px;
+  height: $innerHeight + px;
+  cursor: pointer;
+  background-color: $btnBgColor;
+
+  line {
+    stroke-width: 3px;
+    stroke: #ffffff;
+  }
+
+  &:hover { background-color: $btnBgColorHover; }
+  &:active { background-color: $btnBgColorActive; }
+}
+
+_prefix_ .toggle-element {
+  width: $innerHeight + px;
+  height: $innerHeight + px;
+  border-radius: 2px;
+  background-color: $btnBgColor;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $btnBgColorHover;
+  }
+
+  line {
+    stroke-width: 3px;
+  }
+
+  .x { display: none; }
+  &.active .x { display: block; }
+}
+
+_prefix_ .btn {
+  display: block;
+  text-align: center;
+  font: normal normal 12px arial;
+  text-decoration: none;
+  height: $innerHeight + px;
+  line-height: $innerHeight + px;
+  background-color: $btnBgColor;
+  border: none;
+  color: $btnTextColor;
+  margin: 0 4px 0 0;
+  box-sizing: border-box;
+  border-radius: 2px;
+  cursor: pointer;
+  -webkit-flex-grow: 1;
+  flex-grow: 1;
+
+  &:last-child {
+    margin: 0;
+  }
+
+  &:hover {
+    background-color: $btnBgColorHover;
+  }
+
+  &:active, &.active {
+    background-color: $btnBgColorActive;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+_prefix_ .number {
+  height: $innerHeight + px;
+  display: inline-block;
+  position: relative;
+  font: $numberText;
+  vertical-align: top;
+  border: none;
+  background: none;
+  color: $textColor;
+  padding: 0 0 0 4px;
+  background-color: lighten($backgroundColor, 4%);
+  border-radius: 2px;
+  box-sizing: border-box;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+_prefix_ select {
+  height: $innerHeight + px;
+  line-height: $innerHeight + px;
+  background-color: lighten($backgroundColor, 4%);
+  border-radius: 2px;
+  border: none;
+  vertical-align: top;
+
+  &:focus {
+    outline: none;
+  }
+}
+

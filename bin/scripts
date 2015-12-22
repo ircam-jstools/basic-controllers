@@ -2,12 +2,14 @@
 var pkg = require('../package.json');
 var childProcess = require('child_process');
 var util = require('util');
+var path = require('path');
 // devDependencies
 var babel = require('babel');
 var browserify = require('browserify');
 var fse = require('fs-extra');
 var nodeWatch = require('node-watch');
 var uglifyJS = require('uglify-js');
+var sass = require('node-sass');
 
 // CONFIG
 // -----------------------------------------------
@@ -16,6 +18,7 @@ var distDir = 'dist';
 
 // transpile css file to js string
 var cssSrcDir = 'css';
+var cssSrcFile = 'styles.scss';
 var cssDistDir = distDir + '/' + cssSrcDir;
 
 // options for babel
@@ -67,12 +70,14 @@ function createTargetName(filename) {
 
 function createCssTargetName(filename) {
   // replace source dir with target dir and '.css' to '.js'
-  return filename.replace(new RegExp('^' + cssSrcDir), cssDistDir).replace('.css', '.js');
+  return filename.replace(new RegExp('^' + cssSrcDir), cssDistDir).replace('.scss', '.js');
 }
 
 // create filename from `pck.main` to `umd` version
 function getUmdName() {
-  return pkg.main.replace('.js', '.umd.js');
+  return pkg.main
+    .replace(new RegExp('^' + distDir), '.')
+    .replace('.js', '.umd.js');
 }
 
 // create filename from `umd` to `min` version
@@ -90,9 +95,9 @@ function watch() {
     transpile(filename);
   });
 
-  // watch css files
+  // watch all scss files, but transpile only srcFile
   nodeWatch(cssSrcDir, function(filename) {
-    transpileCss(filename);
+    transpileCss(cssSrcDir + '/' + cssSrcFile);
   });
 }
 
@@ -133,16 +138,21 @@ function transpileAll() {
 
   childProcess.exec(cmd , function(err, stdout, stderr) {
     if (err) { console.error(err); }
-    var fileList = stdout.split('\n');
 
+    var fileList = stdout.split('\n');
     var stack = [];
 
     for (var i = 0; i < fileList.length; i++) {
       var file = fileList[i];
       if (!file) { continue; }
+      // ignore hidden files
+      var basename = path.basename(file);
+      if (/^\./.test(basename)) { continue; }
 
       stack.push(file);
     }
+
+    if (stack.length === 0) { return; }
 
     transpile(stack.shift(), stack);
   });
@@ -178,19 +188,28 @@ function transpileCss(src) {
   fse.readFile(src, 'utf8', function(err, res) {
     if (err) { return console.log(err.message); }
 
-    // replace `_prefix_` keyword in css file with `package.name`
-    res = res.replace(/_prefix_/gm, '.' + pkg.name);
-    // rmeove comments - http://upshots.org/javascript/javascript-regexp-to-remove-comments
-    res = res.replace(/(\/\*([\s\S]*?)\*\/)|(\/\/(.*)$)/gm, ''); // not so reliable
-    // clean white spaces
-    res = res.replace(/[\s]+/gm, ' ');
-    // prepare for js file
-    res = 'module.exports = "' + res.replace(/\n/gm, ' ') + '";';
+    res = sass.render({ data: res }, function(err, res) {
+      if (err) {
+        console.log(util.format(red + "=> [sass] " + err.message + ' at line:' + err.line + NC));
+        return;
+      }
 
-    fse.outputFile(target, res, function(err, res) {
-      if (err) { return console.log(err.message); }
+      res = res.css.toString();
 
-      console.log(util.format(green + '=> "%s" successfully transpiled to "%s"' + NC, src, target));
+      // replace `_prefix_` keyword in css file with `package.name`
+      res = res.replace(/_prefix_/gm, '.' + pkg.name);
+      // remove comments - http://upshots.org/javascript/javascript-regexp-to-remove-comments
+      res = res.replace(/(\/\*([\s\S]*?)\*\/)|(\/\/(.*)$)/gm, ''); // not so reliable
+      // // clean white spaces
+      res = res.replace(/[\s]+/gm, ' ');
+      // prepare for js file
+      res = 'module.exports = "' + res.replace(/\n/gm, ' ') + '";';
+
+      fse.outputFile(target, res, function(err, res) {
+        if (err) { return console.log(err.message); }
+
+        console.log(util.format(green + '=> "%s" successfully transpiled to "%s"' + NC, src, target));
+      });
     });
   });
 }

@@ -1,0 +1,74 @@
+// -----------------------------------------------------------
+// LAYOUT
+// -----------------------------------------------------------
+
+_prefix_ {
+  width: 100%;
+  max-width: 800px;
+  height: $elmHeight + px;
+  padding: $elmPadding + px;
+  margin: $elmMargins;
+  background-color: $backgroundColor;
+  border: 1px solid $borderColor;
+  box-sizing: border-box;
+  border-radius: 2px;
+  display: block;
+  color: $textColor;
+
+  .legend {
+    font: $legendText;
+    line-height: $innerHeight + px;
+    overflow: hidden;
+    text-align: right;
+    padding: 0 8px 0 0;
+    display: block;
+    box-sizing: border-box;
+    width: 24%;
+    float: left;
+    white-space: nowrap;
+    @include prefix('user-select', 'none');
+  }
+
+  .inner-wrapper {
+    display: -webkit-inline-flex;
+    display: inline-flex;
+    -webkit-flex-wrap: no-wrap;
+    flex-wrap: no-wrap;
+    width: 76%;
+    float: left;
+  }
+}
+
+// -----------------------------------------------------------
+// SMALL DISPLAYS
+// -----------------------------------------------------------
+
+_prefix_.small {
+  &:not(.align-small) {
+    height: auto;
+
+    .legend {
+      width: 100%;
+      float: none;
+      text-align: left;
+    }
+
+    .inner-wrapper {
+      width: 100%;
+      float: none;
+    }
+  }
+
+  &.align-small {
+    .legend {
+      display: block;
+      margin-right: 20px;
+      text-align: left;
+    }
+
+    .inner-wrapper {
+      display: inline-block;
+      width: auto;
+    }
+  }
+}

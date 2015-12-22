@@ -1,6 +1,7 @@
-const BaseController = require('./base-controller');
+import BaseController from './base-controller';
+import * as elements from '../utils/elements';
 
-class Toggle extends BaseController {
+export default class Toggle extends BaseController {
   constructor(legend, active = false, $container = false, callback = null) {
     super();
 
@@ -27,16 +28,14 @@ class Toggle extends BaseController {
     let content = `
       <span class="legend">${this.legend}</span>
       <div class="inner-wrapper">
-        <div class="toggle-container">
-          <div class="x x1"></div><div class="x x2"></div>
-        </div>
+        ${elements.toggle}
       </div>`;
 
-    this.$el = super.render();
-    this.$el.classList.add(this.type);
+    this.$el = super.render(this.type);
+    this.$el.classList.add('align-small');
     this.$el.innerHTML = content;
 
-    this.$toggle = this.$el.querySelector('.toggle-container');
+    this.$toggle = this.$el.querySelector('.toggle-element');
     this.bindEvents();
     this.active = this._active; // initialize state
 
@@ -51,5 +50,3 @@ class Toggle extends BaseController {
     });
   }
 }
-
-module.exports = Toggle;

@@ -1,0 +1,76 @@
+// -----------------------------------------------------------
+// DARK THEME
+// -----------------------------------------------------------
+
+$backgroundColor: #464646;
+$borderColor: #686868;
+$textColor: rgba(255, 255, 255, 0.95);
+$textColorLight: #bcbcbc;
+
+$btnBgColor: #efefef;
+$btnBgColorHover: #cdcdcd;
+$btnBgColorActive: #ababab;
+$btnTextColor: #464646;
+$btnLineColor: #464646;
+
+_prefix_.dark {
+  // general
+  background-color: $backgroundColor;
+  border: 1px solid $borderColor;
+  color: $textColor;
+
+  // .legend {
+  //   font-weight: normal;
+  // }
+
+  .toggle-element {
+    background-color: $btnBgColor;
+
+    line {
+      stroke: $btnLineColor;
+    }
+
+    &:hover {
+      background-color: $btnBgColorHover;
+    }
+  }
+
+  .arrow-right, .arrow-left {
+    height: $innerHeight + px;
+    background-color: $btnBgColor;
+
+    line {
+      stroke: $btnLineColor;
+    }
+
+    &:hover {
+      background-color: $btnBgColorHover;
+    }
+
+    &:active {
+      background-color: $btnBgColorActive;
+    }
+  }
+
+  .number, select {
+    color: $textColor;
+    background-color: lighten($backgroundColor, 6%);
+  }
+
+  .btn {
+    background-color: $btnBgColor;
+    color: $btnTextColor;
+
+    &:hover {
+      background-color: $btnBgColorHover;
+    }
+
+    &:active, &.active {
+      background-color: $btnBgColorActive;
+    }
+  }
+
+  &.slider .inner-wrapper .number-wrapper .unit {
+    color: $textColorLight;
+  }
+}

@@ -1,18 +1,22 @@
-const events = require('events');
-const styles = require('./utils/styles');
+import events from 'events';
+import * as styles from '../utils/styles';
 // store all instance in a stack
 const stack = new Set();
-let theme;
+let theme = 'light';
 
 // add a single listener on window to trigger update
 window.addEventListener('resize', function() {
   stack.forEach((controller) => controller.onResize());
 });
 
-class BaseController extends events.EventEmitter {
+export default class BaseController extends events.EventEmitter {
   constructor() {
     super();
-    if (stack.size === 0) { styles.insertStyleSheet(); }
+
+    if (stack.size === 0) {
+      styles.insertStyleSheet();
+    }
+
     stack.add(this);
   }
 
@@ -39,9 +43,10 @@ class BaseController extends events.EventEmitter {
     if (callback) { this.on('change', callback); }
   }
 
-  render() {
+  render(type = null) {
     this.$el = document.createElement('label');
     this.$el.classList.add(styles.ns, theme);
+    if (type !== null) { this.$el.classList.add(type); }
 
     return this.$el;
   }
@@ -60,6 +65,3 @@ class BaseController extends events.EventEmitter {
   bindEvents() {}
 }
 
-BaseController.theme = 'light';
-
-module.exports = BaseController;

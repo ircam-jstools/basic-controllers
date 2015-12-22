@@ -1,3 +1,7 @@
+/**
+ * Not exposed anymore, should be handled as a plugin or something.
+ * waves-ui dependecies is too heavy for a use-case that is not proven
+ */
 const Timeline = require('waves-ui/dist/core/timeline');
 const Layer = require('waves-ui/dist/core/layer');
 const LayerTimeContext = require('waves-ui/dist/core/layer-time-context');

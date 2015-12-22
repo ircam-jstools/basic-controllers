@@ -1,7 +1,8 @@
-const BaseController = require('./base-controller');
-const styles = require('./utils/styles');
+import BaseController from './base-controller';
+import styles from '../utils/styles';
 
-class Title extends BaseController {
+
+export default class Title extends BaseController {
   constructor(legend, $container = null) {
     super();
 
@@ -14,12 +15,10 @@ class Title extends BaseController {
   render() {
     let content = `<span class="legend">${this.legend}</span>`;
 
-    this.$el = super.render();
-    this.$el.classList.add(this.type);
+    this.$el = super.render(this.type);
     this.$el.innerHTML = content;
 
     return this.$el;
   }
 }
 
-module.exports = Title;
