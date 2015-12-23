@@ -48,6 +48,7 @@ _prefix_ .btn {
   border: none;
   color: $btnTextColor;
   margin: 0 4px 0 0;
+  padding: 0;
   box-sizing: border-box;
   border-radius: 2px;
   cursor: pointer;
@@ -81,6 +82,7 @@ _prefix_ .number {
   background: none;
   color: $textColor;
   padding: 0 4px;
+  margin: 0;
   background-color: lighten($backgroundColor, 4%);
   border-radius: 2px;
   box-sizing: border-box;
@@ -97,6 +99,8 @@ _prefix_ select {
   border-radius: 2px;
   border: none;
   vertical-align: top;
+  padding: 0;
+  margin: 0;
 
   &:focus {
     outline: none;

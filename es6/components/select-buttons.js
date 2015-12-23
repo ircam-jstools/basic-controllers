@@ -6,7 +6,7 @@ export default class SelectButtons extends BaseController {
     super();
 
     this.type = 'select-buttons';
-    this.legend = legend;
+    this.legend = legend; // non breakable space to keep rendering consistency
     this.options = options;
     this._value = defaultValue;
     const currentIndex = this.options.indexOf(this._value);

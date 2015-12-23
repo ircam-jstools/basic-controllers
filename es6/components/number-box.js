@@ -23,7 +23,7 @@ export default class NumberBox extends BaseController {
   set value(value) {
     value = this._isIntStep ? parseInt(value, 10) : parseFloat(value);
     value = Math.min(this.max, Math.max(this.min, value));
-    this.$number = value;
+    this.$number.value = value;
 
     this._value = value;
   }
@@ -53,12 +53,35 @@ export default class NumberBox extends BaseController {
 
   bindEvents() {
     this.$prev.addEventListener('click', (e) => {
-      const value = Math.max(this.min, this._value - this.step);
+      // minimize floating point error
+      // const steps = Math.floor(this.value / this.step + 0.5);
+      // const value = Math.max(this.min, this.step * (steps - 1));
+
+      const decimals = this.step.toString().split('.')[1];
+      const exp = decimals ? decimals.length : 0;
+      const mult = Math.pow(10, exp);
+
+      const intValue = Math.floor(this.value * mult + 0.5);
+      const intStep = Math.floor(this.step * mult + 0.5);
+      const value = (intValue - intStep) / mult;
+
       this.propagate(value);
     }, false);
 
     this.$next.addEventListener('click', (e) => {
-      const value = Math.min(this.max, this._value + this.step);
+      // minimize floating point error
+      // const steps = Math.floor(this.value / this.step + 0.5);
+      // const value = Math.max(this.min, this.step * (steps + 1));
+
+      // do computation with integers, looks better ?
+      const decimals = this.step.toString().split('.')[1];
+      const exp = decimals ? decimals.length : 0;
+      const mult = Math.pow(10, exp);
+
+      const intValue = Math.floor(this.value * mult + 0.5);
+      const intStep = Math.floor(this.step * mult + 0.5);
+      const value = (intValue + intStep) / mult;
+
       this.propagate(value);
     }, false);
 
@@ -75,7 +98,7 @@ export default class NumberBox extends BaseController {
     if (value === this._value) { return; }
 
     this._value = value;
-    this.$number.value = this._value;
+    this.$number.value = value;
 
     this.emit('change', this._value);
   }

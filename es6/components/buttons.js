@@ -5,7 +5,7 @@ export default class Buttons extends BaseController {
     super();
 
     this.type = 'buttons';
-    this.legend = legend;
+    this.legend = legend || '&nbsp'; // non breakable space to keep rendering consistency
     this.labels = labels;
     this._index = null;
 

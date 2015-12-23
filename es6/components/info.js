@@ -20,7 +20,6 @@ export default class Info extends BaseController {
   }
 
   set value(value) {
-    console.log(value);
     this.$input.value = value;
     this._value = value;
   }
