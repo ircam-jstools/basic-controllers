@@ -112,6 +112,8 @@ _prefix_.select-list {
   select {
     margin: 0 10px;
     width: 120px;
+    font: $inputText;
+    color: $textColor;
   }
 }
 
@@ -122,6 +124,17 @@ _prefix_.select-list {
 _prefix_.select-buttons {
   .btn:first-of-type {
     margin-left: 4px;
+  }
+}
+
+/* -------------------------------------------
+   INFOS
+   ------------------------------------------- */
+
+_prefix_.info {
+  input[type=text] {
+    font: $inputText;
+    color: $textColor;
   }
 }
 

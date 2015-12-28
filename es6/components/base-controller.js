@@ -37,7 +37,7 @@ export default class BaseController extends events.EventEmitter {
       }
 
       $container.appendChild(this.render());
-      setTimeout(() => this.onResize(), 0);
+      this.onRender();
     }
 
     if (callback) { this.on('change', callback); }
@@ -49,6 +49,10 @@ export default class BaseController extends events.EventEmitter {
     if (type !== null) { this.$el.classList.add(type); }
 
     return this.$el;
+  }
+
+  onRender() {
+    setTimeout(() => this.onResize(), 0);
   }
 
   onResize() {
