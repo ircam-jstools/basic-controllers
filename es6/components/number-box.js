@@ -53,10 +53,6 @@ export default class NumberBox extends BaseController {
 
   bindEvents() {
     this.$prev.addEventListener('click', (e) => {
-      // minimize floating point error
-      // const steps = Math.floor(this.value / this.step + 0.5);
-      // const value = Math.max(this.min, this.step * (steps - 1));
-
       const decimals = this.step.toString().split('.')[1];
       const exp = decimals ? decimals.length : 0;
       const mult = Math.pow(10, exp);
@@ -69,11 +65,6 @@ export default class NumberBox extends BaseController {
     }, false);
 
     this.$next.addEventListener('click', (e) => {
-      // minimize floating point error
-      // const steps = Math.floor(this.value / this.step + 0.5);
-      // const value = Math.max(this.min, this.step * (steps + 1));
-
-      // do computation with integers, looks better ?
       const decimals = this.step.toString().split('.')[1];
       const exp = decimals ? decimals.length : 0;
       const mult = Math.pow(10, exp);

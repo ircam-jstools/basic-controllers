@@ -4,15 +4,16 @@ import BaseController from './base-controller';
 /**
  * Display a value, Read-only.
  */
-export default class Info extends BaseController {
-  constructor(legend, defaultValue, $container = null) {
+export default class Text extends BaseController {
+  constructor(legend, defaultValue, readonly = true, $container = null, callback = null) {
     super();
 
-    this.type = 'info';
+    this.type = 'text';
     this.legend = legend;
+    this._readonly = readonly;
     this._value = defaultValue;
 
-    this._applyOptionnalParameters($container);
+    this._applyOptionnalParameters($container, callback);
   }
 
   get value() {
@@ -25,10 +26,11 @@ export default class Info extends BaseController {
   }
 
   render() {
+    const readonly = this._readonly ? 'readonly' : ''
     const content = `
       <span class="legend">${this.legend}</span>
       <div class="inner-wrapper">
-        <input class="text" type="text" value="${this._value}" readonly />
+        <input class="text" type="text" value="${this._value}" ${readonly} />
       </div>
     `;
 
@@ -37,6 +39,15 @@ export default class Info extends BaseController {
 
     this.$input = this.$el.querySelector('.text');
 
+    this.bindEvents();
+
     return this.$el;
+  }
+
+  bindEvents() {
+    this.$input.addEventListener('keyup', () => {
+      this._value = this.$input.value;
+      this.emit('change', this._value);
+    }, false);
   }
 }

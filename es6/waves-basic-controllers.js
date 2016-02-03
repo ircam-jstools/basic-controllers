@@ -3,7 +3,7 @@ import * as styles from './utils/styles';
 // expose for plugins
 import BaseController from './components/base-controller';
 import Buttons from './components/buttons';
-import Info from './components/info';
+import Text from './components/text';
 import NumberBox from './components/number-box';
 import SelectButtons from './components/select-buttons';
 import SelectList from './components/select-list';
@@ -15,7 +15,7 @@ import Toggle from './components/toggle';
 export default {
   BaseController,
   Buttons,
-  Info,
+  Text,
   NumberBox,
   SelectButtons,
   SelectList,
