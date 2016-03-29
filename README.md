@@ -10,14 +10,14 @@ Two themes are available: `'light'` _(default)_ and `'dark'`.
 The theme can be switched via the `setTheme` method of the namespace
 
 ```js
-var wavesBasicControllers = require('waves-basic-controllers');
-wavesBasicControllers.setTheme('dark');
+import * as basicControllers from 'waves-basic-controller';
+basicControllers.setTheme('dark');
 ```
 
 ### Title
 
 ```js
-const { Title } = require('waves-basic-controllers');
+import { Title } from 'waves-basic-controllers';
 const $container  = document.querySelector('#container');
 
 const title = new Title(legend);
@@ -31,7 +31,7 @@ new Title(legend, $container);
 ### Buttons
 
 ```js
-const { Buttons } = require('waves-basic-controllers');
+import { Buttons } from 'waves-basic-controllers';
 const $container  = document.querySelector('#container');
 
 const buttons = new Buttons(legend, [...ids]);
@@ -55,7 +55,7 @@ new Buttons(legend, [...ids], $container, (id) => {
 ### Toggle
 
 ```js
-const { Toggle } = require('waves-basic-controllers');
+import { Toggle } from 'waves-basic-controllers';
 const $container  = document.querySelector('#container');
 
 const toggle = new Toggle(legend, defaultState);
@@ -75,7 +75,7 @@ new Toggle(legend, defaultValue, $container, () => {
 ### Slider
 
 ```js
-const { Slider } = require('waves-basic-controllers');
+import { Slider } from 'waves-basic-controllers';
 const $container = document.querySelector('#container');
 
 const slider = new Slider(legend, min, max, step, defaultValue, unit, size);
