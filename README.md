@@ -99,21 +99,7 @@ _`size` can be 'large', 'medium' or 'small' ('medium' is the default value)_
 
 - `$container` can be a `DOMElement` or a css selector
 
-## Contributing
 
-This module relies on `babel` and `browserify`, these modules should be installed globally.
-
-```
-sudo npm install -g babel
-sudo npm install -g browserify
-```
-
-and linked into your development folder
-
-```
-npm link babel
-npm link browserify
-```
 
 
 
