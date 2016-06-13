@@ -31,14 +31,16 @@ new wavesBasicControllers.Text('Text', 'changable value', false,  '#container', 
   info.value = value;
 });
 
-new wavesBasicControllers.SelectList('SelectList', ['standby', 'run', 'end'], 'run', '#container', function(value) {
+var selectList = new wavesBasicControllers.SelectList('SelectList', ['standby', 'run', 'end'], 'run', '#container', function(value) {
   console.log('SELECT LIST =>', value);
   info.value = value;
+  selectButtons.value = value;
 });
 
-new wavesBasicControllers.SelectButtons('SelectButtons', ['standby', 'run', 'end'], 'run', '#container', function(value) {
+var selectButtons = new wavesBasicControllers.SelectButtons('SelectButtons', ['standby', 'run', 'end'], 'run', '#container', function(value) {
   console.log('SELECT BUTTONS =>', value);
   info.value = value;
+  selectList.value = value;
 });
 
 new wavesBasicControllers.Title('Sliders', '#container');

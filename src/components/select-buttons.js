@@ -21,7 +21,13 @@ export default class SelectButtons extends BaseController {
   }
 
   set value(value) {
+    const index = this.options.indexOf(value);
 
+    if (index !== -1) {
+      this._value = value;
+      this._currentIndex = index;
+      this._highlightBtn(this._currentIndex);
+    }
   }
 
   render() {
