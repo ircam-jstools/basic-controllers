@@ -7,6 +7,7 @@
   "scripts": {
     "bundle": "node ./bin/runner --bundle",
     "transpile": "node ./bin/runner --transpile",
+    "prewatch": "node ./bin/runner --transpile",
     "watch": "node ./bin/runner --watch"
   },
   "license": "BSD-3",
