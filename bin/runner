@@ -4,8 +4,10 @@ var watch = require('watch');
 var path = require('path');
 var pkg = require('../package.json');
 var util = require('util');
+var sass = require('node-sass');
 
 var javascripts = require('./javascripts');
+var log = require('./log');
 var cwd = process.cwd();
 
 'use strict';
@@ -46,6 +48,11 @@ var distDirectory = path.join(cwd, 'dist');
 
 var umdTarget = path.join(cwd, pkg.name + '.umd.js');
 var minTarget = path.join(cwd, pkg.name + '.min.js');
+
+// transpile css file to js string
+var cssSrcFile = 'styles.scss';
+var cssSrcDir = path.join(cwd, 'css');
+var cssDistDir = path.join(distDirectory, 'css');
 
 /**
  * Define which file should be ignored by every command.
@@ -119,6 +126,31 @@ function watchFiles(srcDirectory, distDirectory) {
   });
 }
 
+/**
+ * Watch javascript source files.
+ */
+function watchSassFiles(srcDirectory, distDirectory) {
+  watch.createMonitor(srcDirectory, watchOptions, function(monitor) {
+    var transpiler = javascripts.getTranspiler(srcDirectory, distDirectory, isAllowed, babelOptions);
+
+    monitor.on('created', function(filename, stats) {
+      if (isAllowed(filename))
+        transpiler.transpile(filename, []);
+    });
+
+    monitor.on('changed', function(filename, stats) {
+      if (isAllowed(filename))
+        transpiler.transpile(filename, []);
+    });
+
+    monitor.on('removed', function(filename, stats) {
+      if (isAllowed(filename, false))
+        transpiler.delete(filename);
+    });
+  });
+}
+
+
 
 function transpileFiles(srcDirectory, distDirectory, callback) {
   _getFileList(srcDirectory, function(files) {
@@ -134,6 +166,40 @@ function bundle(distDirectory) {
   transpileFiles(srcDirectory, distDirectory, function() {
     transpiler.bundle(entryPoint, umdTarget, function() {
       transpiler.uglify(umdTarget, minTarget);
+    });
+  });
+}
+
+function transpileCss(src) {
+  var target = src.replace(new RegExp(cssSrcDir), cssDistDir).replace('.scss', '.js');
+
+  var startTime = new Date().getTime();
+
+  fse.readFile(src, 'utf8', function(err, res) {
+    if (err) { return console.log(err.message); }
+
+    res = sass.render({ data: res }, function(err, res) {
+      if (err) {
+        console.log(util.format(red + "=> [sass] " + err.message + ' at line:' + err.line + NC));
+        return;
+      }
+
+      res = res.css.toString();
+
+      // replace `_prefix_` keyword in css file with `package.name`
+      res = res.replace(/_prefix_/gm, '.' + pkg.name);
+      // remove comments - http://upshots.org/javascript/javascript-regexp-to-remove-comments
+      res = res.replace(/(\/\*([\s\S]*?)\*\/)|(\/\/(.*)$)/gm, ''); // not so reliable
+      // // clean white spaces
+      res = res.replace(/[\s]+/gm, ' ');
+      // prepare for js file
+      res = 'module.exports = "' + res.replace(/\n/gm, ' ') + '";';
+
+      fse.outputFile(target, res, function(err, res) {
+        if (err) { return console.log(err.message); }
+
+        log.transpileSuccess(src, target, startTime);
+      });
     });
   });
 }
@@ -156,6 +222,7 @@ switch (command) {
    */
   case '--watch':
     watchFiles(srcDirectory, distDirectory);
+    watchSassFiles(cssSrcDir, cssDistDir);
     break;
 
   /**
@@ -163,6 +230,7 @@ switch (command) {
    */
   case '--transpile':
     transpileFiles(srcDirectory, distDirectory);
+    transpileCss(path.join(cssSrcDir, cssSrcFile));
     break;
 
   /**
@@ -170,6 +238,7 @@ switch (command) {
    */
   case '--bundle':
     bundle(distDirectory);
+    transpileCss(path.join(cssSrcDir, cssSrcFile));
     break;
 }
 
