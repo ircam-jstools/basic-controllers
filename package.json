@@ -1,9 +1,9 @@
 {
-  "name": "waves-basic-controllers",
+  "name": "basic-controllers",
   "version": "0.6.1",
   "description": "basic-controllers for rapid prototyping",
   "main": "dist/index.js",
-  "standalone": "wavesBasicControllers",
+  "standalone": "basicControllers",
   "scripts": {
     "bundle": "node ./bin/runner --bundle",
     "transpile": "node ./bin/runner --transpile",
