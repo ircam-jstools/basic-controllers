@@ -1,7 +1,7 @@
-import BaseController from './base-controller';
+import BaseController from './BaseController';
 import * as elements from '../utils/elements';
 
-export default class Toggle extends BaseController {
+class Toggle extends BaseController {
   constructor(legend, active = false, $container = false, callback = null) {
     super();
 
@@ -12,12 +12,23 @@ export default class Toggle extends BaseController {
     super._applyOptionnalParameters($container, callback);
   }
 
+  set value(bool) {
+    this.active = bool;
+  }
+
+  get value() {
+    return this._value;
+  }
+
+  // alias value
   set active(bool) {
     this._active = bool;
     this._updateBtn();
   }
 
-  get active() { return this._active; }
+  get active() {
+    return this._active;
+  }
 
   _updateBtn() {
     var method = this.active ? 'add' : 'remove';
@@ -45,8 +56,11 @@ export default class Toggle extends BaseController {
   bindEvents() {
     this.$toggle.addEventListener('click', (e) => {
       e.preventDefault();
+
       this.active = !this.active;
-      this.emit('change', this.active);
+      this._executeListeners(this._active);
     });
   }
 }
+
+export default Toggle;

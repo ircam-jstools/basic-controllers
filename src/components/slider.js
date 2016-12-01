@@ -1,6 +1,7 @@
-import BaseController from './base-controller';
+import BaseController from './BaseController';
+import * as guiComponents from 'gui-components';
 
-export default class Slider extends BaseController {
+class Slider extends BaseController {
   constructor(legend, min = 0, max = 1, step = 0.01, defaultValue = 0, unit = '', size = 'default', $container = null, callback = null) {
     super();
 
@@ -12,6 +13,8 @@ export default class Slider extends BaseController {
     this.unit = unit;
     this.size = size;
     this._value = defaultValue;
+
+    this._onSliderChange = this._onSliderChange.bind(this);
 
     super._applyOptionnalParameters($container, callback);
   }
@@ -33,7 +36,7 @@ export default class Slider extends BaseController {
     const content = `
       <span class="legend">${this.legend}</span>
       <div class="inner-wrapper">
-        <input class="range" type="range" min="${this.min}" max="${this.max}" step="${this.step}" value="${this.value}" />
+        <div class="range"></div>
         <div class="number-wrapper">
           <input type="number" class="number" min="${this.min}" max="${this.max}" step="${this.step}" value="${this.value}" />
           <span class="unit">${this.unit}</span>
@@ -44,8 +47,18 @@ export default class Slider extends BaseController {
     this.$el.innerHTML = content;
     this.$el.classList.add(`slider-${this.size}`);
 
-    this.$range  = this.$el.querySelector(`input[type="range"]`);
+    this.$range = this.$el.querySelector('.range');
     this.$number = this.$el.querySelector(`input[type="number"]`);
+
+    this.slider = new guiComponents.Slider({
+      container: this.$range,
+      callback: this._onSliderChange,
+      min: this.min,
+      max: this.max,
+      step: this.step,
+      default: this.value,
+      foregroundColor: '#ababab',
+    });
 
     this.bindEvents();
 
@@ -53,22 +66,29 @@ export default class Slider extends BaseController {
   }
 
   bindEvents() {
-    this.$range.addEventListener('input', () => {
-      const value = parseFloat(this.$range.value);
-      this.$number.value = value;
-      this.value = value;
-
-      this.emit('change', value);
-    }, false);
-
     this.$number.addEventListener('change', () => {
-      // @todo - should handle min and max
       const value = parseFloat(this.$number.value);
-      this.$range.value = value;
-      this.value = value;
+      this.slider.value = value;
+      this._value = value;
 
-      this.emit('change', value);
+      this._executeListeners(this._value);
     }, false);
+  }
+
+  onResize() {
+    super.onResize();
+
+    console.log('???');
+    const { width, height } = this.$range.getBoundingClientRect();
+    this.slider.resize(width, height);
+  }
+
+  _onSliderChange(value) {
+    this.$number.value = value;
+    this._value = value;
+
+    this._executeListeners(this._value);
   }
 }
 
+export default Slider;

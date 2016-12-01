@@ -1,10 +1,10 @@
-import BaseController from './base-controller';
+import BaseController from './BaseController';
 
 
 /**
  * Display a value, Read-only.
  */
-export default class Text extends BaseController {
+class Text extends BaseController {
   constructor(legend, defaultValue, readonly = true, $container = null, callback = null) {
     super();
 
@@ -47,7 +47,9 @@ export default class Text extends BaseController {
   bindEvents() {
     this.$input.addEventListener('keyup', () => {
       this._value = this.$input.value;
-      this.emit('change', this._value);
+      this._executeListeners(this._value);
     }, false);
   }
 }
+
+export default Text;

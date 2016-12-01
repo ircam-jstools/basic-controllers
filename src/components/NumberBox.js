@@ -1,7 +1,7 @@
-import BaseController from './base-controller';
+import BaseController from './BaseController';
 import * as elements from '../utils/elements';
 
-export default class NumberBox extends BaseController {
+class NumberBox extends BaseController {
   constructor(legend, min = 0, max = 1, step = 0.01, defaultValue = 0, $container = null, callback = null) {
     super();
 
@@ -23,8 +23,8 @@ export default class NumberBox extends BaseController {
   set value(value) {
     value = this._isIntStep ? parseInt(value, 10) : parseFloat(value);
     value = Math.min(this.max, Math.max(this.min, value));
-    this.$number.value = value;
 
+    this.$number.value = value;
     this._value = value;
   }
 
@@ -91,6 +91,8 @@ export default class NumberBox extends BaseController {
     this._value = value;
     this.$number.value = value;
 
-    this.emit('change', this._value);
+    this._executeListeners(this._value);
   }
 }
+
+export default NumberBox;

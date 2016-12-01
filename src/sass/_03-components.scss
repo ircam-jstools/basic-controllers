@@ -1,0 +1,163 @@
+/* -------------------------------------------
+   TITLE
+   ------------------------------------------- */
+
+&.title {
+  border: none !important;
+  margin-bottom: 0;
+  margin-top: 8px;
+  padding-top: 8px;
+  padding-bottom: 0;
+  background-color: transparent !important;
+  height: 25px;
+
+  .legend {
+    font: $textLegend;
+    height: 100%;
+    overflow: hidden;
+    text-align: left;
+    padding: 0;
+    width: 100%;
+    box-sizing: border-box;
+    -webkit-flex-grow: 1;
+    flex-grow: 1;
+  }
+}
+
+/* -------------------------------------------
+   SLIDER
+   ------------------------------------------- */
+
+&.slider {
+  .range {
+    height: $innerHeight + px;
+    display: inline-block;
+    margin: 0;
+    -webkit-flex-grow: 4;
+    flex-grow: 4;
+    position: relative;
+
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  }
+
+  .number-wrapper {
+    display: inline;
+    height: $innerHeight + px;
+    text-align: right;
+    -webkit-flex-grow: 3;
+    flex-grow: 3;
+
+    .number {
+      left: 5px;
+      width: 54px;
+      text-align: right;
+    }
+
+    .unit {
+      font: $unitText;
+      line-height: $innerHeight + px;
+      height: $innerHeight + px;
+      width: 30px;
+      display: inline-block;
+      position: relative;
+      padding-left: 5px;
+      padding-right: 5px;
+      color: $textColorLight;
+
+      sup {
+        line-height: 7px;
+      }
+    }
+  }
+
+  &.slider-large {
+    .range {
+      -webkit-flex-grow: 50;
+      flex-grow: 50
+    }
+
+    .number-wrapper {
+      -webkit-flex-grow: 1;
+      flex-grow: 1;
+    }
+  }
+
+  &.slider-small {
+    .range {
+      -webkit-flex-grow: 2;
+      flex-grow: 2
+    }
+
+    .number-wrapper {
+      -webkit-flex-grow: 4;
+      flex-grow: 4;
+    }
+  }
+}
+
+/* -------------------------------------------
+   NUMBER BOX
+   ------------------------------------------- */
+
+&.number-box {
+  .number {
+    width: 120px;
+    margin: 0 10px;
+    vertical-align: top;
+  }
+}
+
+/* -------------------------------------------
+   SELECT LIST
+   ------------------------------------------- */
+
+&.select-list {
+  select {
+    margin: 0 10px;
+    width: 120px;
+    font: $inputText;
+    color: $textColor;
+  }
+}
+
+/* -------------------------------------------
+   SELECT BUTTONS
+   ------------------------------------------- */
+
+&.select-buttons {
+  .btn:first-of-type {
+    margin-left: 4px;
+  }
+}
+
+/* -------------------------------------------
+   TEXT
+   ------------------------------------------- */
+
+&.text {
+  input[type=text] {
+    font: $inputText;
+    color: $textColor;
+  }
+}
+
+&.small.slider {
+  .range {
+    height: ($innerHeight + 14) + px;
+  }
+
+  .number-wrapper {
+    height: ($innerHeight + 14) + px;
+
+    .unit {
+      line-height: ($innerHeight + 14) + px;
+      height: ($innerHeight + 14) + px;
+    }
+  }
+}
+
+

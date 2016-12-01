@@ -1,8 +1,7 @@
-import BaseController from './base-controller';
+import BaseController from './BaseController';
 import styles from '../utils/styles';
 
-
-export default class Title extends BaseController {
+class Title extends BaseController {
   constructor(legend, $container = null) {
     super();
 
@@ -22,3 +21,4 @@ export default class Title extends BaseController {
   }
 }
 
+export default Title;

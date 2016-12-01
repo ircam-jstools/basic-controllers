@@ -1,6 +1,6 @@
-import BaseController from './base-controller';
+import BaseController from './BaseController';
 
-export default class Buttons extends BaseController {
+class TriggerButtons extends BaseController {
   constructor(legend, labels, $container = null, callback = null) {
     super();
 
@@ -8,6 +8,7 @@ export default class Buttons extends BaseController {
     this.legend = legend || '&nbsp'; // non breakable space to keep rendering consistency
     this.labels = labels;
     this._index = null;
+    this._value = null;
 
     super._applyOptionnalParameters($container, callback);
   }
@@ -33,12 +34,8 @@ export default class Buttons extends BaseController {
     return this.$el;
   }
 
-  set value(value) {
-
-  }
-
   get value() {
-
+    return this._value;
   }
 
   bindEvents() {
@@ -46,9 +43,13 @@ export default class Buttons extends BaseController {
       const label = this.labels[index];
 
       $btn.addEventListener('click', (e) => {
-        this.emit('change', label);
         e.preventDefault();
+
+        this._value = label;
+        this._executeListeners(this._value);
       });
     });
   }
 }
+
+export default TriggerButtons;

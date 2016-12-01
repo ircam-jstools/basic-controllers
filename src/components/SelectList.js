@@ -1,12 +1,12 @@
-import BaseController from './base-controller';
+import BaseController from './BaseController';
 import * as elements from '../utils/elements';
 
-export default class SelectButtons extends BaseController {
+class SelectList extends BaseController {
   constructor(legend, options, defaultValue, $container = null, callback = null) {
     super();
 
-    this.type = 'select-buttons';
-    this.legend = legend; // non breakable space to keep rendering consistency
+    this.type = 'select-list';
+    this.legend = legend;
     this.options = options;
     this._value = defaultValue;
     const currentIndex = this.options.indexOf(this._value);
@@ -21,13 +21,9 @@ export default class SelectButtons extends BaseController {
   }
 
   set value(value) {
-    const index = this.options.indexOf(value);
-
-    if (index !== -1) {
-      this._value = value;
-      this._currentIndex = index;
-      this._highlightBtn(this._currentIndex);
-    }
+    this.$select.value = value;
+    this._value = value;
+    this._currentIndex = this.options.indexOf(value);
   }
 
   render() {
@@ -35,25 +31,26 @@ export default class SelectButtons extends BaseController {
       <span class="legend">${this.legend}</span>
       <div class="inner-wrapper">
         ${elements.arrowLeft}
+        <select>
         ${this.options.map((option, index) => {
-          return `
-            <a href="#" class="btn" data-index="${index}" data-value="${option}">
-              ${option}
-            </a>`;
+          return `<option value="${option}">${option}</option>`;
         }).join('')}
+        <select>
         ${elements.arrowRight}
       </div>
     `;
 
     this.$el = super.render(this.type);
+    this.$el.classList.add('align-small');
     this.$el.innerHTML = content;
 
     this.$prev = this.$el.querySelector('.arrow-left');
     this.$next = this.$el.querySelector('.arrow-right');
-    this.$btns = Array.from(this.$el.querySelectorAll('.btn'));
-    this._highlightBtn(this._currentIndex);
-
+    this.$select = this.$el.querySelector('select');
+    // set to default value
+    this.$select.value = this.options[this._currentIndex];
     this.bindEvents();
+
     return this.$el;
   }
 
@@ -61,38 +58,31 @@ export default class SelectButtons extends BaseController {
     this.$prev.addEventListener('click', () => {
       const index = this._currentIndex - 1;
       this.propagate(index);
-    });
+    }, false);
 
     this.$next.addEventListener('click', () => {
       const index = this._currentIndex + 1;
       this.propagate(index);
-    });
+    }, false);
 
-    this.$btns.forEach(($btn, index) => {
-      $btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        this.propagate(index);
-      });
+    this.$select.addEventListener('change', () => {
+      const value = this.$select.value;
+      const index = this.options.indexOf(value);
+      this.propagate(index);
     });
   }
 
   propagate(index) {
-    if (index < 0 || index > this._maxIndex) { return; }
+    if (index < 0 || index > this._maxIndex) return;
 
+    console.log(index);
+    const value = this.options[index];
     this._currentIndex = index;
-    this._value = this.options[index];
-    this._highlightBtn(this._currentIndex);
+    this._value = value;
+    this.$select.value = value;
 
-    this.emit('change', this._value);
-  }
-
-  _highlightBtn(activeIndex) {
-    this.$btns.forEach(($btn, index) => {
-      $btn.classList.remove('active');
-
-      if (activeIndex === index) {
-        $btn.classList.add('active');
-      }
-    });
+    this._executeListeners(this._value);
   }
 }
+
+export default SelectList;
