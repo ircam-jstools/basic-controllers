@@ -4,33 +4,13 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _BaseController2 = require('./BaseController');
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-var _createClass2 = require('babel-runtime/helpers/createClass');
-
-var _createClass3 = _interopRequireDefault(_createClass2);
-
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
-
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-var _inherits2 = require('babel-runtime/helpers/inherits');
-
-var _inherits3 = _interopRequireDefault(_inherits2);
-
-var _get2 = require('babel-runtime/helpers/get');
-
-var _get3 = _interopRequireDefault(_get2);
-
-var _baseController = require('./base-controller');
-
-var _baseController2 = _interopRequireDefault(_baseController);
+var _BaseController3 = _interopRequireDefault(_BaseController2);
 
 var _styles = require('../utils/styles');
 
@@ -38,35 +18,43 @@ var _styles2 = _interopRequireDefault(_styles);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 var Title = function (_BaseController) {
-  (0, _inherits3.default)(Title, _BaseController);
+  _inherits(Title, _BaseController);
 
   function Title(legend) {
-    var $container = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
-    (0, _classCallCheck3.default)(this, Title);
+    var $container = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Title).call(this));
+    _classCallCheck(this, Title);
+
+    var _this = _possibleConstructorReturn(this, (Title.__proto__ || Object.getPrototypeOf(Title)).call(this));
 
     _this.type = 'title';
     _this.legend = legend;
 
-    (0, _get3.default)((0, _getPrototypeOf2.default)(Title.prototype), '_applyOptionnalParameters', _this).call(_this, $container);
+    _get(Title.prototype.__proto__ || Object.getPrototypeOf(Title.prototype), '_applyOptionnalParameters', _this).call(_this, $container);
     return _this;
   }
 
-  (0, _createClass3.default)(Title, [{
+  _createClass(Title, [{
     key: 'render',
     value: function render() {
       var content = '<span class="legend">' + this.legend + '</span>';
 
-      this.$el = (0, _get3.default)((0, _getPrototypeOf2.default)(Title.prototype), 'render', this).call(this, this.type);
+      this.$el = _get(Title.prototype.__proto__ || Object.getPrototypeOf(Title.prototype), 'render', this).call(this, this.type);
       this.$el.innerHTML = content;
 
       return this.$el;
     }
   }]);
+
   return Title;
-}(_baseController2.default);
+}(_BaseController3.default);
 
 exports.default = Title;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInRpdGxlLmpzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztBQUFBOzs7O0FBQ0E7Ozs7OztJQUdxQjs7O0FBQ25CLFdBRG1CLEtBQ25CLENBQVksTUFBWixFQUF1QztRQUFuQixtRUFBYSxvQkFBTTt3Q0FEcEIsT0FDb0I7OzZGQURwQixtQkFDb0I7O0FBR3JDLFVBQUssSUFBTCxHQUFZLE9BQVosQ0FIcUM7QUFJckMsVUFBSyxNQUFMLEdBQWMsTUFBZCxDQUpxQzs7QUFNckMscURBUGlCLGtFQU9lLFdBQWhDLENBTnFDOztHQUF2Qzs7NkJBRG1COzs2QkFVVjtBQUNQLFVBQUksb0NBQWtDLEtBQUssTUFBTCxZQUFsQyxDQURHOztBQUdQLFdBQUssR0FBTCxvREFiaUIsNkNBYU8sS0FBSyxJQUFMLENBQXhCLENBSE87QUFJUCxXQUFLLEdBQUwsQ0FBUyxTQUFULEdBQXFCLE9BQXJCLENBSk87O0FBTVAsYUFBTyxLQUFLLEdBQUwsQ0FOQTs7O1NBVlUiLCJmaWxlIjoidGl0bGUuanMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgQmFzZUNvbnRyb2xsZXIgZnJvbSAnLi9iYXNlLWNvbnRyb2xsZXInO1xuaW1wb3J0IHN0eWxlcyBmcm9tICcuLi91dGlscy9zdHlsZXMnO1xuXG5cbmV4cG9ydCBkZWZhdWx0IGNsYXNzIFRpdGxlIGV4dGVuZHMgQmFzZUNvbnRyb2xsZXIge1xuICBjb25zdHJ1Y3RvcihsZWdlbmQsICRjb250YWluZXIgPSBudWxsKSB7XG4gICAgc3VwZXIoKTtcblxuICAgIHRoaXMudHlwZSA9ICd0aXRsZSc7XG4gICAgdGhpcy5sZWdlbmQgPSBsZWdlbmQ7XG5cbiAgICBzdXBlci5fYXBwbHlPcHRpb25uYWxQYXJhbWV0ZXJzKCRjb250YWluZXIpO1xuICB9XG5cbiAgcmVuZGVyKCkge1xuICAgIGxldCBjb250ZW50ID0gYDxzcGFuIGNsYXNzPVwibGVnZW5kXCI+JHt0aGlzLmxlZ2VuZH08L3NwYW4+YDtcblxuICAgIHRoaXMuJGVsID0gc3VwZXIucmVuZGVyKHRoaXMudHlwZSk7XG4gICAgdGhpcy4kZWwuaW5uZXJIVE1MID0gY29udGVudDtcblxuICAgIHJldHVybiB0aGlzLiRlbDtcbiAgfVxufVxuXG4iXX0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIlRpdGxlLmpzIl0sIm5hbWVzIjpbIlRpdGxlIiwibGVnZW5kIiwiJGNvbnRhaW5lciIsInR5cGUiLCJjb250ZW50IiwiJGVsIiwiaW5uZXJIVE1MIl0sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7O0FBQUE7Ozs7QUFDQTs7Ozs7Ozs7Ozs7O0lBRU1BLEs7OztBQUNKLGlCQUFZQyxNQUFaLEVBQXVDO0FBQUEsUUFBbkJDLFVBQW1CLHVFQUFOLElBQU07O0FBQUE7O0FBQUE7O0FBR3JDLFVBQUtDLElBQUwsR0FBWSxPQUFaO0FBQ0EsVUFBS0YsTUFBTCxHQUFjQSxNQUFkOztBQUVBLDhIQUFnQ0MsVUFBaEM7QUFOcUM7QUFPdEM7Ozs7NkJBRVE7QUFDUCxVQUFJRSxvQ0FBa0MsS0FBS0gsTUFBdkMsWUFBSjs7QUFFQSxXQUFLSSxHQUFMLHdHQUF3QixLQUFLRixJQUE3QjtBQUNBLFdBQUtFLEdBQUwsQ0FBU0MsU0FBVCxHQUFxQkYsT0FBckI7O0FBRUEsYUFBTyxLQUFLQyxHQUFaO0FBQ0Q7Ozs7OztrQkFHWUwsSyIsImZpbGUiOiJUaXRsZS5qcyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBCYXNlQ29udHJvbGxlciBmcm9tICcuL0Jhc2VDb250cm9sbGVyJztcbmltcG9ydCBzdHlsZXMgZnJvbSAnLi4vdXRpbHMvc3R5bGVzJztcblxuY2xhc3MgVGl0bGUgZXh0ZW5kcyBCYXNlQ29udHJvbGxlciB7XG4gIGNvbnN0cnVjdG9yKGxlZ2VuZCwgJGNvbnRhaW5lciA9IG51bGwpIHtcbiAgICBzdXBlcigpO1xuXG4gICAgdGhpcy50eXBlID0gJ3RpdGxlJztcbiAgICB0aGlzLmxlZ2VuZCA9IGxlZ2VuZDtcblxuICAgIHN1cGVyLl9hcHBseU9wdGlvbm5hbFBhcmFtZXRlcnMoJGNvbnRhaW5lcik7XG4gIH1cblxuICByZW5kZXIoKSB7XG4gICAgbGV0IGNvbnRlbnQgPSBgPHNwYW4gY2xhc3M9XCJsZWdlbmRcIj4ke3RoaXMubGVnZW5kfTwvc3Bhbj5gO1xuXG4gICAgdGhpcy4kZWwgPSBzdXBlci5yZW5kZXIodGhpcy50eXBlKTtcbiAgICB0aGlzLiRlbC5pbm5lckhUTUwgPSBjb250ZW50O1xuXG4gICAgcmV0dXJuIHRoaXMuJGVsO1xuICB9XG59XG5cbmV4cG9ydCBkZWZhdWx0IFRpdGxlO1xuIl19

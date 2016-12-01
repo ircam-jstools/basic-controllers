@@ -15,11 +15,8 @@ var cwd = process.cwd();
 /**
  * Options for babel transpiling.
  */
-var babelOptions = {
-  sourceMap: 'inline',
-  presets: ['es2015'],
-  plugins: ['transform-runtime', 'transform-es2015-modules-commonjs'],
-};
+var babelrc = fse.readFileSync(path.join(cwd, '.babelrc'));
+var babelOptions = JSON.parse(babelrc);
 
 /**
  * Options for watch.
@@ -28,7 +25,7 @@ var watchOptions = {
   ignoreDotFiles: true,
   ignoreUnreadableDir: true,
   ignoreNotPermitted: true,
-  interval: 2000, // watch internally use `fs.watchFile`
+  interval: 2, // watch internally use `fs.watchFile`
 };
 
 /**
@@ -46,18 +43,19 @@ var browserifyOptions = {
 var srcDirectory = path.join(cwd, 'src');
 var distDirectory = path.join(cwd, 'dist');
 
-var umdTarget = path.join(cwd, pkg.name + '.umd.js');
-var minTarget = path.join(cwd, pkg.name + '.min.js');
-
 // transpile css file to js string
-var cssSrcFile = 'styles.scss';
-var cssSrcDir = path.join(cwd, 'css');
-var cssDistDir = path.join(distDirectory, 'css');
+var sassSrcFile = 'styles.scss';
+var sassSrcDir = path.join(srcDirectory, 'sass');
+var sassEntryPoint = path.join(sassSrcDir, sassSrcFile);
+var cssDistDir = path.join(distDirectory, 'utils');
+var cssDistFile = path.join(cssDistDir, 'styles-declarations.js');
 
 /**
  * Define which file should be ignored by every command.
  */
-var allowedExtentions = /\.ejs$|\.scss$|\.js$/;
+var allowedExtentions = /\.scss$|\.js$/;
+var jsExtention = /\.js$/;
+var sassExtention = /\.scss$/;
 var excludeFiles = /^\./; // exclude hidden files
 
 /**
@@ -86,15 +84,23 @@ function isAllowed(filename, ensureFile) {
   return isFile && hasAllowedExt && notExcludeFile;
 }
 
+function isSass(filename) {
+  return sassExtention.test(filename);
+}
+
+function isJs(filename) {
+  return jsExtention.test(filename);
+}
+
 /**
  * Returns a list of the file in a given folder recursively.
  */
-function _getFileList(folder, callback) {
+function _getJsFileList(folder, callback) {
   var files = [];
 
   fse.walk(folder)
     .on('data', function(item) {
-      if (item.stats.isFile() && isAllowed(item.path))
+      if (item.stats.isFile() && isAllowed(item.path) && isJs(item.path))
         files.push(item.path);
     })
     .on('end', function() {
@@ -105,18 +111,26 @@ function _getFileList(folder, callback) {
 /**
  * Watch javascript source files.
  */
-function watchFiles(srcDirectory, distDirectory) {
+function watchFiles(srcDirectory, distDirectory, sassEntryPoint, cssDistFile) {
   watch.createMonitor(srcDirectory, watchOptions, function(monitor) {
     var transpiler = javascripts.getTranspiler(srcDirectory, distDirectory, isAllowed, babelOptions);
 
     monitor.on('created', function(filename, stats) {
-      if (isAllowed(filename))
-        transpiler.transpile(filename, []);
+      if (isAllowed(filename)) {
+        if (isSass(filename))
+          transpileCss(sassEntryPoint, cssDistFile);
+        else
+          transpiler.transpile(filename, []);
+      }
     });
 
     monitor.on('changed', function(filename, stats) {
-      if (isAllowed(filename))
-        transpiler.transpile(filename, []);
+      if (isAllowed(filename)) {
+        if (isSass(filename))
+          transpileCss(sassEntryPoint, cssDistFile);
+        else
+          transpiler.transpile(filename, []);
+      }
     });
 
     monitor.on('removed', function(filename, stats) {
@@ -126,53 +140,14 @@ function watchFiles(srcDirectory, distDirectory) {
   });
 }
 
-/**
- * Watch javascript source files.
- */
-function watchSassFiles(srcDirectory, distDirectory) {
-  watch.createMonitor(srcDirectory, watchOptions, function(monitor) {
-    var transpiler = javascripts.getTranspiler(srcDirectory, distDirectory, isAllowed, babelOptions);
-
-    monitor.on('created', function(filename, stats) {
-      if (isAllowed(filename))
-        transpiler.transpile(filename, []);
-    });
-
-    monitor.on('changed', function(filename, stats) {
-      if (isAllowed(filename))
-        transpiler.transpile(filename, []);
-    });
-
-    monitor.on('removed', function(filename, stats) {
-      if (isAllowed(filename, false))
-        transpiler.delete(filename);
-    });
-  });
-}
-
-
-
-function transpileFiles(srcDirectory, distDirectory, callback) {
-  _getFileList(srcDirectory, function(files) {
+function transpileJsFiles(srcDirectory, distDirectory, callback) {
+  _getJsFileList(srcDirectory, function(files) {
     var transpiler = javascripts.getTranspiler(srcDirectory, distDirectory, isAllowed, babelOptions);
     transpiler.transpile(undefined, files, callback);
   });
 }
 
-function bundle(distDirectory) {
-  var entryPoint = path.join(distDirectory, 'index.js');
-  var transpiler = javascripts.getTranspiler(srcDirectory, distDirectory, isAllowed, babelOptions, browserifyOptions);
-
-  transpileFiles(srcDirectory, distDirectory, function() {
-    transpiler.bundle(entryPoint, umdTarget, function() {
-      transpiler.uglify(umdTarget, minTarget);
-    });
-  });
-}
-
-function transpileCss(src) {
-  var target = src.replace(new RegExp(cssSrcDir), cssDistDir).replace('.scss', '.js');
-
+function transpileCss(src, target) {
   var startTime = new Date().getTime();
 
   fse.readFile(src, 'utf8', function(err, res) {
@@ -180,7 +155,7 @@ function transpileCss(src) {
 
     res = sass.render({ data: res }, function(err, res) {
       if (err) {
-        console.log(util.format(red + "=> [sass] " + err.message + ' at line:' + err.line + NC));
+        log.transpileError(err);
         return;
       }
 
@@ -221,24 +196,15 @@ switch (command) {
    * Watch the file system and transpile from es6 to es5.
    */
   case '--watch':
-    watchFiles(srcDirectory, distDirectory);
-    watchSassFiles(cssSrcDir, cssDistDir);
+    watchFiles(srcDirectory, distDirectory, sassEntryPoint, cssDistFile);
     break;
 
   /**
    * Transpile all files in `src` from es6 to es5.
    */
   case '--transpile':
-    transpileFiles(srcDirectory, distDirectory);
-    transpileCss(path.join(cssSrcDir, cssSrcFile));
-    break;
-
-  /**
-   * Transpile all files in `src` from es6 to es5.
-   */
-  case '--bundle':
-    bundle(distDirectory);
-    transpileCss(path.join(cssSrcDir, cssSrcFile));
+    transpileJsFiles(srcDirectory, distDirectory);
+    transpileCss(sassEntryPoint, cssDistFile);
     break;
 }
 
