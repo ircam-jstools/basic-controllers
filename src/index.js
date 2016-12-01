@@ -4,6 +4,7 @@ export const styles = _styles;
 import _BaseController from './components/BaseController';
 export const BaseController = _BaseController;
 
+export { default as Group } from './components/Group';
 export { default as NumberBox } from './components/NumberBox';
 export { default as SelectButtons } from './components/SelectButtons';
 export { default as SelectList } from './components/SelectList';

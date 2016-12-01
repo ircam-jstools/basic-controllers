@@ -78,7 +78,6 @@ class Slider extends BaseController {
   onResize() {
     super.onResize();
 
-    console.log('???');
     const { width, height } = this.$range.getBoundingClientRect();
     this.slider.resize(width, height);
   }

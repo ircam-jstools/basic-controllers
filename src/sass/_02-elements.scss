@@ -18,6 +18,15 @@
   &:active { background-color: $btnBgColorActive; }
 }
 
+.small-arrow-right, .small-arrow-bottom {
+  width: $innerHeight + px;
+  height: $innerHeight + px;
+  cursor: pointer;
+
+  path { fill: $btnBgColorActive; }
+  &:hover path { fill: $btnBgColorHover; }
+}
+
 .toggle-element {
   width: $innerHeight + px;
   height: $innerHeight + px;

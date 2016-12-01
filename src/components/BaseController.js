@@ -50,15 +50,19 @@ class BaseController {
     this._listeners.remove(callback);
   }
 
-  _executeListeners(value) {
-    this._listeners.forEach((callback) => callback(value));
+  _executeListeners(...values) {
+    this._listeners.forEach((callback) => callback(...values));
   }
 
   /** @private */
   _applyOptionnalParameters($container = null, callback = null) {
     if ($container) {
+      // css selector
       if (typeof $container === 'string')
         $container = document.querySelector($container);
+      // group
+      else if ($container instanceof BaseController && $container.$container)
+        $container = $container.$container;
 
       $container.appendChild(this.render());
       this.onRender();

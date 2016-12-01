@@ -25,6 +25,64 @@
 }
 
 /* -------------------------------------------
+   GROUP
+   ------------------------------------------- */
+
+&.group {
+  height: auto;
+  background-color: lighten($backgroundColor, 10%);
+  // padding-bottom: 0;
+
+  .group-header {
+    .legend {
+      font: $textLegend;
+      height: ($innerHeight) + px;
+      line-height: ($innerHeight) + px;
+      overflow: hidden;
+      text-align: left;
+      padding: 0 0 0 ($innerHeight + 10) + px;
+      width: 100%;
+      box-sizing: border-box;
+      -webkit-flex-grow: 1;
+      flex-grow: 1;
+      float: none;
+      cursor: pointer;
+    }
+
+    .small-arrow-right {
+      width: ($innerHeight) + px;
+      height: ($innerHeight) + px;
+      position: absolute;
+    }
+    .small-arrow-bottom {
+      width: ($innerHeight) + px;
+      height: ($innerHeight) + px;
+      position: absolute;
+    }
+  }
+
+  .group-content {
+    overflow: hidden;
+
+    label:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &.opened {
+    .group-header .small-arrow-right { display: none; }
+    .group-header .small-arrow-bottom { display: block; }
+    .group-content { height: auto; }
+  }
+
+  &.closed {
+    .group-header .small-arrow-right { display: block; }
+    .group-header .small-arrow-bottom { display: none; }
+    .group-content { height: 0; }
+  }
+}
+
+/* -------------------------------------------
    SLIDER
    ------------------------------------------- */
 

@@ -13,6 +13,14 @@ class TriggerButtons extends BaseController {
     super._applyOptionnalParameters($container, callback);
   }
 
+  /**
+   * Last triggered label
+   * @type {String}
+   */
+  get value() {
+    return this._value;
+  }
+
   render() {
     let content = `
       <span class="legend">${this.legend}</span>
@@ -34,10 +42,6 @@ class TriggerButtons extends BaseController {
     return this.$el;
   }
 
-  get value() {
-    return this._value;
-  }
-
   bindEvents() {
     this.$buttons.forEach(($btn, index) => {
       const label = this.labels[index];
@@ -46,7 +50,7 @@ class TriggerButtons extends BaseController {
         e.preventDefault();
 
         this._value = label;
-        this._executeListeners(this._value);
+        this._executeListeners(label, index);
       });
     });
   }

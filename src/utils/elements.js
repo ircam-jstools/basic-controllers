@@ -21,3 +21,18 @@ export const arrowLeft = `
     <line x1="40" y1="40" x2="10" y2="25" />
   </svg>
 `;
+
+export const smallArrowRight = `
+  <svg xmlns="http://www.w3.org/2000/svg" class="small-arrow-right" viewBox="0 0 50 50">
+    <path d="M 20 15 L 35 25 L 20 35 Z" />
+  </svg>
+`;
+
+export const smallArrowBottom = `
+  <svg xmlns="http://www.w3.org/2000/svg" class="small-arrow-bottom" viewBox="0 0 50 50">
+    <path d="M 15 17 L 35 17 L 25 32 Z" />
+  </svg>
+`;
+
+
+

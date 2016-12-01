@@ -1,8 +1,9 @@
 import * as controllers from '../../../dist/index';
 
+// components
 const title1 = new controllers.Title('Title', '#container');
 
-const triggerButtons = new controllers.TriggerButtons('TriggerButtons', ['light', 'dark', 'soundworks'], '#container', function(theme) {
+const triggerButtons = new controllers.TriggerButtons('TriggerButtons', ['light', 'grey', 'dark'], '#container', function(theme) {
   console.log('Button =>', theme);
   controllers.setTheme(theme);
 
@@ -10,9 +11,11 @@ const triggerButtons = new controllers.TriggerButtons('TriggerButtons', ['light'
     case 'light':
       document.body.style.backgroundColor = '#ffffff';
       break;
+    case 'grey':
+      document.body.style.backgroundColor = '#000000';
+      break;
     case 'dark':
-    case 'soundworks':
-      document.body.style.backgroundColor = '#000';
+      document.body.style.backgroundColor = '#000000';
       break;
   }
 });
@@ -49,6 +52,19 @@ const selectButtons = new controllers.SelectButtons('SelectButtons', ['standby',
   selectList.value = value;
 });
 
+// group
+const group = new controllers.Group('Group', 'opened', '#container');
+
+const groupSlider = new controllers.Slider('Group Slider', 20, 1000, 1, 200, 'Hz', 'large', group, function(value) {
+  console.log('Group - Slider =>', value);
+});
+
+const groupText = new controllers.Text('Group Text', 'text input', false,  group, (value) => {
+  console.log('Group - Text =>', value);
+  info.value = value;
+});
+
+// sliders
 const title2 = new controllers.Title('Sliders', '#container');
 
 const sliderLarge = new controllers.Slider('Slider (large)', 20, 1000, 1, 537, 'Hz', 'large', '#container', function(value) {
