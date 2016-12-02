@@ -21,6 +21,15 @@ const defaults = {
  * @param {Function} [options.callback=null] - Callback to be executed when the
  *  value changes.
  *
+ * @example
+ * import * as controllers from 'basic-controllers';
+ *
+ * const toggle = new controllers.Toggle({
+ *   label: 'My Toggle',
+ *   active: false,
+ *   container: '#container',
+ *   callback: (active) => console.log(active),
+ * });
  */
 class Toggle extends BaseController {
   constructor(options) {

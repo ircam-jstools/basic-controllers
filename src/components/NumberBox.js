@@ -31,7 +31,7 @@ const defaults = {
  * import * as controllers from 'basic-controllers';
  *
  * const numberBox = new controllers.NumberBox({
- *   label: 'NumberBox',
+ *   label: 'My Number Box',
  *   min: 0,
  *   max: 10,
  *   step: 0.1,

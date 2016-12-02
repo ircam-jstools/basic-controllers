@@ -22,7 +22,7 @@ const defaults = {
  * import * as controllers from 'basic-controllers';
  *
  * const triggerButtons = new controllers.TriggerButtons({
- *   label: 'TriggerButtons',
+ *   label: 'My Trigger Buttons',
  *   values: ['value 1', 'value 2', 'value 3'],
  *   container: '#container',
  *   callback: (value, index) => console.log(value, index),
