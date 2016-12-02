@@ -1,23 +1,29 @@
 import * as styles from '../utils/styles';
-// store all instance in a controllers
+
+// keep track of all instaciated controllers
 const controllers = new Set();
+// default theme
 let theme = 'light';
 
-// add a single listener on window to trigger update
-window.addEventListener('resize', function() {
-  controllers.forEach((controller) => controller.onResize());
-});
+/**
+ * @module basic-controllers
+ */
 
 /**
  * Base class to create new controllers
- *
- * @memberof module:basicControllers
  */
 class BaseController {
-  constructor() {
-    // insert styles when the first controller is created
-    if (controllers.size === 0)
+  constructor(type, defaults, options) {
+    this.type = type;
+    this.params = Object.assign({}, defaults, options);
+    // insert styles and listen window resize when the first controller is created
+    if (controllers.size === 0) {
       styles.insertStyleSheet();
+
+      window.addEventListener('resize', function() {
+        controllers.forEach((controller) => controller.onResize());
+      });
+    }
 
     controllers.add(this);
 
@@ -25,8 +31,9 @@ class BaseController {
   }
 
   /**
-   * Set the theme of the controllers
+   * Theme of the controllers
    * @type {String}
+   * @private
    */
   static set theme(value) {
     controllers.forEach((controller) => controller.$el.classList.remove(theme));
@@ -34,28 +41,18 @@ class BaseController {
     controllers.forEach((controller) => controller.$el.classList.add(theme));
   }
 
-  /**
-   * Get the theme of the controllers
-   * @type {String}
-   */
   static get theme() {
     return theme;
   }
 
-  addListener(callback) {
-    this._listeners.add(callback);
-  }
+  /**
+   * Mandatory method to be called at the end of a constructor.
+   * @private
+   */
+  initialize() {
+    const callback = this.params.callback;
+    let $container = this.params.container;
 
-  removeListener(callback) {
-    this._listeners.remove(callback);
-  }
-
-  _executeListeners(...values) {
-    this._listeners.forEach((callback) => callback(...values));
-  }
-
-  /** @private */
-  _applyOptionnalParameters($container = null, callback = null) {
     if ($container) {
       // css selector
       if (typeof $container === 'string')
@@ -72,11 +69,37 @@ class BaseController {
       this.addListener(callback);
   }
 
+  /**
+   * Add a listener to the controller.
+   *
+   * @param {Function} callback - Function to be applied when the controller
+   *  state change.
+   */
+  addListener(callback) {
+    this._listeners.add(callback);
+  }
+
+  /**
+   * Remove a listener from the controller.
+   *
+   * @param {Function} callback - Function to remove from the listeners.
+   */
+  removeListener(callback) {
+    this._listeners.remove(callback);
+  }
+
+  /** @private */
+  executeListeners(...values) {
+    this._listeners.forEach((callback) => callback(...values));
+  }
+
   /** @private */
   render(type = null) {
     this.$el = document.createElement('label');
     this.$el.classList.add(styles.ns, theme);
-    if (type !== null) { this.$el.classList.add(type); }
+
+    if (type !== null)
+      this.$el.classList.add(type);
 
     return this.$el;
   }

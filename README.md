@@ -2,6 +2,37 @@
 
 A set of basic controllers for rapid prototyping
 
+## @todos
+
+- review API
+- review doc
+- create factory from JSON
+
+- serialize / deserialize (?)
+
+```
+// create interface from config object
+
+config = [
+  {
+    type: 'group',
+    label: 'coucou',
+    handle: false,
+    show: false,
+    elements: {
+    {
+      type: 'slider',
+      // ....
+
+    },
+  }
+  {
+
+  }
+]
+```
+
+
 ## Documentation
 
 ### Themes

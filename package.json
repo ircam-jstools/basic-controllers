@@ -1,10 +1,10 @@
 {
   "name": "basic-controllers",
   "version": "0.6.2",
-  "description": "basic-controllers for rapid prototyping",
+  "description": "Set of simple controllers for rapid prototyping",
   "main": "dist/index.js",
   "scripts": {
-    "bundle": "node ./bin/runner --bundle",
+    "doc": "jsdoc2md -t tmpl/README.hbs --separators src/**/*.js src/*.js > README-test.md",
     "transpile": "node ./bin/runner --transpile",
     "prewatch": "node ./bin/runner --transpile",
     "watch": "node ./bin/runner --watch"
@@ -22,7 +22,9 @@
   },
   "dependencies": {
     "babel-runtime": "^6.18.0",
-    "gui-components": "^1.0.0"
+    "gui-components": "^1.0.0",
+    "jsdoc-to-markdown": "^2.0.1",
+    "parameters": "ircam-jstools/parameters"
   },
   "devDependencies": {
     "babel-core": "^6.18.2",

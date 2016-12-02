@@ -11,7 +11,7 @@
   background-color: transparent !important;
   height: 25px;
 
-  .legend {
+  .label {
     font: $textLegend;
     height: 100%;
     overflow: hidden;
@@ -34,7 +34,7 @@
   // padding-bottom: 0;
 
   .group-header {
-    .legend {
+    .label {
       font: $textLegend;
       height: ($innerHeight) + px;
       line-height: ($innerHeight) + px;

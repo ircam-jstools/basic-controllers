@@ -1,0 +1,36 @@
+# Basic Controllers
+
+> Set of simple controllers for rapid prototyping
+
+## Install
+
+```
+npm install [--save] ircam-jstools/basic-controllers
+```
+
+## Available Components
+
+- Slider - [example](https://cdn.rawgit.com/ircam-jstools/gui-components/master/examples/slider/index.html)
+
+## Usage
+
+```js
+import { Slider} from 'gui-components';
+
+const slider = new Slider({
+  mode: 'jump',
+  container: '#container',
+  default: 0.6,
+  markers: [0.5],
+  callback: (value) => console.log(value),
+});
+```
+
+# API
+
+{{#module name="basic-controllers"}}{{>docs}}{{/module}}
+
+## License
+
+BSD-3-Clause
+
