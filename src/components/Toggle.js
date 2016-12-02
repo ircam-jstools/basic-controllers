@@ -1,26 +1,52 @@
 import BaseController from './BaseController';
 import * as elements from '../utils/elements';
 
+/** @module basic-controllers */
+
+const defaults = {
+  label: '&bnsp;',
+  active: false,
+  container: null,
+  callback: null,
+};
+
+/**
+ * On/Off controller.
+ *
+ * @param {Object} options - Override default options.
+ * @param {String} options.label - Label of the controller.
+ * @param {Array} [options.active=false] - Default state of the toggle.
+ * @param {String|Element|basic-controller~Group} [options.container=null] -
+ *  Container of the controller.
+ * @param {Function} [options.callback=null] - Callback to be executed when the
+ *  value changes.
+ *
+ */
 class Toggle extends BaseController {
-  constructor(legend, active = false, $container = false, callback = null) {
-    super();
+  constructor(options) {
+    super('toggle', defaults, options);
 
-    this.type = 'toggle';
-    this.legend = legend;
-    this._active = active;
+    this._active = this.params.active;
 
-    super._applyOptionnalParameters($container, callback);
+    super.initialize();
   }
 
+  /**
+   * Value of the toggle
+   * @type {Boolean}
+   */
   set value(bool) {
     this.active = bool;
   }
 
   get value() {
-    return this._value;
+    return this._active;
   }
 
-  // alias value
+  /**
+   * Alias for `value`.
+   * @type {Boolean}
+   */
   set active(bool) {
     this._active = bool;
     this._updateBtn();
@@ -30,35 +56,39 @@ class Toggle extends BaseController {
     return this._active;
   }
 
+  /** @private */
   _updateBtn() {
     var method = this.active ? 'add' : 'remove';
     this.$toggle.classList[method]('active');
   }
 
+  /** @private */
   render() {
     let content = `
-      <span class="legend">${this.legend}</span>
+      <span class="label">${this.params.label}</span>
       <div class="inner-wrapper">
         ${elements.toggle}
       </div>`;
 
-    this.$el = super.render(this.type);
+    this.$el = super.render();
     this.$el.classList.add('align-small');
     this.$el.innerHTML = content;
 
     this.$toggle = this.$el.querySelector('.toggle-element');
+    // initialize state
+    this.active = this._active;
     this.bindEvents();
-    this.active = this._active; // initialize state
 
     return this.$el;
   }
 
+  /** @private */
   bindEvents() {
     this.$toggle.addEventListener('click', (e) => {
       e.preventDefault();
 
       this.active = !this.active;
-      this._executeListeners(this._active);
+      this.executeListeners(this._active);
     });
   }
 }

@@ -15,7 +15,7 @@ const defaults = {
  * Create a group of controllers.
  *
  * @param {Object} options - Override default parameters.
- * @param {String} legend -
+ * @param {String} label -
  */
 class Group extends BaseController {
   constructor(options) {
@@ -50,12 +50,12 @@ class Group extends BaseController {
       <div class="group-header">
         ${elements.smallArrowRight}
         ${elements.smallArrowBottom}
-        <span class="legend">${this.params.legend}</span>
+        <span class="label">${this.params.label}</span>
       </div>
       <div class="group-content"></div>
     `;
 
-    this.$el = super.render(this.type);
+    this.$el = super.render();
     this.$el.innerHTML = content;
     this.$el.classList.add(this.params.state);
 

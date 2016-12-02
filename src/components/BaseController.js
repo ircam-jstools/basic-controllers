@@ -5,9 +5,7 @@ const controllers = new Set();
 // default theme
 let theme = 'light';
 
-/**
- * @module basic-controllers
- */
+/** @module basic-controller */
 
 /**
  * Base class to create new controllers
@@ -94,12 +92,9 @@ class BaseController {
   }
 
   /** @private */
-  render(type = null) {
-    this.$el = document.createElement('label');
-    this.$el.classList.add(styles.ns, theme);
-
-    if (type !== null)
-      this.$el.classList.add(type);
+  render() {
+    this.$el = document.createElement('div');
+    this.$el.classList.add(styles.ns, theme, this.type);
 
     return this.$el;
   }

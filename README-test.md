@@ -37,15 +37,17 @@ const slider = new Slider({
         * [.setTheme(theme)](#module_basic-controllers.setTheme)
         * [.disableStyles()](#module_basic-controllers.disableStyles)
     * _inner_
-        * [~BaseController](#module_basic-controllers..BaseController)
-            * [.addListener(callback)](#module_basic-controllers..BaseController+addListener)
-            * [.removeListener(callback)](#module_basic-controllers..BaseController+removeListener)
         * [~Group](#module_basic-controllers..Group)
-            * [new Group(options, legend)](#new_module_basic-controllers..Group_new)
+            * [new Group(options, label)](#new_module_basic-controllers..Group_new)
             * [.state](#module_basic-controllers..Group+state) : <code>String</code>
-        * [~NumberBox](#module_basic-controllers..NumberBox)
-            * [new NumberBox(options)](#new_module_basic-controllers..NumberBox_new)
-            * [.value](#module_basic-controllers..NumberBox+value) : <code>Number</code>
+        * [~Toggle](#module_basic-controllers..Toggle)
+            * [new Toggle(options)](#new_module_basic-controllers..Toggle_new)
+            * [.value](#module_basic-controllers..Toggle+value) : <code>Boolean</code>
+            * [.active](#module_basic-controllers..Toggle+active) : <code>Boolean</code>
+        * [~TriggerButtons](#module_basic-controllers..TriggerButtons)
+            * [new TriggerButtons(options)](#new_module_basic-controllers..TriggerButtons_new)
+            * [.value](#module_basic-controllers..TriggerButtons+value) : <code>String</code>
+            * [.index](#module_basic-controllers..TriggerButtons+index) : <code>String</code>
 
 
 -
@@ -76,48 +78,6 @@ Disable default styling (expect a broken ui)
 
 -
 
-<a name="module_basic-controllers..BaseController"></a>
-
-### basic-controllers~BaseController
-Base class to create new controllers
-
-**Kind**: inner class of <code>[basic-controllers](#module_basic-controllers)</code>  
-
-* [~BaseController](#module_basic-controllers..BaseController)
-    * [.addListener(callback)](#module_basic-controllers..BaseController+addListener)
-    * [.removeListener(callback)](#module_basic-controllers..BaseController+removeListener)
-
-
--
-
-<a name="module_basic-controllers..BaseController+addListener"></a>
-
-#### baseController.addListener(callback)
-Add a listener to the controller.
-
-**Kind**: instance method of <code>[BaseController](#module_basic-controllers..BaseController)</code>  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| callback | <code>function</code> | Function to be applied when the controller  state change. |
-
-
--
-
-<a name="module_basic-controllers..BaseController+removeListener"></a>
-
-#### baseController.removeListener(callback)
-Remove a listener from the controller.
-
-**Kind**: instance method of <code>[BaseController](#module_basic-controllers..BaseController)</code>  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| callback | <code>function</code> | Function to remove from the listeners. |
-
-
--
-
 <a name="module_basic-controllers..Group"></a>
 
 ### basic-controllers~Group
@@ -126,7 +86,7 @@ Create a group of controllers.
 **Kind**: inner class of <code>[basic-controllers](#module_basic-controllers)</code>  
 
 * [~Group](#module_basic-controllers..Group)
-    * [new Group(options, legend)](#new_module_basic-controllers..Group_new)
+    * [new Group(options, label)](#new_module_basic-controllers..Group_new)
     * [.state](#module_basic-controllers..Group+state) : <code>String</code>
 
 
@@ -134,12 +94,12 @@ Create a group of controllers.
 
 <a name="new_module_basic-controllers..Group_new"></a>
 
-#### new Group(options, legend)
+#### new Group(options, label)
 
 | Param | Type | Description |
 | --- | --- | --- |
 | options | <code>Object</code> | Override default parameters. |
-| legend | <code>String</code> | - |
+| label | <code>String</code> | - |
 
 
 -
@@ -153,58 +113,112 @@ State of the group (`'opened'` or `'closed'`).
 
 -
 
-<a name="module_basic-controllers..NumberBox"></a>
+<a name="module_basic-controllers..Toggle"></a>
 
-### basic-controllers~NumberBox
-Number Box
+### basic-controllers~Toggle
+On/Off controller.
 
 **Kind**: inner class of <code>[basic-controllers](#module_basic-controllers)</code>  
 
-* [~NumberBox](#module_basic-controllers..NumberBox)
-    * [new NumberBox(options)](#new_module_basic-controllers..NumberBox_new)
-    * [.value](#module_basic-controllers..NumberBox+value) : <code>Number</code>
+* [~Toggle](#module_basic-controllers..Toggle)
+    * [new Toggle(options)](#new_module_basic-controllers..Toggle_new)
+    * [.value](#module_basic-controllers..Toggle+value) : <code>Boolean</code>
+    * [.active](#module_basic-controllers..Toggle+active) : <code>Boolean</code>
 
 
 -
 
-<a name="new_module_basic-controllers..NumberBox_new"></a>
+<a name="new_module_basic-controllers..Toggle_new"></a>
 
-#### new NumberBox(options)
+#### new Toggle(options)
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
 | options | <code>Object</code> |  | Override default options. |
 | options.label | <code>String</code> |  | Label of the controller. |
-| [options.min] | <code>Number</code> | <code>0</code> | Minimum value. |
-| [options.max] | <code>Number</code> | <code>1</code> | Maximum value. |
-| [options.step] | <code>Number</code> | <code>0.01</code> | Step between consecutive values. |
-| [options.default] | <code>Number</code> | <code>0</code> | Default value. |
-| [options.container] | <code>Number</code> | <code></code> | Container of the controller. |
-| [options.callback] | <code>Number</code> | <code></code> | Callback to be executed when the  value changes. |
+| [options.active] | <code>Array</code> | <code>false</code> | Default state of the toggle. |
+| [options.container] | <code>String</code> &#124; <code>Element</code> &#124; <code>basic-controller~Group</code> | <code></code> | Container of the controller. |
+| [options.callback] | <code>function</code> | <code></code> | Callback to be executed when the  value changes. |
+
+
+-
+
+<a name="module_basic-controllers..Toggle+value"></a>
+
+#### toggle.value : <code>Boolean</code>
+Value of the toggle
+
+**Kind**: instance property of <code>[Toggle](#module_basic-controllers..Toggle)</code>  
+
+-
+
+<a name="module_basic-controllers..Toggle+active"></a>
+
+#### toggle.active : <code>Boolean</code>
+Alias for `value`.
+
+**Kind**: instance property of <code>[Toggle](#module_basic-controllers..Toggle)</code>  
+
+-
+
+<a name="module_basic-controllers..TriggerButtons"></a>
+
+### basic-controllers~TriggerButtons
+List of buttons without state.
+
+**Kind**: inner class of <code>[basic-controllers](#module_basic-controllers)</code>  
+
+* [~TriggerButtons](#module_basic-controllers..TriggerButtons)
+    * [new TriggerButtons(options)](#new_module_basic-controllers..TriggerButtons_new)
+    * [.value](#module_basic-controllers..TriggerButtons+value) : <code>String</code>
+    * [.index](#module_basic-controllers..TriggerButtons+index) : <code>String</code>
+
+
+-
+
+<a name="new_module_basic-controllers..TriggerButtons_new"></a>
+
+#### new TriggerButtons(options)
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| options | <code>Object</code> |  | Override default options. |
+| options.label | <code>String</code> |  | Label of the controller. |
+| [options.values] | <code>Array</code> | <code></code> | Values for each button. |
+| [options.container] | <code>String</code> &#124; <code>Element</code> &#124; <code>basic-controller~Group</code> | <code></code> | Container of the controller. |
+| [options.callback] | <code>function</code> | <code></code> | Callback to be executed when the  value changes. |
 
 **Example**  
 ```js
 import * as controllers from 'basic-controllers';
 
-const numberBox = new controllers.NumberBox({
-  label: 'NumberBox',
-  min: 0,
-  max: 10,
-  step: 0.1,
-  default: 5,
+const triggerButtons = new controllers.TriggerButtons({
+  label: 'TriggerButtons',
+  values: ['value 1', 'value 2', 'value 3'],
   container: '#container',
-  callback: (value) => console.log(value),
+  callback: (value, index) => console.log(value, index),
 });
 ```
 
 -
 
-<a name="module_basic-controllers..NumberBox+value"></a>
+<a name="module_basic-controllers..TriggerButtons+value"></a>
 
-#### numberBox.value : <code>Number</code>
-Value of the controller.
+#### triggerButtons.value : <code>String</code>
+Last triggered button value.
 
-**Kind**: instance property of <code>[NumberBox](#module_basic-controllers..NumberBox)</code>  
+**Kind**: instance property of <code>[TriggerButtons](#module_basic-controllers..TriggerButtons)</code>  
+**Read only**: true  
+
+-
+
+<a name="module_basic-controllers..TriggerButtons+index"></a>
+
+#### triggerButtons.index : <code>String</code>
+Last triggered button index.
+
+**Kind**: instance property of <code>[TriggerButtons](#module_basic-controllers..TriggerButtons)</code>  
+**Read only**: true  
 
 -
 

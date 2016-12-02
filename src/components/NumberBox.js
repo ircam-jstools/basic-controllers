@@ -1,9 +1,7 @@
 import BaseController from './BaseController';
 import * as elements from '../utils/elements';
 
-/**
- * @module basic-controllers
- */
+/** @module basic-controller */
 
 const defaults = {
   label: '$nbsp;',
@@ -16,7 +14,7 @@ const defaults = {
 };
 
 /**
- * Number Box
+ * Number Box controller
  *
  * @param {Object} options - Override default options.
  * @param {String} options.label - Label of the controller.
@@ -24,8 +22,9 @@ const defaults = {
  * @param {Number} [options.max=1] - Maximum value.
  * @param {Number} [options.step=0.01] - Step between consecutive values.
  * @param {Number} [options.default=0] - Default value.
- * @param {Number} [options.container=null] - Container of the controller.
- * @param {Number} [options.callback=null] - Callback to be executed when the
+ * @param {String|Element|basic-controller~Group} [options.container=null] -
+ *  Container of the controller.
+ * @param {Function} [options.callback=null] - Callback to be executed when the
  *  value changes.
  *
  * @example
@@ -53,7 +52,7 @@ class NumberBox extends BaseController {
   }
 
   /**
-   * Value of the controller.
+   * Current value of the controller.
    *
    * @type {Number}
    */
@@ -72,7 +71,6 @@ class NumberBox extends BaseController {
   /** @private */
   render() {
     const { label, min, max, step } = this.params;
-    console.log(this._value)
     const content = `
       <span class="label">${label}</span>
       <div class="inner-wrapper">
@@ -82,7 +80,7 @@ class NumberBox extends BaseController {
       </div>
     `;
 
-    this.$el = super.render(this.type);
+    this.$el = super.render();
     this.$el.classList.add('align-small');
     this.$el.innerHTML = content;
 

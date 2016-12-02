@@ -1,24 +1,33 @@
 import * as controllers from '../../../dist/index';
 
 // components
-// const title1 = new controllers.Title('Title', '#container');
+const title1 = new controllers.Title({
+  label: 'Title',
+  container: '#container'
+});
 
-// const triggerButtons = new controllers.TriggerButtons('TriggerButtons', ['light', 'grey', 'dark'], '#container', function(theme) {
-//   console.log('Button =>', theme);
-//   controllers.setTheme(theme);
+const triggerButtons = new controllers.TriggerButtons({
+  label: 'TriggerButtons',
+  values: ['light', 'grey', 'dark'],
+  container: '#container',
+  callback: (theme) => {
+    console.log('Button =>', theme);
 
-//   switch (theme) {
-//     case 'light':
-//       document.body.style.backgroundColor = '#ffffff';
-//       break;
-//     case 'grey':
-//       document.body.style.backgroundColor = '#000000';
-//       break;
-//     case 'dark':
-//       document.body.style.backgroundColor = '#000000';
-//       break;
-//   }
-// });
+    switch (theme) {
+      case 'light':
+        document.body.style.backgroundColor = '#ffffff';
+        break;
+      case 'grey':
+        document.body.style.backgroundColor = '#000000';
+        break;
+      case 'dark':
+        document.body.style.backgroundColor = '#000000';
+        break;
+    }
+
+    controllers.setTheme(theme);
+  },
+});
 
 const numberBox = new controllers.NumberBox({
   label: 'NumberBox',
@@ -30,12 +39,17 @@ const numberBox = new controllers.NumberBox({
   callback: (value) => console.log('Number =>', value),
 });
 
-// const toggle = new controllers.Toggle('Toggle', false, '#container', function(active) {
-//   console.log('Toggle =>', active);
+const toggle = new controllers.Toggle({
+  label: 'Toggle',
+  active: false,
+  container: '#container',
+  callback: (active) => {
+    console.log('Toggle =>', active);
 
-//   if (active)
-//     numberBox.value = 0;
-// });
+    if (active)
+      numberBox.value = 0;
+  }
+});
 
 // const info = new controllers.Text('Info', 'read-only value', true, '#container');
 
