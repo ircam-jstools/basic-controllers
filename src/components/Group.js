@@ -1,45 +1,97 @@
 import BaseController from './BaseController';
 import * as elements from '../utils/elements';
 
-
+/** @module basic-controllers */
 
 const defaults = {
   legend: '&nbsp;',
-  defaultState: 'opened',
+  default: 'opened',
   container: null,
 };
 
 /**
- * Create a group of controllers.
+ * Group of controllers.
  *
- * @param {Object} options - Override default parameters.
- * @param {String} label -
+ * @param {Object} config - Override default parameters.
+ * @param {String} config.label - Label of the group.
+ * @param {'opened'|'closed'} [config.default='opened'] - Default state of the
+ *  group.
+ * @param {String|Element|basic-controller~Group} [config.container=null] -
+ *  Container of the controller.
+ *
+ * @example
+ * import * as controllers from 'basic-controllers';
+ *
+ * // create a group
+ * const group = new controllers.Group({
+ *   label: 'Group',
+ *   default: 'opened',
+ *   container: '#container'
+ * });
+ *
+ * // insert controllers in the group
+ * const groupSlider = new controllers.Slider({
+ *   label: 'Group Slider',
+ *   min: 20,
+ *   max: 1000,
+ *   step: 1,
+ *   default: 200,
+ *   unit: 'Hz',
+ *   size: 'large',
+ *   container: group,
+ *   callback: (value) => console.log(value),
+ * });
+ *
+ * const groupText = new controllers.Text({
+ *   label: 'Group Text',
+ *   default: 'text input',
+ *   readonly: false,
+ *   container: group,
+ *   callback: (value) => console.log(value),
+ * });
  */
 class Group extends BaseController {
-  constructor(options) {
-    super(type, defaults, options);
+  constructor(config) {
+    super('group', defaults, config);
 
     this._states = ['opened', 'closed'];
-    super.initialize($container);
+
+    if (this._states.indexOf(this.params.default) === -1)
+      throw new Error(`Invalid state "${value}"`);
+
+    this._state = this.params.default;
+
+    super.initialize();
   }
 
   /**
    * State of the group (`'opened'` or `'closed'`).
-   *
+   * @type {String}
+   */
+  get value() {
+    return this.state;
+  }
+
+  set value(state) {
+    this.state = state;
+  }
+
+  /**
+   * Alias for `value`.
    * @type {String}
    */
   get state() {
-    return this.params.state;
+    return this._state;
   }
 
   set state(value) {
     if (this._states.indexOf(value) === -1)
       throw new Error(`Invalid state "${value}"`);
 
-    this.$el.classList.remove(this.params.state);
+    this.$el.classList.remove(this._state);
     this.$el.classList.add(value);
 
-    this.params.state = value;
+    this._state = value;
   }
 
   /** @private */
@@ -55,7 +107,7 @@ class Group extends BaseController {
 
     this.$el = super.render();
     this.$el.innerHTML = content;
-    this.$el.classList.add(this.params.state);
+    this.$el.classList.add(this._state);
 
     this.$header = this.$el.querySelector('.group-header');
     this.$container = this.$el.querySelector('.group-content');
@@ -68,7 +120,7 @@ class Group extends BaseController {
   /** @private */
   bindEvents() {
     this.$header.addEventListener('click', () => {
-      const state = this.params.state === 'closed' ? 'opened' : 'closed';
+      const state = this._state === 'closed' ? 'opened' : 'closed';
       this.state = state;
     });
   }

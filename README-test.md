@@ -36,6 +36,10 @@ const slider = new Slider({
         * [.setTheme(theme)](#module_basic-controllers.setTheme)
         * [.disableStyles()](#module_basic-controllers.disableStyles)
     * _inner_
+        * [~Group](#module_basic-controllers..Group)
+            * [new Group(config)](#new_module_basic-controllers..Group_new)
+            * [.value](#module_basic-controllers..Group+value) : <code>String</code>
+            * [.state](#module_basic-controllers..Group+state) : <code>String</code>
         * [~NumberBox](#module_basic-controllers..NumberBox)
             * [new NumberBox(config)](#new_module_basic-controllers..NumberBox_new)
             * [.value](#module_basic-controllers..NumberBox+value) : <code>Number</code>
@@ -90,6 +94,85 @@ Change the theme of the controllers, currently 3 themes are available:
 Disable default styling (expect a broken ui)
 
 **Kind**: static method of <code>[basic-controllers](#module_basic-controllers)</code>  
+
+-
+
+<a name="module_basic-controllers..Group"></a>
+
+### basic-controllers~Group
+Group of controllers.
+
+**Kind**: inner class of <code>[basic-controllers](#module_basic-controllers)</code>  
+
+* [~Group](#module_basic-controllers..Group)
+    * [new Group(config)](#new_module_basic-controllers..Group_new)
+    * [.value](#module_basic-controllers..Group+value) : <code>String</code>
+    * [.state](#module_basic-controllers..Group+state) : <code>String</code>
+
+
+-
+
+<a name="new_module_basic-controllers..Group_new"></a>
+
+#### new Group(config)
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| config | <code>Object</code> |  | Override default parameters. |
+| config.label | <code>String</code> |  | Label of the group. |
+| [config.default] | <code>&#x27;opened&#x27;</code> &#124; <code>&#x27;closed&#x27;</code> | <code>&#x27;opened&#x27;</code> | Default state of the  group. |
+| [config.container] | <code>String</code> &#124; <code>Element</code> &#124; <code>basic-controller~Group</code> | <code></code> | Container of the controller. |
+
+**Example**  
+```js
+import * as controllers from 'basic-controllers';
+
+// create a group
+const group = new controllers.Group({
+  label: 'Group',
+  default: 'opened',
+  container: '#container'
+});
+
+// insert controllers in the group
+const groupSlider = new controllers.Slider({
+  label: 'Group Slider',
+  min: 20,
+  max: 1000,
+  step: 1,
+  default: 200,
+  unit: 'Hz',
+  size: 'large',
+  container: group,
+  callback: (value) => console.log(value),
+});
+
+const groupText = new controllers.Text({
+  label: 'Group Text',
+  default: 'text input',
+  readonly: false,
+  container: group,
+  callback: (value) => console.log(value),
+});
+```
+
+-
+
+<a name="module_basic-controllers..Group+value"></a>
+
+#### group.value : <code>String</code>
+State of the group (`'opened'` or `'closed'`).
+
+**Kind**: instance property of <code>[Group](#module_basic-controllers..Group)</code>  
+
+-
+
+<a name="module_basic-controllers..Group+state"></a>
+
+#### group.state : <code>String</code>
+Alias for `value`.
+
+**Kind**: instance property of <code>[Group](#module_basic-controllers..Group)</code>  
 
 -
 

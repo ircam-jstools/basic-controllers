@@ -96,16 +96,31 @@ const selectButtons = new controllers.SelectButtons({
 });
 
 // // group
-// const group = new controllers.Group('Group', 'opened', '#container');
+const group = new controllers.Group({
+  label: 'Group',
+  default: 'opened',
+  container: '#container'
+});
 
-// const groupSlider = new controllers.Slider('Group Slider', 20, 1000, 1, 200, 'Hz', 'large', group, function(value) {
-//   console.log('Group - Slider =>', value);
-// });
+const groupSlider = new controllers.Slider({
+  label: 'Group Slider',
+  min: 20,
+  max: 1000,
+  step: 1,
+  default: 200,
+  unit: 'Hz',
+  size: 'large',
+  container: group,
+  callback: (value) => console.log('Group - Slider =>', value),
+});
 
-// const groupText = new controllers.Text('Group Text', 'text input', false,  group, (value) => {
-//   console.log('Group - Text =>', value);
-//   info.value = value;
-// });
+const groupText = new controllers.Text({
+  label: 'Group Text',
+  default: 'text input',
+  readonly: false,
+  container: group,
+  callback: (value) => console.log('Group - Text =>', value),
+});
 
 // // sliders
 const title2 = new controllers.Title({
