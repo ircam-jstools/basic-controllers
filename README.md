@@ -1,14 +1,50 @@
-# WAVESJS - BasicControllers
+# Basic Controllers
 
-A set of basic controllers for rapid prototyping
+> Set of simple controllers for rapid prototyping
 
-## @todos
+## Install
 
-- review API
-- review doc
-- create factory from JSON
+```
+npm install [--save] ircam-jstools/basic-controllers
+```
 
-- serialize / deserialize (?)
+## Available Components
+
+> [examples](https://cdn.rawgit.com/ircam-jstools/basic-controllers/master/examples/controllers/index.html)
+
+![examples](https://cdn.rawgit.com/ircam-jstools/basic-controllers/master/tmpl/examples.png)
+
+- Group
+- NumberBox
+- SelectButtons
+- SelectList
+- Slider
+- Text
+- Title
+- Toggle
+- TriggerButtons
+
+## Usage
+
+```js
+import * as controllers from 'basic-controllers';
+
+const slider = new controllers.Slider({
+  label: 'My Slider',
+  min: 20,
+  max: 1000,
+  step: 1,
+  default: 537,
+  unit: 'Hz',
+  size: 'large',
+  container: '#container',
+  callback: (value) => console.log(value),
+});
+```
+
+## @todo
+
+Factory from JSON object
 
 ```
 // create interface from config object
@@ -23,118 +59,605 @@ config = [
     {
       type: 'slider',
       // ....
-
     },
-  }
-  {
-
+  }, {
+    // ...
   }
 ]
 ```
 
+## API
 
-## Documentation
+<a name="module_basic-controllers"></a>
 
-### Themes
+## basic-controllers
 
-Two themes are available: `'light'` _(default)_ and `'dark'`.
-The theme can be switched via the `setTheme` method of the namespace
+* [basic-controllers](#module_basic-controllers)
+    * _static_
+        * [.setTheme(theme)](#module_basic-controllers.setTheme)
+        * [.disableStyles()](#module_basic-controllers.disableStyles)
+    * _inner_
+        * [~Group](#module_basic-controllers..Group)
+            * [new Group(config)](#new_module_basic-controllers..Group_new)
+            * [.value](#module_basic-controllers..Group+value) : <code>String</code>
+            * [.state](#module_basic-controllers..Group+state) : <code>String</code>
+        * [~NumberBox](#module_basic-controllers..NumberBox)
+            * [new NumberBox(config)](#new_module_basic-controllers..NumberBox_new)
+            * [.value](#module_basic-controllers..NumberBox+value) : <code>Number</code>
+        * [~SelectButtons](#module_basic-controllers..SelectButtons)
+            * [new SelectButtons(config)](#new_module_basic-controllers..SelectButtons_new)
+            * [.value](#module_basic-controllers..SelectButtons+value) : <code>String</code>
+            * [.index](#module_basic-controllers..SelectButtons+index) : <code>Number</code>
+        * [~SelectList](#module_basic-controllers..SelectList)
+            * [new SelectList(config)](#new_module_basic-controllers..SelectList_new)
+            * [.value](#module_basic-controllers..SelectList+value) : <code>String</code>
+            * [.index](#module_basic-controllers..SelectList+index) : <code>Number</code>
+        * [~Slider](#module_basic-controllers..Slider)
+            * [new Slider(config)](#new_module_basic-controllers..Slider_new)
+            * [.value](#module_basic-controllers..Slider+value) : <code>Number</code>
+        * [~Text](#module_basic-controllers..Text)
+            * [new Text(config)](#new_module_basic-controllers..Text_new)
+            * [.value](#module_basic-controllers..Text+value) : <code>String</code>
+        * [~Title](#module_basic-controllers..Title)
+            * [new Title(config)](#new_module_basic-controllers..Title_new)
+        * [~Toggle](#module_basic-controllers..Toggle)
+            * [new Toggle(config)](#new_module_basic-controllers..Toggle_new)
+            * [.value](#module_basic-controllers..Toggle+value) : <code>Boolean</code>
+            * [.active](#module_basic-controllers..Toggle+active) : <code>Boolean</code>
+        * [~TriggerButtons](#module_basic-controllers..TriggerButtons)
+            * [new TriggerButtons(config)](#new_module_basic-controllers..TriggerButtons_new)
+            * [.value](#module_basic-controllers..TriggerButtons+value) : <code>String</code>
+            * [.index](#module_basic-controllers..TriggerButtons+index) : <code>String</code>
 
+
+-
+
+<a name="module_basic-controllers.setTheme"></a>
+
+### basic-controllers.setTheme(theme)
+Change the theme of the controllers, currently 3 themes are available:
+ - 'light' (default)
+ - 'grey'
+ - 'dark'
+
+**Kind**: static method of <code>[basic-controllers](#module_basic-controllers)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| theme | <code>String</code> | Name of the theme. |
+
+
+-
+
+<a name="module_basic-controllers.disableStyles"></a>
+
+### basic-controllers.disableStyles()
+Disable default styling (expect a broken ui)
+
+**Kind**: static method of <code>[basic-controllers](#module_basic-controllers)</code>  
+
+-
+
+<a name="module_basic-controllers..Group"></a>
+
+### basic-controllers~Group
+Group of controllers.
+
+**Kind**: inner class of <code>[basic-controllers](#module_basic-controllers)</code>  
+
+* [~Group](#module_basic-controllers..Group)
+    * [new Group(config)](#new_module_basic-controllers..Group_new)
+    * [.value](#module_basic-controllers..Group+value) : <code>String</code>
+    * [.state](#module_basic-controllers..Group+state) : <code>String</code>
+
+
+-
+
+<a name="new_module_basic-controllers..Group_new"></a>
+
+#### new Group(config)
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| config | <code>Object</code> |  | Override default parameters. |
+| config.label | <code>String</code> |  | Label of the group. |
+| [config.default] | <code>&#x27;opened&#x27;</code> &#124; <code>&#x27;closed&#x27;</code> | <code>&#x27;opened&#x27;</code> | Default state of the  group. |
+| [config.container] | <code>String</code> &#124; <code>Element</code> &#124; <code>basic-controller~Group</code> | <code></code> | Container of the controller. |
+
+**Example**  
 ```js
-import * as basicControllers from 'waves-basic-controller';
-basicControllers.setTheme('dark');
-```
+import * as controllers from 'basic-controllers';
 
-### Title
-
-```js
-import { Title } from 'waves-basic-controllers';
-const $container  = document.querySelector('#container');
-
-const title = new Title(legend);
-$container.appendChild(title.render());
-
-// ... or simply
-
-new Title(legend, $container);
-```
-
-### Buttons
-
-```js
-import { Buttons } from 'waves-basic-controllers';
-const $container  = document.querySelector('#container');
-
-const buttons = new Buttons(legend, [...ids]);
-$container.appendChild(buttons.render());
-
-buttons.on('change', (id) => {
-  switch (id) {
-    // ...do stuff
-  }
+// create a group
+const group = new controllers.Group({
+  label: 'Group',
+  default: 'opened',
+  container: '#container'
 });
 
-// ... or simply
+// insert controllers in the group
+const groupSlider = new controllers.Slider({
+  label: 'Group Slider',
+  min: 20,
+  max: 1000,
+  step: 1,
+  default: 200,
+  unit: 'Hz',
+  size: 'large',
+  container: group,
+  callback: (value) => console.log(value),
+});
 
-new Buttons(legend, [...ids], $container, (id) => {
-  switch (id) {
-    // ...do stuff
-  }
-})
+const groupText = new controllers.Text({
+  label: 'Group Text',
+  default: 'text input',
+  readonly: false,
+  container: group,
+  callback: (value) => console.log(value),
+});
 ```
 
-### Toggle
+-
 
+<a name="module_basic-controllers..Group+value"></a>
+
+#### group.value : <code>String</code>
+State of the group (`'opened'` or `'closed'`).
+
+**Kind**: instance property of <code>[Group](#module_basic-controllers..Group)</code>  
+
+-
+
+<a name="module_basic-controllers..Group+state"></a>
+
+#### group.state : <code>String</code>
+Alias for `value`.
+
+**Kind**: instance property of <code>[Group](#module_basic-controllers..Group)</code>  
+
+-
+
+<a name="module_basic-controllers..NumberBox"></a>
+
+### basic-controllers~NumberBox
+Number Box controller
+
+**Kind**: inner class of <code>[basic-controllers](#module_basic-controllers)</code>  
+
+* [~NumberBox](#module_basic-controllers..NumberBox)
+    * [new NumberBox(config)](#new_module_basic-controllers..NumberBox_new)
+    * [.value](#module_basic-controllers..NumberBox+value) : <code>Number</code>
+
+
+-
+
+<a name="new_module_basic-controllers..NumberBox_new"></a>
+
+#### new NumberBox(config)
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| config | <code>Object</code> |  | Override default parameters. |
+| config.label | <code>String</code> |  | Label of the controller. |
+| [config.min] | <code>Number</code> | <code>0</code> | Minimum value. |
+| [config.max] | <code>Number</code> | <code>1</code> | Maximum value. |
+| [config.step] | <code>Number</code> | <code>0.01</code> | Step between consecutive values. |
+| [config.default] | <code>Number</code> | <code>0</code> | Default value. |
+| [config.container] | <code>String</code> &#124; <code>Element</code> &#124; <code>basic-controller~Group</code> | <code></code> | Container of the controller. |
+| [config.callback] | <code>function</code> | <code></code> | Callback to be executed when the  value changes. |
+
+**Example**  
 ```js
-import { Toggle } from 'waves-basic-controllers';
-const $container  = document.querySelector('#container');
+import * as controllers from 'basic-controllers';
 
-const toggle = new Toggle(legend, defaultState);
-$container.appendChild(toggle.render());
-
-toggle.on('change', function(active) {
-  // ...do stuff
-});
-
-// ... or simply
-
-new Toggle(legend, defaultValue, $container, () => {
-  // ...do stuff
+const numberBox = new controllers.NumberBox({
+  label: 'My Number Box',
+  min: 0,
+  max: 10,
+  step: 0.1,
+  default: 5,
+  container: '#container',
+  callback: (value) => console.log(value),
 });
 ```
 
-### Slider
+-
 
+<a name="module_basic-controllers..NumberBox+value"></a>
+
+#### numberBox.value : <code>Number</code>
+Current value of the controller.
+
+**Kind**: instance property of <code>[NumberBox](#module_basic-controllers..NumberBox)</code>  
+
+-
+
+<a name="module_basic-controllers..SelectButtons"></a>
+
+### basic-controllers~SelectButtons
+List of buttons with state.
+
+**Kind**: inner class of <code>[basic-controllers](#module_basic-controllers)</code>  
+
+* [~SelectButtons](#module_basic-controllers..SelectButtons)
+    * [new SelectButtons(config)](#new_module_basic-controllers..SelectButtons_new)
+    * [.value](#module_basic-controllers..SelectButtons+value) : <code>String</code>
+    * [.index](#module_basic-controllers..SelectButtons+index) : <code>Number</code>
+
+
+-
+
+<a name="new_module_basic-controllers..SelectButtons_new"></a>
+
+#### new SelectButtons(config)
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| config | <code>Object</code> |  | Override default parameters. |
+| config.label | <code>String</code> |  | Label of the controller. |
+| [config.options] | <code>Array</code> | <code></code> | Values of the drop down list. |
+| [config.default] | <code>Number</code> | <code></code> | Default value. |
+| [config.container] | <code>String</code> &#124; <code>Element</code> &#124; <code>basic-controller~Group</code> | <code></code> | Container of the controller. |
+| [config.callback] | <code>function</code> | <code></code> | Callback to be executed when the  value changes. |
+
+**Example**  
 ```js
-import { Slider } from 'waves-basic-controllers';
-const $container = document.querySelector('#container');
+import * as controllers from 'basic-controllers';
 
-const slider = new Slider(legend, min, max, step, defaultValue, unit, size);
-$container.appendChild(slider.render());
-
-slider.on('change', (value) => {
-  // ...do stuff
-});
-
-// ... or simply
-
-new Slider(legend, min, max, step, defaultValue, unit, size, $container, () => {
-  //do stuff
+const selectButtons = new controllers.SelectButtons({
+  label: 'SelectButtons',
+  options: ['standby', 'run', 'end'],
+  default: 'run',
+  container: '#container',
+  callback: (value, index) => console.log(value, index),
 });
 ```
 
-_`size` can be 'large', 'medium' or 'small' ('medium' is the default value)_
+-
+
+<a name="module_basic-controllers..SelectButtons+value"></a>
+
+#### selectButtons.value : <code>String</code>
+Current value.
+
+**Kind**: instance property of <code>[SelectButtons](#module_basic-controllers..SelectButtons)</code>  
+
+-
+
+<a name="module_basic-controllers..SelectButtons+index"></a>
+
+#### selectButtons.index : <code>Number</code>
+Current option index.
+
+**Kind**: instance property of <code>[SelectButtons](#module_basic-controllers..SelectButtons)</code>  
+
+-
+
+<a name="module_basic-controllers..SelectList"></a>
+
+### basic-controllers~SelectList
+Drop-down list controller.
+
+**Kind**: inner class of <code>[basic-controllers](#module_basic-controllers)</code>  
+
+* [~SelectList](#module_basic-controllers..SelectList)
+    * [new SelectList(config)](#new_module_basic-controllers..SelectList_new)
+    * [.value](#module_basic-controllers..SelectList+value) : <code>String</code>
+    * [.index](#module_basic-controllers..SelectList+index) : <code>Number</code>
 
 
-### Conventions
+-
 
-- `$container` can be a `DOMElement` or a css selector
+<a name="new_module_basic-controllers..SelectList_new"></a>
+
+#### new SelectList(config)
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| config | <code>Object</code> |  | Override default parameters. |
+| config.label | <code>String</code> |  | Label of the controller. |
+| [config.options] | <code>Array</code> | <code></code> | Values of the drop down list. |
+| [config.default] | <code>Number</code> | <code></code> | Default value. |
+| [config.container] | <code>String</code> &#124; <code>Element</code> &#124; <code>basic-controller~Group</code> | <code></code> | Container of the controller. |
+| [config.callback] | <code>function</code> | <code></code> | Callback to be executed when the  value changes. |
+
+**Example**  
+```js
+import * as controllers from 'basic-controllers';
+
+const selectList = new controllers.SelectList({
+  label: 'SelectList',
+  options: ['standby', 'run', 'end'],
+  default: 'run',
+  container: '#container',
+  callback: (value, index) => console.log(value, index),
+});
+```
+
+-
+
+<a name="module_basic-controllers..SelectList+value"></a>
+
+#### selectList.value : <code>String</code>
+Current value.
+
+**Kind**: instance property of <code>[SelectList](#module_basic-controllers..SelectList)</code>  
+
+-
+
+<a name="module_basic-controllers..SelectList+index"></a>
+
+#### selectList.index : <code>Number</code>
+Current option index.
+
+**Kind**: instance property of <code>[SelectList](#module_basic-controllers..SelectList)</code>  
+
+-
+
+<a name="module_basic-controllers..Slider"></a>
+
+### basic-controllers~Slider
+Slider controller.
+
+**Kind**: inner class of <code>[basic-controllers](#module_basic-controllers)</code>  
+
+* [~Slider](#module_basic-controllers..Slider)
+    * [new Slider(config)](#new_module_basic-controllers..Slider_new)
+    * [.value](#module_basic-controllers..Slider+value) : <code>Number</code>
+
+
+-
+
+<a name="new_module_basic-controllers..Slider_new"></a>
+
+#### new Slider(config)
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| config | <code>Object</code> |  | Override default parameters. |
+| config.label | <code>String</code> |  | Label of the controller. |
+| [config.min] | <code>Number</code> | <code>0</code> | Minimum value. |
+| [config.max] | <code>Number</code> | <code>1</code> | Maximum value. |
+| [config.step] | <code>Number</code> | <code>0.01</code> | Step between consecutive values. |
+| [config.default] | <code>Number</code> | <code>0</code> | Default value. |
+| [config.unit] | <code>String</code> | <code>&#x27;&#x27;</code> | Unit of the value. |
+| [config.size] | <code>&#x27;small&#x27;</code> &#124; <code>&#x27;medium&#x27;</code> &#124; <code>&#x27;large&#x27;</code> | <code>&#x27;medium&#x27;</code> | Size of the  slider. |
+| [config.container] | <code>String</code> &#124; <code>Element</code> &#124; <code>basic-controller~Group</code> | <code></code> | Container of the controller. |
+| [config.callback] | <code>function</code> | <code></code> | Callback to be executed when the  value changes. |
+
+**Example**  
+```js
+import * as controllers from 'basic-controllers';
+
+const slider = new controllers.Slider({
+  label: 'My Slider',
+  min: 20,
+  max: 1000,
+  step: 1,
+  default: 537,
+  unit: 'Hz',
+  size: 'large',
+  container: '#container',
+  callback: (value) => console.log(value),
+});
+```
+
+-
+
+<a name="module_basic-controllers..Slider+value"></a>
+
+#### slider.value : <code>Number</code>
+Current value.
+
+**Kind**: instance property of <code>[Slider](#module_basic-controllers..Slider)</code>  
+
+-
+
+<a name="module_basic-controllers..Text"></a>
+
+### basic-controllers~Text
+Text controller.
+
+**Kind**: inner class of <code>[basic-controllers](#module_basic-controllers)</code>  
+
+* [~Text](#module_basic-controllers..Text)
+    * [new Text(config)](#new_module_basic-controllers..Text_new)
+    * [.value](#module_basic-controllers..Text+value) : <code>String</code>
+
+
+-
+
+<a name="new_module_basic-controllers..Text_new"></a>
+
+#### new Text(config)
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| config | <code>Object</code> |  | Override default parameters. |
+| config.label | <code>String</code> |  | Label of the controller. |
+| [config.default] | <code>Array</code> | <code>&#x27;&#x27;</code> | Default value of the controller. |
+| [config.readonly] | <code>Array</code> | <code>false</code> | Define if the controller is readonly. |
+| [config.container] | <code>String</code> &#124; <code>Element</code> &#124; <code>basic-controller~Group</code> | <code></code> | Container of the controller. |
+| [config.callback] | <code>function</code> | <code></code> | Callback to be executed when the  value changes. |
+
+**Example**  
+```js
+import * as controllers from 'basic-contollers';
+
+const text = new controllers.Text({
+  label: 'My Text',
+  default: 'default value',
+  readonly: false,
+  container: '#container',
+  callback: (value) => console.log(value),
+});
+```
+
+-
+
+<a name="module_basic-controllers..Text+value"></a>
+
+#### text.value : <code>String</code>
+Current value.
+
+**Kind**: instance property of <code>[Text](#module_basic-controllers..Text)</code>  
+
+-
+
+<a name="module_basic-controllers..Title"></a>
+
+### basic-controllers~Title
+Title.
+
+**Kind**: inner class of <code>[basic-controllers](#module_basic-controllers)</code>  
+
+-
+
+<a name="new_module_basic-controllers..Title_new"></a>
+
+#### new Title(config)
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| config | <code>Object</code> |  | Override default parameters. |
+| config.label | <code>String</code> |  | Label of the controller. |
+| [config.container] | <code>String</code> &#124; <code>Element</code> &#124; <code>basic-controller~Group</code> | <code></code> | Container of the controller. |
+
+**Example**  
+```js
+import * as controller from 'basic-controllers';
+
+const title = new controllers.Title({
+  label: 'My Title',
+  container: '#container'
+});
+```
+
+-
+
+<a name="module_basic-controllers..Toggle"></a>
+
+### basic-controllers~Toggle
+On/Off controller.
+
+**Kind**: inner class of <code>[basic-controllers](#module_basic-controllers)</code>  
+
+* [~Toggle](#module_basic-controllers..Toggle)
+    * [new Toggle(config)](#new_module_basic-controllers..Toggle_new)
+    * [.value](#module_basic-controllers..Toggle+value) : <code>Boolean</code>
+    * [.active](#module_basic-controllers..Toggle+active) : <code>Boolean</code>
+
+
+-
+
+<a name="new_module_basic-controllers..Toggle_new"></a>
+
+#### new Toggle(config)
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| config | <code>Object</code> |  | Override default parameters. |
+| config.label | <code>String</code> |  | Label of the controller. |
+| [config.active] | <code>Array</code> | <code>false</code> | Default state of the toggle. |
+| [config.container] | <code>String</code> &#124; <code>Element</code> &#124; <code>basic-controller~Group</code> | <code></code> | Container of the controller. |
+| [config.callback] | <code>function</code> | <code></code> | Callback to be executed when the  value changes. |
+
+**Example**  
+```js
+import * as controllers from 'basic-controllers';
+
+const toggle = new controllers.Toggle({
+  label: 'My Toggle',
+  active: false,
+  container: '#container',
+  callback: (active) => console.log(active),
+});
+```
+
+-
+
+<a name="module_basic-controllers..Toggle+value"></a>
+
+#### toggle.value : <code>Boolean</code>
+Value of the toggle
+
+**Kind**: instance property of <code>[Toggle](#module_basic-controllers..Toggle)</code>  
+
+-
+
+<a name="module_basic-controllers..Toggle+active"></a>
+
+#### toggle.active : <code>Boolean</code>
+Alias for `value`.
+
+**Kind**: instance property of <code>[Toggle](#module_basic-controllers..Toggle)</code>  
+
+-
+
+<a name="module_basic-controllers..TriggerButtons"></a>
+
+### basic-controllers~TriggerButtons
+List of buttons without state.
+
+**Kind**: inner class of <code>[basic-controllers](#module_basic-controllers)</code>  
+
+* [~TriggerButtons](#module_basic-controllers..TriggerButtons)
+    * [new TriggerButtons(config)](#new_module_basic-controllers..TriggerButtons_new)
+    * [.value](#module_basic-controllers..TriggerButtons+value) : <code>String</code>
+    * [.index](#module_basic-controllers..TriggerButtons+index) : <code>String</code>
+
+
+-
+
+<a name="new_module_basic-controllers..TriggerButtons_new"></a>
+
+#### new TriggerButtons(config)
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| config | <code>Object</code> |  | Override default parameters. |
+| config.label | <code>String</code> |  | Label of the controller. |
+| [config.options] | <code>Array</code> | <code></code> | Options for each button. |
+| [config.container] | <code>String</code> &#124; <code>Element</code> &#124; <code>basic-controller~Group</code> | <code></code> | Container of the controller. |
+| [config.callback] | <code>function</code> | <code></code> | Callback to be executed when the  value changes. |
+
+**Example**  
+```js
+import * as controllers from 'basic-controllers';
+
+const triggerButtons = new controllers.TriggerButtons({
+  label: 'My Trigger Buttons',
+  options: ['value 1', 'value 2', 'value 3'],
+  container: '#container',
+  callback: (value, index) => console.log(value, index),
+});
+```
+
+-
+
+<a name="module_basic-controllers..TriggerButtons+value"></a>
+
+#### triggerButtons.value : <code>String</code>
+Last triggered button value.
+
+**Kind**: instance property of <code>[TriggerButtons](#module_basic-controllers..TriggerButtons)</code>  
+**Read only**: true  
+
+-
+
+<a name="module_basic-controllers..TriggerButtons+index"></a>
+
+#### triggerButtons.index : <code>String</code>
+Last triggered button index.
+
+**Kind**: instance property of <code>[TriggerButtons](#module_basic-controllers..TriggerButtons)</code>  
+**Read only**: true  
+
+-
 
 
 
+## License
 
-
-
-
-
+BSD-3-Clause
 

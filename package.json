@@ -4,7 +4,7 @@
   "description": "Set of simple controllers for rapid prototyping",
   "main": "dist/index.js",
   "scripts": {
-    "doc": "jsdoc2md -t tmpl/README.hbs --separators src/**/*.js src/*.js > README-test.md",
+    "doc": "jsdoc2md -t tmpl/README.hbs --separators src/**/*.js src/*.js > README.md",
     "transpile": "node ./bin/runner --transpile",
     "prewatch": "node ./bin/runner --transpile",
     "watch": "node ./bin/runner --watch"

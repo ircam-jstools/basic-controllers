@@ -12,6 +12,8 @@ npm install [--save] ircam-jstools/basic-controllers
 
 > [examples](https://cdn.rawgit.com/ircam-jstools/basic-controllers/master/examples/controllers/index.html)
 
+![examples](https://cdn.rawgit.com/ircam-jstools/basic-controllers/master/tmpl/examples.png)
+
 - Group
 - NumberBox
 - SelectButtons
@@ -25,22 +27,46 @@ npm install [--save] ircam-jstools/basic-controllers
 ## Usage
 
 ```js
- * import * as controllers from 'basic-controllers';
- *
- * const slider = new controllers.Slider({
- *   label: 'My Slider',
- *   min: 20,
- *   max: 1000,
- *   step: 1,
- *   default: 537,
- *   unit: 'Hz',
- *   size: 'large',
- *   container: '#container',
- *   callback: (value) => console.log(value),
- * });
+import * as controllers from 'basic-controllers';
+
+const slider = new controllers.Slider({
+  label: 'My Slider',
+  min: 20,
+  max: 1000,
+  step: 1,
+  default: 537,
+  unit: 'Hz',
+  size: 'large',
+  container: '#container',
+  callback: (value) => console.log(value),
+});
 ```
 
-# API
+## @todo
+
+Factory from JSON object
+
+```
+// create interface from config object
+
+config = [
+  {
+    type: 'group',
+    label: 'coucou',
+    handle: false,
+    show: false,
+    elements: {
+    {
+      type: 'slider',
+      // ....
+    },
+  }, {
+    // ...
+  }
+]
+```
+
+## API
 
 {{#module name="basic-controllers"}}{{>docs}}{{/module}}
 
