@@ -78,16 +78,22 @@ const selectList = new controllers.SelectList({
     console.log('SelectList =>', value);
 
     info.value = value;
-    // selectButtons.value = value;
+    selectButtons.value = value;
   },
 });
 
-// const selectButtons = new controllers.SelectButtons('SelectButtons', ['standby', 'run', 'end'], 'run', '#container', function(value) {
-//   console.log('SelectButtons =>', value);
+const selectButtons = new controllers.SelectButtons({
+  label: 'SelectButtons',
+  options: ['standby', 'run', 'end'],
+  default: 'run',
+  container: '#container',
+  callback: (value) => {
+    console.log('SelectButtons =>', value);
 
-//   info.value = value;
-//   selectList.value = value;
-// });
+    info.value = value;
+    selectList.value = value;
+  }
+});
 
 // // group
 // const group = new controllers.Group('Group', 'opened', '#container');
@@ -102,16 +108,42 @@ const selectList = new controllers.SelectList({
 // });
 
 // // sliders
-// const title2 = new controllers.Title('Sliders', '#container');
+const title2 = new controllers.Title({
+  label: 'Sliders',
+  container: '#container',
+});
 
-// const sliderLarge = new controllers.Slider('Slider (large)', 20, 1000, 1, 537, 'Hz', 'large', '#container', function(value) {
-//   console.log('Slider (large) =>', value);
-// });
+const sliderLarge = new controllers.Slider({
+  label: 'Slider (large)',
+  min: 20,
+  max: 1000,
+  step: 1,
+  default: 537,
+  unit: 'Hz',
+  size: 'large',
+  container: '#container',
+  callback: (value) => console.log('Slider (large) =>', value),
+});
 
-// const sliderDefault = new controllers.Slider('Slider (default / medium)', 20, 1000, 1, 225, 'm.s<sup>-1</sup>', 'default', '#container', function(value) {
-//   console.log('Slider (default) =>', value);
-// });
+const sliderMedium = new controllers.Slider({
+  label: 'Slider (default / medium)',
+  min: 20,
+  max: 1000,
+  step: 1,
+  default: 225,
+  unit: 'm.s<sup>-1</sup>',
+  size: 'medium',
+  container: '#container',
+  callback: (value) => console.log('Slider (default) =>', value),
+});
 
-// const sliderSmall = new controllers.Slider('Slider (small)', 20, 1000, 1, 660, '', 'small', '#container', function(value) {
-//   console.log('Slider (small) =>', value);
-// });
+const sliderSmall = new controllers.Slider({
+  label: 'Slider (small)',
+  min: 20,
+  max: 1000,
+  step: 1,
+  default: 660,
+  size: 'small',
+  container: '#container',
+  callback: (value) => console.log('Slider (small) =>', value),
+});

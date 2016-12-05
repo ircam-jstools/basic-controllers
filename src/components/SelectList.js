@@ -25,7 +25,14 @@ const defaults = {
  *
  * @example
  * import * as controllers from 'basic-controllers';
-
+ *
+ * const selectList = new controllers.SelectList({
+ *   label: 'SelectList',
+ *   options: ['standby', 'run', 'end'],
+ *   default: 'run',
+ *   container: '#container',
+ *   callback: (value, index) => console.log(value, index),
+ * });
  */
 class SelectList extends BaseController {
   constructor(config) {
@@ -60,7 +67,7 @@ class SelectList extends BaseController {
 
   /**
    * Current option index.
-   * @type {String}
+   * @type {Number}
    */
   get index() {
     return this._index;
@@ -129,7 +136,7 @@ class SelectList extends BaseController {
     this._value = value;
     this.$select.value = value;
 
-    this.executeListeners(this._value);
+    this.executeListeners(this._value, this._index);
   }
 }
 

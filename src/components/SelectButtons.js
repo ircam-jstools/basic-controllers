@@ -1,45 +1,99 @@
 import BaseController from './BaseController';
 import * as elements from '../utils/elements';
 
+/** @module basic-controllers */
+
+const defaults = {
+  label: '&nbsp;',
+  options: null,
+  default: null,
+  container: null,
+  callback: null,
+};
+
+/**
+ * List of buttons with state.
+ *
+ * @param {Object} config - Override default parameters.
+ * @param {String} config.label - Label of the controller.
+ * @param {Array} [config.options=null] - Values of the drop down list.
+ * @param {Number} [config.default=null] - Default value.
+ * @param {String|Element|basic-controller~Group} [config.container=null] -
+ *  Container of the controller.
+ * @param {Function} [config.callback=null] - Callback to be executed when the
+ *  value changes.
+ *
+ * @example
+ * import * as controllers from 'basic-controllers';
+ *
+ * const selectButtons = new controllers.SelectButtons({
+ *   label: 'SelectButtons',
+ *   options: ['standby', 'run', 'end'],
+ *   default: 'run',
+ *   container: '#container',
+ *   callback: (value, index) => console.log(value, index),
+ * });
+ */
 class SelectButtons extends BaseController {
-  constructor(legend, options, defaultValue, $container = null, callback = null) {
-    super();
+  constructor(config) {
+    super('select-buttons', defaults, config);
 
-    this.type = 'select-buttons';
-    this.legend = legend; // non breakable space to keep rendering consistency
-    this.options = options;
-    this._value = defaultValue;
-    const currentIndex = this.options.indexOf(this._value);
-    this._currentIndex = currentIndex === -1 ? 0 : currentIndex;
-    this._maxIndex = this.options.length - 1;
+    if (!Array.isArray(this.params.options))
+      throw new Error('TriggerButton: Invalid option "options"');
 
-    super._applyOptionnalParameters($container, callback);
+    this._value = this.params.default;
+
+    const options = this.params.options;
+    const index = options.indexOf(this._value);
+    this._index = index === -1 ? 0 : index;
+    this._maxIndex = options.length - 1;
+
+    super.initialize();
   }
 
+  /**
+   * Current value.
+   * @type {String}
+   */
   get value() {
     return this._value;
   }
 
   set value(value) {
-    const index = this.options.indexOf(value);
+    const index = this.params.options.indexOf(value);
 
-    if (index !== -1) {
-      this._value = value;
-      this._currentIndex = index;
-      this._highlightBtn(this._currentIndex);
-    }
+    if (index !== -1)
+      this.index = index;
   }
 
+  /**
+   * Current option index.
+   * @type {Number}
+   */
+  get index() {
+    this._index;
+  }
+
+  set index(index) {
+    if (index < 0 || index > this._maxIndex) return;
+
+    this._value = this.params.options[index];
+    this._index = index;
+    this._highlightBtn(this._index);
+  }
+
+  /** @private */
   render() {
+    const { options, label } = this.params;
     const content = `
-      <span class="legend">${this.legend}</span>
+      <span class="label">${label}</span>
       <div class="inner-wrapper">
         ${elements.arrowLeft}
-        ${this.options.map((option, index) => {
+        ${options.map((option, index) => {
           return `
-            <a href="#" class="btn" data-index="${index}" data-value="${option}">
+            <button class="btn" data-index="${index}" data-value="${option}">
               ${option}
-            </a>`;
+            </button>`;
         }).join('')}
         ${elements.arrowRight}
       </div>
@@ -51,20 +105,22 @@ class SelectButtons extends BaseController {
     this.$prev = this.$el.querySelector('.arrow-left');
     this.$next = this.$el.querySelector('.arrow-right');
     this.$btns = Array.from(this.$el.querySelectorAll('.btn'));
-    this._highlightBtn(this._currentIndex);
 
+    this._highlightBtn(this._index);
     this.bindEvents();
+
     return this.$el;
   }
 
+  /** @private */
   bindEvents() {
     this.$prev.addEventListener('click', () => {
-      const index = this._currentIndex - 1;
+      const index = this._index - 1;
       this.propagate(index);
     });
 
     this.$next.addEventListener('click', () => {
-      const index = this._currentIndex + 1;
+      const index = this._index + 1;
       this.propagate(index);
     });
 
@@ -76,16 +132,18 @@ class SelectButtons extends BaseController {
     });
   }
 
+  /** @private */
   propagate(index) {
     if (index < 0 || index > this._maxIndex) return;
 
-    this._currentIndex = index;
-    this._value = this.options[index];
-    this._highlightBtn(this._currentIndex);
+    this._index = index;
+    this._value = this.params.options[index];
+    this._highlightBtn(this._index);
 
-    this._executeListeners(this._value);
+    this.executeListeners(this._value, this._index);
   }
 
+  /** @private */
   _highlightBtn(activeIndex) {
     this.$btns.forEach(($btn, index) => {
       $btn.classList.remove('active');

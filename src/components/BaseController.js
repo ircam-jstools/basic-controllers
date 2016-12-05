@@ -15,7 +15,7 @@ let theme = 'light';
  * @param {Object} config - User defined configuration options.
  */
 class BaseController {
-  constructor(type, defaults, config) {
+  constructor(type, defaults, config = {}) {
     this.type = type;
     this.params = Object.assign({}, defaults, config);
     // insert styles and listen window resize when the first controller is created
