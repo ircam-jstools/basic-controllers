@@ -1,6 +1,6 @@
 {
   "name": "basic-controllers",
-  "version": "0.6.2",
+  "version": "1.0.0",
   "description": "Set of simple controllers for rapid prototyping",
   "main": "dist/index.js",
   "scripts": {
