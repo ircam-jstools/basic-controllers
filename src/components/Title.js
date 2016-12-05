@@ -10,9 +10,9 @@ const defaults = {
 /**
  * Title.
  *
- * @param {Object} options - Override default options.
- * @param {String} options.label - Label of the controller.
- * @param {String|Element|basic-controller~Group} [options.container=null] -
+ * @param {Object} config - Override default parameters.
+ * @param {String} config.label - Label of the controller.
+ * @param {String|Element|basic-controller~Group} [config.container=null] -
  *  Container of the controller.
  *
  * @example
@@ -24,8 +24,8 @@ const defaults = {
  * });
  */
 class Title extends BaseController {
-  constructor(options) {
-    super('title', defaults, options);
+  constructor(config) {
+    super('title', defaults, config);
     super.initialize();
   }
 

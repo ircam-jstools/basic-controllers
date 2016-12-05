@@ -8,12 +8,16 @@ let theme = 'light';
 /** @module basic-controller */
 
 /**
- * Base class to create new controllers
+ * Base class to create new controllers.
+ *
+ * @param {String} type - String describing the type of the controller.
+ * @param {Object} defaults - Default parameters of the controller.
+ * @param {Object} config - User defined configuration options.
  */
 class BaseController {
-  constructor(type, defaults, options) {
+  constructor(type, defaults, config) {
     this.type = type;
-    this.params = Object.assign({}, defaults, options);
+    this.params = Object.assign({}, defaults, config);
     // insert styles and listen window resize when the first controller is created
     if (controllers.size === 0) {
       styles.insertStyleSheet();

@@ -1,6 +1,11 @@
 import BaseController from './BaseController';
 import * as elements from '../utils/elements';
 
+const defaults = {
+  label: '&nbsp;'
+}
+
+
 class SelectList extends BaseController {
   constructor(legend, options, defaultValue, $container = null, callback = null) {
     super();

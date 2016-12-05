@@ -11,13 +11,13 @@ const defaults = {
 /**
  * Text controller.
  *
- * @param {Object} options - Override default options.
- * @param {String} options.label - Label of the controller.
- * @param {Array} [options.default=''] - Default value of the controller.
- * @param {Array} [options.readonly=false] - Define if the controller is readonly.
- * @param {String|Element|basic-controller~Group} [options.container=null] -
+ * @param {Object} config - Override default parameters.
+ * @param {String} config.label - Label of the controller.
+ * @param {Array} [config.default=''] - Default value of the controller.
+ * @param {Array} [config.readonly=false] - Define if the controller is readonly.
+ * @param {String|Element|basic-controller~Group} [config.container=null] -
  *  Container of the controller.
- * @param {Function} [options.callback=null] - Callback to be executed when the
+ * @param {Function} [config.callback=null] - Callback to be executed when the
  *  value changes.
  *
  * @example
@@ -32,8 +32,8 @@ const defaults = {
  * });
  */
 class Text extends BaseController {
-  constructor(options) {
-    super('text', defaults, options);
+  constructor(config) {
+    super('text', defaults, config);
 
     this._value = this.params.default;
     this.initialize();

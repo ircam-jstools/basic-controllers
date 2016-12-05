@@ -8,7 +8,7 @@ const title1 = new controllers.Title({
 
 const triggerButtons = new controllers.TriggerButtons({
   label: 'TriggerButtons',
-  values: ['light', 'grey', 'dark'],
+  options: ['light', 'grey', 'dark'],
   container: '#container',
   callback: (theme) => {
     console.log('Button =>', theme);

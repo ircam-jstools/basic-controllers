@@ -13,12 +13,12 @@ const defaults = {
 /**
  * On/Off controller.
  *
- * @param {Object} options - Override default options.
- * @param {String} options.label - Label of the controller.
- * @param {Array} [options.active=false] - Default state of the toggle.
- * @param {String|Element|basic-controller~Group} [options.container=null] -
+ * @param {Object} config - Override default parameters.
+ * @param {String} config.label - Label of the controller.
+ * @param {Array} [config.active=false] - Default state of the toggle.
+ * @param {String|Element|basic-controller~Group} [config.container=null] -
  *  Container of the controller.
- * @param {Function} [options.callback=null] - Callback to be executed when the
+ * @param {Function} [config.callback=null] - Callback to be executed when the
  *  value changes.
  *
  * @example
@@ -32,8 +32,8 @@ const defaults = {
  * });
  */
 class Toggle extends BaseController {
-  constructor(options) {
-    super('toggle', defaults, options);
+  constructor(config) {
+    super('toggle', defaults, config);
 
     this._active = this.params.active;
 

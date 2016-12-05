@@ -4,18 +4,20 @@ import BaseController from './BaseController';
 
 const defaults = {
   label: '&nbsp;',
-  values: null,
+  options: null,
+  container: null,
+  callback: null,
 };
 
 /**
  * List of buttons without state.
  *
- * @param {Object} options - Override default options.
- * @param {String} options.label - Label of the controller.
- * @param {Array} [options.values=null] - Values for each button.
- * @param {String|Element|basic-controller~Group} [options.container=null] -
+ * @param {Object} config - Override default parameters.
+ * @param {String} config.label - Label of the controller.
+ * @param {Array} [config.options=null] - Options for each button.
+ * @param {String|Element|basic-controller~Group} [config.container=null] -
  *  Container of the controller.
- * @param {Function} [options.callback=null] - Callback to be executed when the
+ * @param {Function} [config.callback=null] - Callback to be executed when the
  *  value changes.
  *
  * @example
@@ -23,17 +25,17 @@ const defaults = {
  *
  * const triggerButtons = new controllers.TriggerButtons({
  *   label: 'My Trigger Buttons',
- *   values: ['value 1', 'value 2', 'value 3'],
+ *   options: ['value 1', 'value 2', 'value 3'],
  *   container: '#container',
  *   callback: (value, index) => console.log(value, index),
  * });
  */
 class TriggerButtons extends BaseController {
-  constructor(options) {
-    super('trigger-buttons', defaults, options);
+  constructor(config) {
+    super('trigger-buttons', defaults, config);
 
-    if (!Array.isArray(this.params.values))
-      throw new Error('TriggerButton: Invalid option "values"');
+    if (!Array.isArray(this.params.options))
+      throw new Error('TriggerButton: Invalid option "options"');
 
     this._index = null;
     this._value = null;
@@ -59,16 +61,13 @@ class TriggerButtons extends BaseController {
 
   /** @private */
   render() {
-    const { label, values } = this.params;
+    const { label, options } = this.params;
 
     const content = `
       <span class="label">${label}</span>
       <div class="inner-wrapper">
-        ${values.map((value, index) => {
-          return `
-            <a href="#" class="btn">
-              ${value}
-            </a>`;
+        ${options.map((option, index) => {
+          return `<a href="#" class="btn">${option}</a>`;
         }).join('')}
       </div>`;
 
@@ -84,7 +83,7 @@ class TriggerButtons extends BaseController {
   /** @private */
   bindEvents() {
     this.$buttons.forEach(($btn, index) => {
-      const value = this.params.values[index];
+      const value = this.params.options[index];
 
       $btn.addEventListener('click', (e) => {
         e.preventDefault();

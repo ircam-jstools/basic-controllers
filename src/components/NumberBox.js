@@ -16,15 +16,15 @@ const defaults = {
 /**
  * Number Box controller
  *
- * @param {Object} options - Override default options.
- * @param {String} options.label - Label of the controller.
- * @param {Number} [options.min=0] - Minimum value.
- * @param {Number} [options.max=1] - Maximum value.
- * @param {Number} [options.step=0.01] - Step between consecutive values.
- * @param {Number} [options.default=0] - Default value.
- * @param {String|Element|basic-controller~Group} [options.container=null] -
+ * @param {Object} config - Override default parameters.
+ * @param {String} config.label - Label of the controller.
+ * @param {Number} [config.min=0] - Minimum value.
+ * @param {Number} [config.max=1] - Maximum value.
+ * @param {Number} [config.step=0.01] - Step between consecutive values.
+ * @param {Number} [config.default=0] - Default value.
+ * @param {String|Element|basic-controller~Group} [config.container=null] -
  *  Container of the controller.
- * @param {Function} [options.callback=null] - Callback to be executed when the
+ * @param {Function} [config.callback=null] - Callback to be executed when the
  *  value changes.
  *
  * @example
@@ -42,8 +42,8 @@ const defaults = {
  */
 class NumberBox extends BaseController {
   // legend, min = 0, max = 1, step = 0.01, defaultValue = 0, $container = null, callback = null
-  constructor(options) {
-    super('number-box', defaults, options);
+  constructor(config) {
+    super('number-box', defaults, config);
 
     this._value = this.params.default;
     this._isIntStep = (this.params.step % 1 === 0);
