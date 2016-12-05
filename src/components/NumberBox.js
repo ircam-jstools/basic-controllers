@@ -4,7 +4,7 @@ import * as elements from '../utils/elements';
 /** @module basic-controllers */
 
 const defaults = {
-  label: '$nbsp;',
+  label: '&nbsp;',
   min: 0,
   max: 1,
   step: 0.01,

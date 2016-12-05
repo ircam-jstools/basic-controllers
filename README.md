@@ -42,30 +42,6 @@ const slider = new controllers.Slider({
 });
 ```
 
-## @todo
-
-Factory from JSON object
-
-```
-// create interface from config object
-
-config = [
-  {
-    type: 'group',
-    label: 'coucou',
-    handle: false,
-    show: false,
-    elements: {
-    {
-      type: 'slider',
-      // ....
-    },
-  }, {
-    // ...
-  }
-]
-```
-
 ## API
 
 <a name="module_basic-controllers"></a>

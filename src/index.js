@@ -19,6 +19,9 @@ export { default as Title } from './components/Title';
 export { default as Toggle } from './components/Toggle';
 export { default as TriggerButtons } from './components/TriggerButtons';
 
+// factory
+export { default as create } from './factory';
+
 /**
  * Change the theme of the controllers, currently 3 themes are available:
  *  - 'light' (default)
@@ -37,4 +40,3 @@ export function setTheme(theme) {
 export function disableStyles() {
   _styles.disable();
 };
-
