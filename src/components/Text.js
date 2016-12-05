@@ -39,6 +39,10 @@ class Text extends BaseController {
     this.initialize();
   }
 
+  /**
+   * Current value.
+   * @type {String}
+   */
   get value() {
     return this._value;
   }
@@ -48,6 +52,7 @@ class Text extends BaseController {
     this._value = value;
   }
 
+  /** @private */
   render() {
     const readonly = this.params.readonly ? 'readonly' : '';
     const content = `
@@ -65,6 +70,7 @@ class Text extends BaseController {
     return this.$el;
   }
 
+  /** @private */
   bindEvents() {
     this.$input.addEventListener('keyup', () => {
       this._value = this.$input.value;

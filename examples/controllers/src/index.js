@@ -66,15 +66,21 @@ const text = new controllers.Text({
   callback: (value) => {
     console.log('Text =>', value);
     info.value = value;
-  }
+  },
 });
 
-// const selectList = new controllers.SelectList('SelectList', ['standby', 'run', 'end'], 'run', '#container', function(value) {
-//   console.log('SelectList =>', value);
+const selectList = new controllers.SelectList({
+  label: 'SelectList',
+  options: ['standby', 'run', 'end'],
+  default: 'run',
+  container: '#container',
+  callback: (value) => {
+    console.log('SelectList =>', value);
 
-//   info.value = value;
-//   selectButtons.value = value;
-// });
+    info.value = value;
+    // selectButtons.value = value;
+  },
+});
 
 // const selectButtons = new controllers.SelectButtons('SelectButtons', ['standby', 'run', 'end'], 'run', '#container', function(value) {
 //   console.log('SelectButtons =>', value);
