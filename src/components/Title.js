@@ -1,6 +1,6 @@
 import BaseController from './BaseController';
 
-/** @module basic-controller */
+/** @module basic-controllers */
 
 const defaults = {
   label: '&nbsp;',

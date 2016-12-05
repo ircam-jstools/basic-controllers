@@ -1,7 +1,7 @@
 import BaseController from './BaseController';
 import * as elements from '../utils/elements';
 
-/** @module basic-controller */
+/** @module basic-controllers */
 
 const defaults = {
   label: '$nbsp;',

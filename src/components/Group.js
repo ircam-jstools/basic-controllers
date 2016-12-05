@@ -1,9 +1,7 @@
 import BaseController from './BaseController';
 import * as elements from '../utils/elements';
 
-/**
- * @module basic-controllers
- */
+
 
 const defaults = {
   legend: '&nbsp;',
