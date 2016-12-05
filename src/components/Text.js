@@ -1,19 +1,42 @@
 import BaseController from './BaseController';
 
+const defaults = {
+  label: '&nbsp;',
+  default: '',
+  readonly: false,
+  container: null,
+  callback: null,
+}
 
 /**
- * Display a value, Read-only.
+ * Text controller.
+ *
+ * @param {Object} options - Override default options.
+ * @param {String} options.label - Label of the controller.
+ * @param {Array} [options.default=''] - Default value of the controller.
+ * @param {Array} [options.readonly=false] - Define if the controller is readonly.
+ * @param {String|Element|basic-controller~Group} [options.container=null] -
+ *  Container of the controller.
+ * @param {Function} [options.callback=null] - Callback to be executed when the
+ *  value changes.
+ *
+ * @example
+ * import * as controllers from 'basic-contollers';
+ *
+ * const text = new controllers.Text({
+ *   label: 'My Text',
+ *   default: 'default value',
+ *   readonly: false,
+ *   container: '#container',
+ *   callback: (value) => console.log(value),
+ * });
  */
 class Text extends BaseController {
-  constructor(legend, defaultValue, readonly = true, $container = null, callback = null) {
-    super();
+  constructor(options) {
+    super('text', defaults, options);
 
-    this.type = 'text';
-    this.legend = legend;
-    this._readonly = readonly;
-    this._value = defaultValue;
-
-    this._applyOptionnalParameters($container, callback);
+    this._value = this.params.default;
+    this.initialize();
   }
 
   get value() {
@@ -26,28 +49,26 @@ class Text extends BaseController {
   }
 
   render() {
-    const readonly = this._readonly ? 'readonly' : ''
+    const readonly = this.params.readonly ? 'readonly' : '';
     const content = `
-      <span class="legend">${this.legend}</span>
+      <span class="label">${this.params.label}</span>
       <div class="inner-wrapper">
         <input class="text" type="text" value="${this._value}" ${readonly} />
       </div>
     `;
 
-    this.$el = super.render(this.type);
+    this.$el = super.render();
     this.$el.innerHTML = content;
-
     this.$input = this.$el.querySelector('.text');
 
     this.bindEvents();
-
     return this.$el;
   }
 
   bindEvents() {
     this.$input.addEventListener('keyup', () => {
       this._value = this.$input.value;
-      this._executeListeners(this._value);
+      this.executeListeners(this._value);
     }, false);
   }
 }

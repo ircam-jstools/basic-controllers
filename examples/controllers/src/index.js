@@ -51,12 +51,23 @@ const toggle = new controllers.Toggle({
   }
 });
 
-// const info = new controllers.Text('Info', 'read-only value', true, '#container');
+const info = new controllers.Text({
+  label: 'Info',
+  default: 'read-only value',
+  readonly: true,
+  container: '#container',
+});
 
-// const text = new controllers.Text('Text', 'changable value', false,  '#container', (value) => {
-//   console.log('Text =>', value);
-//   info.value = value;
-// });
+const text = new controllers.Text({
+  label: 'Text',
+  default: 'default value',
+  readonly: false,
+  container: '#container',
+  callback: (value) => {
+    console.log('Text =>', value);
+    info.value = value;
+  }
+});
 
 // const selectList = new controllers.SelectList('SelectList', ['standby', 'run', 'end'], 'run', '#container', function(value) {
 //   console.log('SelectList =>', value);
