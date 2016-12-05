@@ -1,6 +1,6 @@
 # Basic Controllers
 
-> Set of simple controllers for rapid prototyping ([examples](https://cdn.rawgit.com/ircam-jstools/basic-controllers/master/examples/controllers/index.html))
+> Set of simple controllers for rapid prototyping
 
 ## Install
 
@@ -10,19 +10,34 @@ npm install [--save] ircam-jstools/basic-controllers
 
 ## Available Components
 
+> [examples](https://cdn.rawgit.com/ircam-jstools/basic-controllers/master/examples/controllers/index.html)
+
+- Group
+- NumberBox
+- SelectButtons
+- SelectList
+- Slider
+- Text
+- Title
+- Toggle
+- TriggerButtons
 
 ## Usage
 
 ```js
-import { Slider} from 'gui-components';
-
-const slider = new Slider({
-  mode: 'jump',
-  container: '#container',
-  default: 0.6,
-  markers: [0.5],
-  callback: (value) => console.log(value),
-});
+ * import * as controllers from 'basic-controllers';
+ *
+ * const slider = new controllers.Slider({
+ *   label: 'My Slider',
+ *   min: 20,
+ *   max: 1000,
+ *   step: 1,
+ *   default: 537,
+ *   unit: 'Hz',
+ *   size: 'large',
+ *   container: '#container',
+ *   callback: (value) => console.log(value),
+ * });
 ```
 
 # API
