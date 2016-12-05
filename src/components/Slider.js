@@ -25,7 +25,7 @@ const defaults = {
  * @param {Number} [config.step=0.01] - Step between consecutive values.
  * @param {Number} [config.default=0] - Default value.
  * @param {String} [config.unit=''] - Unit of the value.
- * @param {'small', 'medium', 'large'} [config.size='medium'] - Size of the
+ * @param {'small'|'medium'|'large'} [config.size='medium'] - Size of the
  *  slider.
  * @param {String|Element|basic-controller~Group} [config.container=null] -
  *  Container of the controller.

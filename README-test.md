@@ -39,10 +39,17 @@ const slider = new Slider({
         * [~NumberBox](#module_basic-controllers..NumberBox)
             * [new NumberBox(config)](#new_module_basic-controllers..NumberBox_new)
             * [.value](#module_basic-controllers..NumberBox+value) : <code>Number</code>
+        * [~SelectButtons](#module_basic-controllers..SelectButtons)
+            * [new SelectButtons(config)](#new_module_basic-controllers..SelectButtons_new)
+            * [.value](#module_basic-controllers..SelectButtons+value) : <code>String</code>
+            * [.index](#module_basic-controllers..SelectButtons+index) : <code>Number</code>
         * [~SelectList](#module_basic-controllers..SelectList)
             * [new SelectList(config)](#new_module_basic-controllers..SelectList_new)
             * [.value](#module_basic-controllers..SelectList+value) : <code>String</code>
-            * [.index](#module_basic-controllers..SelectList+index) : <code>String</code>
+            * [.index](#module_basic-controllers..SelectList+index) : <code>Number</code>
+        * [~Slider](#module_basic-controllers..Slider)
+            * [new Slider(config)](#new_module_basic-controllers..Slider_new)
+            * [.value](#module_basic-controllers..Slider+value) : <code>Number</code>
         * [~Text](#module_basic-controllers..Text)
             * [new Text(config)](#new_module_basic-controllers..Text_new)
             * [.value](#module_basic-controllers..Text+value) : <code>String</code>
@@ -141,6 +148,67 @@ Current value of the controller.
 
 -
 
+<a name="module_basic-controllers..SelectButtons"></a>
+
+### basic-controllers~SelectButtons
+List of buttons with state.
+
+**Kind**: inner class of <code>[basic-controllers](#module_basic-controllers)</code>  
+
+* [~SelectButtons](#module_basic-controllers..SelectButtons)
+    * [new SelectButtons(config)](#new_module_basic-controllers..SelectButtons_new)
+    * [.value](#module_basic-controllers..SelectButtons+value) : <code>String</code>
+    * [.index](#module_basic-controllers..SelectButtons+index) : <code>Number</code>
+
+
+-
+
+<a name="new_module_basic-controllers..SelectButtons_new"></a>
+
+#### new SelectButtons(config)
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| config | <code>Object</code> |  | Override default parameters. |
+| config.label | <code>String</code> |  | Label of the controller. |
+| [config.options] | <code>Array</code> | <code></code> | Values of the drop down list. |
+| [config.default] | <code>Number</code> | <code></code> | Default value. |
+| [config.container] | <code>String</code> &#124; <code>Element</code> &#124; <code>basic-controller~Group</code> | <code></code> | Container of the controller. |
+| [config.callback] | <code>function</code> | <code></code> | Callback to be executed when the  value changes. |
+
+**Example**  
+```js
+import * as controllers from 'basic-controllers';
+
+const selectButtons = new controllers.SelectButtons({
+  label: 'SelectButtons',
+  options: ['standby', 'run', 'end'],
+  default: 'run',
+  container: '#container',
+  callback: (value, index) => console.log(value, index),
+});
+```
+
+-
+
+<a name="module_basic-controllers..SelectButtons+value"></a>
+
+#### selectButtons.value : <code>String</code>
+Current value.
+
+**Kind**: instance property of <code>[SelectButtons](#module_basic-controllers..SelectButtons)</code>  
+
+-
+
+<a name="module_basic-controllers..SelectButtons+index"></a>
+
+#### selectButtons.index : <code>Number</code>
+Current option index.
+
+**Kind**: instance property of <code>[SelectButtons](#module_basic-controllers..SelectButtons)</code>  
+
+-
+
 <a name="module_basic-controllers..SelectList"></a>
 
 ### basic-controllers~SelectList
@@ -151,7 +219,7 @@ Drop-down list controller.
 * [~SelectList](#module_basic-controllers..SelectList)
     * [new SelectList(config)](#new_module_basic-controllers..SelectList_new)
     * [.value](#module_basic-controllers..SelectList+value) : <code>String</code>
-    * [.index](#module_basic-controllers..SelectList+index) : <code>String</code>
+    * [.index](#module_basic-controllers..SelectList+index) : <code>Number</code>
 
 
 -
@@ -172,6 +240,14 @@ Drop-down list controller.
 **Example**  
 ```js
 import * as controllers from 'basic-controllers';
+
+const selectList = new controllers.SelectList({
+  label: 'SelectList',
+  options: ['standby', 'run', 'end'],
+  default: 'run',
+  container: '#container',
+  callback: (value, index) => console.log(value, index),
+});
 ```
 
 -
@@ -187,10 +263,69 @@ Current value.
 
 <a name="module_basic-controllers..SelectList+index"></a>
 
-#### selectList.index : <code>String</code>
+#### selectList.index : <code>Number</code>
 Current option index.
 
 **Kind**: instance property of <code>[SelectList](#module_basic-controllers..SelectList)</code>  
+
+-
+
+<a name="module_basic-controllers..Slider"></a>
+
+### basic-controllers~Slider
+Slider controller.
+
+**Kind**: inner class of <code>[basic-controllers](#module_basic-controllers)</code>  
+
+* [~Slider](#module_basic-controllers..Slider)
+    * [new Slider(config)](#new_module_basic-controllers..Slider_new)
+    * [.value](#module_basic-controllers..Slider+value) : <code>Number</code>
+
+
+-
+
+<a name="new_module_basic-controllers..Slider_new"></a>
+
+#### new Slider(config)
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| config | <code>Object</code> |  | Override default parameters. |
+| config.label | <code>String</code> |  | Label of the controller. |
+| [config.min] | <code>Number</code> | <code>0</code> | Minimum value. |
+| [config.max] | <code>Number</code> | <code>1</code> | Maximum value. |
+| [config.step] | <code>Number</code> | <code>0.01</code> | Step between consecutive values. |
+| [config.default] | <code>Number</code> | <code>0</code> | Default value. |
+| [config.unit] | <code>String</code> | <code>&#x27;&#x27;</code> | Unit of the value. |
+| [config.size] | <code>&#x27;small&#x27;</code> &#124; <code>&#x27;medium&#x27;</code> &#124; <code>&#x27;large&#x27;</code> | <code>&#x27;medium&#x27;</code> | Size of the  slider. |
+| [config.container] | <code>String</code> &#124; <code>Element</code> &#124; <code>basic-controller~Group</code> | <code></code> | Container of the controller. |
+| [config.callback] | <code>function</code> | <code></code> | Callback to be executed when the  value changes. |
+
+**Example**  
+```js
+import * as controllers from 'basic-controllers';
+
+const slider = new controllers.Slider({
+  label: 'My Slider',
+  min: 20,
+  max: 1000,
+  step: 1,
+  default: 537,
+  unit: 'Hz',
+  size: 'large',
+  container: '#container',
+  callback: (value) => console.log(value),
+});
+```
+
+-
+
+<a name="module_basic-controllers..Slider+value"></a>
+
+#### slider.value : <code>Number</code>
+Current value.
+
+**Kind**: instance property of <code>[Slider](#module_basic-controllers..Slider)</code>  
 
 -
 
