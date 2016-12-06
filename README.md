@@ -42,6 +42,30 @@ const slider = new controllers.Slider({
 });
 ```
 
+## @todo
+
+Factory from JSON object
+
+```
+// create interface from config object
+
+config = [
+  {
+    type: 'group',
+    label: 'coucou',
+    handle: false,
+    show: false,
+    elements: {
+    {
+      type: 'slider',
+      // ....
+    },
+  }, {
+    // ...
+  }
+]
+```
+
 ## API
 
 <a name="module_basic-controllers"></a>
@@ -57,6 +81,7 @@ const slider = new controllers.Slider({
             * [new Group(config)](#new_module_basic-controllers..Group_new)
             * [.value](#module_basic-controllers..Group+value) : <code>String</code>
             * [.state](#module_basic-controllers..Group+state) : <code>String</code>
+            * [.addListener(id, callback)](#module_basic-controllers..Group+addListener)
         * [~NumberBox](#module_basic-controllers..NumberBox)
             * [new NumberBox(config)](#new_module_basic-controllers..NumberBox_new)
             * [.value](#module_basic-controllers..NumberBox+value) : <code>Number</code>
@@ -125,6 +150,7 @@ Group of controllers.
     * [new Group(config)](#new_module_basic-controllers..Group_new)
     * [.value](#module_basic-controllers..Group+value) : <code>String</code>
     * [.state](#module_basic-controllers..Group+state) : <code>String</code>
+    * [.addListener(id, callback)](#module_basic-controllers..Group+addListener)
 
 
 -
@@ -190,6 +216,21 @@ State of the group (`'opened'` or `'closed'`).
 Alias for `value`.
 
 **Kind**: instance property of <code>[Group](#module_basic-controllers..Group)</code>  
+
+-
+
+<a name="module_basic-controllers..Group+addListener"></a>
+
+#### group.addListener(id, callback)
+Add Listener on each components of the group.
+
+**Kind**: instance method of <code>[Group](#module_basic-controllers..Group)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| id | <code>String</code> | Path to component id. |
+| callback | <code>function</code> | Function to execute. |
+
 
 -
 

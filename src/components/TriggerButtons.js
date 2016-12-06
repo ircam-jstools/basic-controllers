@@ -1,4 +1,5 @@
-import BaseController from './BaseController';
+import BaseComponent from './BaseComponent';
+import display from '../mixins/display';
 
 /** @module basic-controllers */
 
@@ -30,7 +31,7 @@ const defaults = {
  *   callback: (value, index) => console.log(value, index),
  * });
  */
-class TriggerButtons extends BaseController {
+class TriggerButtons extends display(BaseComponent) {
   constructor(config) {
     super('trigger-buttons', defaults, config);
 
@@ -75,13 +76,13 @@ class TriggerButtons extends BaseController {
     this.$el.innerHTML = content;
 
     this.$buttons = Array.from(this.$el.querySelectorAll('.btn'));
-    this.bindEvents();
+    this._bindEvents();
 
     return this.$el;
   }
 
   /** @private */
-  bindEvents() {
+  _bindEvents() {
     this.$buttons.forEach(($btn, index) => {
       const value = this.params.options[index];
 

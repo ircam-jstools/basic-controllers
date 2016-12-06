@@ -1,4 +1,5 @@
-import BaseController from './BaseController';
+import BaseComponent from './BaseComponent';
+import display from '../mixins/display';
 import * as elements from '../utils/elements';
 
 /** @module basic-controllers */
@@ -34,7 +35,7 @@ const defaults = {
  *   callback: (value, index) => console.log(value, index),
  * });
  */
-class SelectButtons extends BaseController {
+class SelectButtons extends display(BaseComponent) {
   constructor(config) {
     super('select-buttons', defaults, config);
 
@@ -107,33 +108,33 @@ class SelectButtons extends BaseController {
     this.$btns = Array.from(this.$el.querySelectorAll('.btn'));
 
     this._highlightBtn(this._index);
-    this.bindEvents();
+    this._bindEvents();
 
     return this.$el;
   }
 
   /** @private */
-  bindEvents() {
+  _bindEvents() {
     this.$prev.addEventListener('click', () => {
       const index = this._index - 1;
-      this.propagate(index);
+      this._propagate(index);
     });
 
     this.$next.addEventListener('click', () => {
       const index = this._index + 1;
-      this.propagate(index);
+      this._propagate(index);
     });
 
     this.$btns.forEach(($btn, index) => {
       $btn.addEventListener('click', (e) => {
         e.preventDefault();
-        this.propagate(index);
+        this._propagate(index);
       });
     });
   }
 
   /** @private */
-  propagate(index) {
+  _propagate(index) {
     if (index < 0 || index > this._maxIndex) return;
 
     this._index = index;

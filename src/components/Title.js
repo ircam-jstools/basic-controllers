@@ -1,4 +1,5 @@
-import BaseController from './BaseController';
+import BaseComponent from './BaseComponent';
+import display from '../mixins/display';
 
 /** @module basic-controllers */
 
@@ -23,7 +24,7 @@ const defaults = {
  *   container: '#container'
  * });
  */
-class Title extends BaseController {
+class Title extends display(BaseComponent) {
   constructor(config) {
     super('title', defaults, config);
     super.initialize();

@@ -1,4 +1,5 @@
-import BaseController from './BaseController';
+import BaseComponent from './BaseComponent';
+import display from '../mixins/display';
 import * as elements from '../utils/elements';
 
 /** @module basic-controllers */
@@ -31,7 +32,7 @@ const defaults = {
  *   callback: (active) => console.log(active),
  * });
  */
-class Toggle extends BaseController {
+class Toggle extends display(BaseComponent) {
   constructor(config) {
     super('toggle', defaults, config);
 

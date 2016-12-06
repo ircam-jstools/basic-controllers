@@ -1,14 +1,13 @@
 import * as _styles from './utils/styles';
 export const styles = _styles;
 
-/**
- * @module basic-controllers
- */
+/** @module basic-controllers */
 
 // expose for plugins
-import _BaseController from './components/BaseController';
-export const BaseController = _BaseController;
+import _BaseComponent from './components/BaseComponent';
+export const BaseComponent = _BaseComponent;
 
+// components
 export { default as Group } from './components/Group';
 export { default as NumberBox } from './components/NumberBox';
 export { default as SelectButtons } from './components/SelectButtons';
@@ -21,18 +20,8 @@ export { default as TriggerButtons } from './components/TriggerButtons';
 
 // factory
 export { default as create } from './factory';
-
-/**
- * Change the theme of the controllers, currently 3 themes are available:
- *  - 'light' (default)
- *  - 'grey'
- *  - 'dark'
- *
- * @param {String} theme - Name of the theme.
- */
-export function setTheme(theme) {
-  _BaseController.theme = theme;
-};
+// display
+export { setTheme  } from './mixins/display';
 
 /**
  * Disable default styling (expect a broken ui)

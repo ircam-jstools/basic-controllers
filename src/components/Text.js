@@ -1,4 +1,5 @@
-import BaseController from './BaseController';
+import BaseComponent from './BaseComponent';
+import display from '../mixins/display';
 
 /** @module basic-controllers */
 
@@ -33,7 +34,7 @@ const defaults = {
  *   callback: (value) => console.log(value),
  * });
  */
-class Text extends BaseController {
+class Text extends display(BaseComponent) {
   constructor(config) {
     super('text', defaults, config);
 

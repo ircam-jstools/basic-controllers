@@ -1,4 +1,6 @@
-import BaseController from './BaseController';
+import BaseComponent from './BaseComponent';
+import display from '../mixins/display';
+import container from '../mixins/container';
 import * as elements from '../utils/elements';
 
 /** @module basic-controllers */
@@ -50,7 +52,7 @@ const defaults = {
  *   callback: (value) => console.log(value),
  * });
  */
-class Group extends BaseController {
+class Group extends container(display(BaseComponent)) {
   constructor(config) {
     super('group', defaults, config);
 
@@ -94,6 +96,7 @@ class Group extends BaseController {
     this._state = value;
   }
 
+
   /** @private */
   render() {
     let content = `
@@ -112,13 +115,13 @@ class Group extends BaseController {
     this.$header = this.$el.querySelector('.group-header');
     this.$container = this.$el.querySelector('.group-content');
 
-    this.bindEvents();
+    this._bindEvents();
 
     return this.$el;
   }
 
   /** @private */
-  bindEvents() {
+  _bindEvents() {
     this.$header.addEventListener('click', () => {
       const state = this._state === 'closed' ? 'opened' : 'closed';
       this.state = state;
