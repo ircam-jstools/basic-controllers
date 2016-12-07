@@ -1,4 +1,5 @@
-import BaseController from './BaseController';
+import BaseComponent from './BaseComponent';
+import display from '../mixins/display';
 import * as elements from '../utils/elements';
 
 /** @module basic-controllers */
@@ -34,7 +35,7 @@ const defaults = {
  *   callback: (value, index) => console.log(value, index),
  * });
  */
-class SelectList extends BaseController {
+class SelectList extends display(BaseComponent) {
   constructor(config) {
     super('select-list', defaults, config);
 
@@ -103,32 +104,32 @@ class SelectList extends BaseController {
     this.$select = this.$el.querySelector('select');
     // set to default value
     this.$select.value = options[this._index];
-    this.bindEvents();
+    this._bindEvents();
 
     return this.$el;
   }
 
   /** @private */
-  bindEvents() {
+  _bindEvents() {
     this.$prev.addEventListener('click', () => {
       const index = this._index - 1;
-      this.propagate(index);
+      this._propagate(index);
     }, false);
 
     this.$next.addEventListener('click', () => {
       const index = this._index + 1;
-      this.propagate(index);
+      this._propagate(index);
     }, false);
 
     this.$select.addEventListener('change', () => {
       const value = this.$select.value;
       const index = this.params.options.indexOf(value);
-      this.propagate(index);
+      this._propagate(index);
     });
   }
 
   /** @private */
-  propagate(index) {
+  _propagate(index) {
     if (index < 0 || index > this._maxIndex) return;
 
     const value = this.params.options[index];

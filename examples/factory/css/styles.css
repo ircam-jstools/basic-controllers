@@ -1,0 +1,18 @@
+html {
+  font-size: 62.5%;
+  font-family: arial;
+}
+
+body {
+  margin: 0;
+}
+
+#container {
+  max-width: 800px;
+  margin: 10px auto;
+}
+
+/* override rules */
+/*.basic-controllers .btn {
+  background-color: red;
+}*/

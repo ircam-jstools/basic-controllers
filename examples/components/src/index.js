@@ -95,7 +95,7 @@ const selectButtons = new controllers.SelectButtons({
   }
 });
 
-// // group
+// group
 const group = new controllers.Group({
   label: 'Group',
   default: 'opened',

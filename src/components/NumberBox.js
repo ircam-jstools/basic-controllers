@@ -1,10 +1,11 @@
-import BaseController from './BaseController';
+import BaseComponent from './BaseComponent';
+import display from '../mixins/display';
 import * as elements from '../utils/elements';
 
 /** @module basic-controllers */
 
 const defaults = {
-  label: '$nbsp;',
+  label: '&nbsp;',
   min: 0,
   max: 1,
   step: 0.01,
@@ -40,7 +41,7 @@ const defaults = {
  *   callback: (value) => console.log(value),
  * });
  */
-class NumberBox extends BaseController {
+class NumberBox extends display(BaseComponent) {
   // legend, min = 0, max = 1, step = 0.01, defaultValue = 0, $container = null, callback = null
   constructor(config) {
     super('number-box', defaults, config);
@@ -88,13 +89,13 @@ class NumberBox extends BaseController {
     this.$next = this.$el.querySelector('.arrow-right');
     this.$number = this.$el.querySelector('input[type="number"]');
 
-    this.bindEvents();
+    this._bindEvents();
 
     return this.$el;
   }
 
   /** @private */
-  bindEvents() {
+  _bindEvents() {
     this.$prev.addEventListener('click', (e) => {
       const step = this.params.step;
       const decimals = step.toString().split('.')[1];
@@ -105,7 +106,7 @@ class NumberBox extends BaseController {
       const intStep = Math.floor(step * mult + 0.5);
       const value = (intValue - intStep) / mult;
 
-      this.propagate(value);
+      this._propagate(value);
     }, false);
 
     this.$next.addEventListener('click', (e) => {
@@ -118,7 +119,7 @@ class NumberBox extends BaseController {
       const intStep = Math.floor(step * mult + 0.5);
       const value = (intValue + intStep) / mult;
 
-      this.propagate(value);
+      this._propagate(value);
     }, false);
 
     this.$number.addEventListener('change', (e) => {
@@ -126,12 +127,12 @@ class NumberBox extends BaseController {
       value = this._isIntStep ? parseInt(value, 10) : parseFloat(value);
       value = Math.min(this.params.max, Math.max(this.params.min, value));
 
-      this.propagate(value);
+      this._propagate(value);
     }, false);
   }
 
   /** @private */
-  propagate(value) {
+  _propagate(value) {
     if (value === this._value) { return; }
 
     this._value = value;

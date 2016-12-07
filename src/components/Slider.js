@@ -1,4 +1,5 @@
-import BaseController from './BaseController';
+import BaseComponent from './BaseComponent';
+import display from '../mixins/display';
 import * as guiComponents from 'gui-components';
 
 /** @module basic-controllers */
@@ -47,7 +48,7 @@ const defaults = {
  *   callback: (value) => console.log(value),
  * });
  */
-class Slider extends BaseController {
+class Slider extends display(BaseComponent) {
   constructor(config) {
     super('slider', defaults, config);
 
@@ -104,27 +105,27 @@ class Slider extends BaseController {
       foregroundColor: '#ababab',
     });
 
-    this.bindEvents();
+    this._bindEvents();
 
     return this.$el;
   }
 
   /** @private */
-  bindEvents() {
+  resize() {
+    super.resize();
+
+    const { width, height } = this.$range.getBoundingClientRect();
+    this.slider.resize(width, height);
+  }
+
+  /** @private */
+  _bindEvents() {
     this.$number.addEventListener('change', () => {
       const value = parseFloat(this.$number.value);
       // the slider propagates the value
       this.slider.value = value;
       this._value = value;
     }, false);
-  }
-
-  /** @private */
-  onResize() {
-    super.onResize();
-
-    const { width, height } = this.$range.getBoundingClientRect();
-    this.slider.resize(width, height);
   }
 
   /** @private */

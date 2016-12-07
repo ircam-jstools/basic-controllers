@@ -2,17 +2,21 @@
 
 > Set of simple controllers for rapid prototyping
 
+![examples](https://cdn.rawgit.com/ircam-jstools/basic-controllers/master/tmpl/examples.png)
+
 ## Install
 
 ```
 npm install [--save] ircam-jstools/basic-controllers
 ```
 
-## Available Components
+## Examples
 
-> [examples](https://cdn.rawgit.com/ircam-jstools/basic-controllers/master/examples/controllers/index.html)
+> [components](https://cdn.rawgit.com/ircam-jstools/basic-controllers/master/examples/controllers/index.html)
 
-![examples](https://cdn.rawgit.com/ircam-jstools/basic-controllers/master/tmpl/examples.png)
+> [factory](https://cdn.rawgit.com/ircam-jstools/basic-controllers/master/examples/factory/index.html)
+
+## Available components
 
 - Group
 - NumberBox
@@ -26,9 +30,12 @@ npm install [--save] ircam-jstools/basic-controllers
 
 ## Usage
 
+Controllers can be instanciated individually :
+
 ```js
 import * as controllers from 'basic-controllers';
 
+// instanciate individual components
 const slider = new controllers.Slider({
   label: 'My Slider',
   min: 20,
@@ -42,28 +49,41 @@ const slider = new controllers.Slider({
 });
 ```
 
-## @todo
+Or through a factory using a json definition :
 
-Factory from JSON object
+```js
+import * as controllers from 'basic-controllers';
 
-```
-// create interface from config object
-
-config = [
+const definitions = [
   {
-    type: 'group',
-    label: 'coucou',
-    handle: false,
-    show: false,
-    elements: {
-    {
-      type: 'slider',
-      // ....
-    },
+    id: 'my-slider',
+    type: 'slider',
+    label: 'My Slider',
+    size: 'large',
+    min: 0,
+    max: 1000,
+    step: 1,
+    default: 253,
   }, {
-    // ...
+    id: 'my-group',
+    type: 'group',
+    label: 'Group',
+    default: 'opened',
+    elements: [
+      {
+        id: 'my-number',
+        type: 'number-box',
+        default: 0.4,
+        min: -1,
+        max: 1,
+        step: 0.01,
+      }
+    ],
   }
-]
+];
+
+const controls = controllers.create('#container', definitions);
+controls.addListener((id, value) => console.log(id, value));
 ```
 
 ## API
