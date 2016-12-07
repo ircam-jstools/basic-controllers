@@ -12,7 +12,7 @@ npm install [--save] ircam-jstools/basic-controllers
 
 ## Examples
 
-> [components](https://cdn.rawgit.com/ircam-jstools/basic-controllers/master/examples/controllers/index.html)
+> [components](https://cdn.rawgit.com/ircam-jstools/basic-controllers/master/examples/components/index.html)
 
 > [factory](https://cdn.rawgit.com/ircam-jstools/basic-controllers/master/examples/factory/index.html)
 
