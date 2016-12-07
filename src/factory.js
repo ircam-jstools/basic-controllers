@@ -11,23 +11,7 @@ import TriggerButtons from './components/TriggerButtons';
 
 import container from './mixins/container';
 
-const defaults = {
-  container: 'body',
-};
-
-class Root extends container(BaseComponent) {
-  constructor(config) {
-    super('root', defaults, config);
-
-    let $container = this.params.container;
-
-    if (typeof $container === 'string')
-      $container = document.querySelector($container);
-
-    this.$container = $container;
-  }
-}
-
+// map type names to constructors
 const typeCtorMap = {
   'group': Group,
   'number-box': NumberBox,
@@ -40,6 +24,72 @@ const typeCtorMap = {
   'trigger-buttons': TriggerButtons,
 };
 
+const defaults = {
+  container: 'body',
+};
+
+class Control extends container(BaseComponent) {
+  constructor(config) {
+    super('control', defaults, config);
+
+    let $container = this.params.container;
+
+    if (typeof $container === 'string')
+      $container = document.querySelector($container);
+
+    this.$container = $container;
+  }
+}
+
+/** @module basic-controllers */
+
+/**
+ * Create a whole control surface from a json definition.
+ *
+ * @param {String|Element} container - Container of the controls.
+ * @param {Object} - Definitions for the controls.
+ * @return {Object} - A `Control` instance that behaves like a group without graphic.
+ * @static
+ *
+ * @example
+ * import * as controllers from 'basic-controllers';
+ *
+ * const definitions = [
+ *   {
+ *     id: 'my-slider',
+ *     type: 'slider',
+ *     label: 'My Slider',
+ *     size: 'large',
+ *     min: 0,
+ *     max: 1000,
+ *     step: 1,
+ *     default: 253,
+ *   }, {
+ *     id: 'my-group',
+ *     type: 'group',
+ *     label: 'Group',
+ *     default: 'opened',
+ *     elements: [
+ *       {
+ *         id: 'my-number',
+ *         type: 'number-box',
+ *         default: 0.4,
+ *         min: -1,
+ *         max: 1,
+ *         step: 0.01,
+ *       }
+ *     ],
+ *   }
+ * ];
+ *
+ * const controls = controllers.create('#container', definitions);
+ *
+ * // add a listener on all the component inside `my-group`
+ * controls.addListener('my-group', (id, value) => console.log(id, value));
+ *
+ * // retrieve the instance of `my-number`
+ * const myNumber = controls.getComponent('my-group/my-number');
+ */
 function create(container, definitions) {
 
   function _parse(container, definitions) {
@@ -59,7 +109,7 @@ function create(container, definitions) {
     });
   };
 
-  const _root = new Root({ container: container });
+  const _root = new Control({ container: container });
   _parse(_root, definitions);
 
   return _root;

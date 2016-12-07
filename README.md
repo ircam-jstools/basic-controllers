@@ -2,17 +2,21 @@
 
 > Set of simple controllers for rapid prototyping
 
+![examples](https://cdn.rawgit.com/ircam-jstools/basic-controllers/master/tmpl/examples.png)
+
 ## Install
 
 ```
 npm install [--save] ircam-jstools/basic-controllers
 ```
 
-## Available Components
+## Examples
 
-> [examples](https://cdn.rawgit.com/ircam-jstools/basic-controllers/master/examples/controllers/index.html)
+> [components](https://cdn.rawgit.com/ircam-jstools/basic-controllers/master/examples/controllers/index.html)
 
-![examples](https://cdn.rawgit.com/ircam-jstools/basic-controllers/master/tmpl/examples.png)
+> [factory](https://cdn.rawgit.com/ircam-jstools/basic-controllers/master/examples/factory/index.html)
+
+## Available components
 
 - Group
 - NumberBox
@@ -26,9 +30,12 @@ npm install [--save] ircam-jstools/basic-controllers
 
 ## Usage
 
+Controllers can be instanciated individually :
+
 ```js
 import * as controllers from 'basic-controllers';
 
+// instanciate individual components
 const slider = new controllers.Slider({
   label: 'My Slider',
   min: 20,
@@ -42,28 +49,41 @@ const slider = new controllers.Slider({
 });
 ```
 
-## @todo
+Or through a factory using a json definition :
 
-Factory from JSON object
+```js
+import * as controllers from 'basic-controllers';
 
-```
-// create interface from config object
-
-config = [
+const definitions = [
   {
-    type: 'group',
-    label: 'coucou',
-    handle: false,
-    show: false,
-    elements: {
-    {
-      type: 'slider',
-      // ....
-    },
+    id: 'my-slider',
+    type: 'slider',
+    label: 'My Slider',
+    size: 'large',
+    min: 0,
+    max: 1000,
+    step: 1,
+    default: 253,
   }, {
-    // ...
+    id: 'my-group',
+    type: 'group',
+    label: 'Group',
+    default: 'opened',
+    elements: [
+      {
+        id: 'my-number',
+        type: 'number-box',
+        default: 0.4,
+        min: -1,
+        max: 1,
+        step: 0.01,
+      }
+    ],
   }
-]
+];
+
+const controls = controllers.create('#container', definitions);
+controls.addListener((id, value) => console.log(id, value));
 ```
 
 ## API
@@ -75,13 +95,13 @@ config = [
 * [basic-controllers](#module_basic-controllers)
     * _static_
         * [.setTheme(theme)](#module_basic-controllers.setTheme)
+        * [.create(container, definitions)](#module_basic-controllers.create) ⇒ <code>Object</code>
         * [.disableStyles()](#module_basic-controllers.disableStyles)
     * _inner_
         * [~Group](#module_basic-controllers..Group)
             * [new Group(config)](#new_module_basic-controllers..Group_new)
             * [.value](#module_basic-controllers..Group+value) : <code>String</code>
             * [.state](#module_basic-controllers..Group+state) : <code>String</code>
-            * [.addListener(id, callback)](#module_basic-controllers..Group+addListener)
         * [~NumberBox](#module_basic-controllers..NumberBox)
             * [new NumberBox(config)](#new_module_basic-controllers..NumberBox_new)
             * [.value](#module_basic-controllers..NumberBox+value) : <code>Number</code>
@@ -130,6 +150,62 @@ Change the theme of the controllers, currently 3 themes are available:
 
 -
 
+<a name="module_basic-controllers.create"></a>
+
+### basic-controllers.create(container, definitions) ⇒ <code>Object</code>
+Create a whole control surface from a json definition.
+
+**Kind**: static method of <code>[basic-controllers](#module_basic-controllers)</code>  
+**Returns**: <code>Object</code> - - A `Control` instance that behaves like a group without graphic.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| container | <code>String</code> &#124; <code>Element</code> | Container of the controls. |
+| definitions | <code>Object</code> | Definitions for the controls. |
+
+**Example**  
+```js
+import * as controllers from 'basic-controllers';
+
+const definitions = [
+  {
+    id: 'my-slider',
+    type: 'slider',
+    label: 'My Slider',
+    size: 'large',
+    min: 0,
+    max: 1000,
+    step: 1,
+    default: 253,
+  }, {
+    id: 'my-group',
+    type: 'group',
+    label: 'Group',
+    default: 'opened',
+    elements: [
+      {
+        id: 'my-number',
+        type: 'number-box',
+        default: 0.4,
+        min: -1,
+        max: 1,
+        step: 0.01,
+      }
+    ],
+  }
+];
+
+const controls = controllers.create('#container', definitions);
+
+// add a listener on all the component inside `my-group`
+controls.addListener('my-group', (id, value) => console.log(id, value));
+
+// retrieve the instance of `my-number`
+const myNumber = controls.getComponent('my-group/my-number');
+```
+
+-
+
 <a name="module_basic-controllers.disableStyles"></a>
 
 ### basic-controllers.disableStyles()
@@ -150,7 +226,6 @@ Group of controllers.
     * [new Group(config)](#new_module_basic-controllers..Group_new)
     * [.value](#module_basic-controllers..Group+value) : <code>String</code>
     * [.state](#module_basic-controllers..Group+state) : <code>String</code>
-    * [.addListener(id, callback)](#module_basic-controllers..Group+addListener)
 
 
 -
@@ -216,21 +291,6 @@ State of the group (`'opened'` or `'closed'`).
 Alias for `value`.
 
 **Kind**: instance property of <code>[Group](#module_basic-controllers..Group)</code>  
-
--
-
-<a name="module_basic-controllers..Group+addListener"></a>
-
-#### group.addListener(id, callback)
-Add Listener on each components of the group.
-
-**Kind**: instance method of <code>[Group](#module_basic-controllers..Group)</code>  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| id | <code>String</code> | Path to component id. |
-| callback | <code>function</code> | Function to execute. |
-
 
 -
 

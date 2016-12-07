@@ -35,7 +35,7 @@ const container = (superclass) => class extends superclass {
   }
 
   /**
-   * Return a chile of the group recursively according to the given `id`,
+   * Return a child of the group recursively according to the given `id`,
    * `null` otherwise.
    * @private
    */

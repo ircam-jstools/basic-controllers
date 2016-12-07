@@ -76,8 +76,8 @@ const number2 = controls.getComponent('group-0/group-1/number-2');
 // controls.addListener('group-0', (id, value) => console.log(id, value));
 // controls.addListener('group-0/group-1', (id, value) => console.log(id, value));
 
-// controls.addListener((id, value) => console.log(id, value));
+controls.addListener((id, value) => console.log(id, value));
 
 // group0.addListener('number-1', (value) => console.log(value));
 // group0.addListener('group-1', (id, value) => console.log(id, value));
-group0.addListener((id, value) => console.log(id, value));
+// group0.addListener((id, value) => console.log(id, value));
