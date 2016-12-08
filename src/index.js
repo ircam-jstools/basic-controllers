@@ -9,6 +9,7 @@ export const BaseComponent = _BaseComponent;
 
 // components
 export { default as Group } from './components/Group';
+export { default as DragAndDrop } from './components/DragAndDrop';
 export { default as NumberBox } from './components/NumberBox';
 export { default as SelectButtons } from './components/SelectButtons';
 export { default as SelectList } from './components/SelectList';

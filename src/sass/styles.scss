@@ -11,7 +11,7 @@ $mainFont: Quicksand, arial, sans-serif;
 
 $elmHeight: 34;
 $elmPadding: 3;
-$elmMargins: 4px auto;
+$elmMargins: 4px;
 $innerHeight: $elmHeight - ($elmPadding * 2) - 2; /* -2 for borders */
 
 $legendText: italic normal 1.2em $mainFont;
