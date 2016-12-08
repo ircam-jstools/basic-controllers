@@ -250,7 +250,7 @@ Drag and drop zone for audio files returning `AudioBuffer`s
 ```js
 import * as controllers from 'basic-controllers';
 
-const dragNDrop = new controllers.DragAndDrop({
+const dragAndDrop = new controllers.DragAndDrop({
   container: '#container',
   callback: (audioFiles) => console.log(audioFiles),
 });

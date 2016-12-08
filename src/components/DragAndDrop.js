@@ -31,7 +31,7 @@ const defaults = {
  * @example
  * import * as controllers from 'basic-controllers';
  *
- * const dragNDrop = new controllers.DragAndDrop({
+ * const dragAndDrop = new controllers.DragAndDrop({
  *   container: '#container',
  *   callback: (audioFiles) => console.log(audioFiles),
  * });
