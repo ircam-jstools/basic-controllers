@@ -162,3 +162,13 @@ const sliderSmall = new controllers.Slider({
   container: '#container',
   callback: (value) => console.log('Slider (small) =>', value),
 });
+
+const title3 = new controllers.Title({
+  label: 'DragNDrop',
+  container: '#container',
+});
+
+const dragNDrop = new controllers.DragAndDrop({
+  container: '#container',
+  callback: (audioFiles) => console.log(audioFiles),
+});

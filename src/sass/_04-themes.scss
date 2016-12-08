@@ -76,6 +76,11 @@ $btnLineColor: #363636;
   &.group {
     background-color: lighten($backgroundColor, 10%);
   }
+
+  &.drag-and-drop .drop-zone {
+    border: 1px dotted lighten($borderColor, 10%);
+    &.drag { background-color: lighten($borderColor, 10%); }
+  }
 }
 
 // -----------------------------------------------------------
@@ -155,6 +160,11 @@ $btnLineColor: #ffffff;
 
   &.group {
     background-color: lighten($backgroundColor, 10%);
+  }
+
+  &.drag-and-drop .drop-zone {
+    border: 1px dotted lighten($borderColor, 10%);
+    &.drag { background-color: lighten($borderColor, 10%); }
   }
 }
 

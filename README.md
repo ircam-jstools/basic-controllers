@@ -98,6 +98,8 @@ controls.addListener((id, value) => console.log(id, value));
         * [.create(container, definitions)](#module_basic-controllers.create) ⇒ <code>Object</code>
         * [.disableStyles()](#module_basic-controllers.disableStyles)
     * _inner_
+        * [~DragAndDrop](#module_basic-controllers..DragAndDrop)
+            * [new DragAndDrop(config)](#new_module_basic-controllers..DragAndDrop_new)
         * [~Group](#module_basic-controllers..Group)
             * [new Group(config)](#new_module_basic-controllers..Group_new)
             * [.value](#module_basic-controllers..Group+value) : <code>String</code>
@@ -212,6 +214,40 @@ const myNumber = controls.getComponent('my-group/my-number');
 Disable default styling (expect a broken ui)
 
 **Kind**: static method of <code>[basic-controllers](#module_basic-controllers)</code>  
+
+-
+
+<a name="module_basic-controllers..DragAndDrop"></a>
+
+### basic-controllers~DragAndDrop
+Drag and drop zone for audio files returning `AudioBuffer`s
+
+**Kind**: inner class of <code>[basic-controllers](#module_basic-controllers)</code>  
+
+-
+
+<a name="new_module_basic-controllers..DragAndDrop_new"></a>
+
+#### new DragAndDrop(config)
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| config | <code>Object</code> |  | Override default parameters. |
+| [config.label] | <code>String</code> | <code>&#x27;Drag and drop audio files&#x27;</code> | Label of the  controller. |
+| [config.labelProcess] | <code>String</code> | <code>&#x27;process...&#x27;</code> | Label of the controller  while audio files are decoded. |
+| [config.audioContext] | <code>AudioContext</code> | <code></code> | Optionnal audio context  to use in order to decode audio files. |
+| [config.container] | <code>String</code> &#124; <code>Element</code> &#124; <code>basic-controller~Group</code> | <code></code> | Container of the controller. |
+| [config.callback] | <code>function</code> | <code></code> | Callback to be executed when the  value changes. |
+
+**Example**  
+```js
+import * as controllers from 'basic-controllers';
+
+const dragNDrop = new controllers.DragAndDrop({
+  container: '#container',
+  callback: (audioFiles) => console.log(audioFiles),
+});
+```
 
 -
 
