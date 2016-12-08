@@ -140,9 +140,9 @@ controls.addListener((id, value) => console.log(id, value));
 
 ### basic-controllers.setTheme(theme)
 Change the theme of the controllers, currently 3 themes are available:
- - 'light' (default)
- - 'grey'
- - 'dark'
+ - `'light'` (default)
+ - `'grey'`
+ - `'dark'`
 
 **Kind**: static method of <code>[basic-controllers](#module_basic-controllers)</code>  
 
