@@ -48,6 +48,11 @@ class DragAndDrop extends display(BaseComponent) {
     super.initialize();
   }
 
+  /**
+   * Get the last decoded `AudioBuffer`s
+   * @type {Array<AudioBuffer>}
+   * @readonly
+   */
   get value() {
     return this._value;
   }

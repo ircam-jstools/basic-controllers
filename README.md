@@ -18,6 +18,7 @@ npm install [--save] ircam-jstools/basic-controllers
 
 ## Available components
 
+- DragAndDrop
 - Group
 - NumberBox
 - SelectButtons
@@ -100,6 +101,7 @@ controls.addListener((id, value) => console.log(id, value));
     * _inner_
         * [~DragAndDrop](#module_basic-controllers..DragAndDrop)
             * [new DragAndDrop(config)](#new_module_basic-controllers..DragAndDrop_new)
+            * [.value](#module_basic-controllers..DragAndDrop+value) : <code>Array.&lt;AudioBuffer&gt;</code>
         * [~Group](#module_basic-controllers..Group)
             * [new Group(config)](#new_module_basic-controllers..Group_new)
             * [.value](#module_basic-controllers..Group+value) : <code>String</code>
@@ -224,6 +226,11 @@ Drag and drop zone for audio files returning `AudioBuffer`s
 
 **Kind**: inner class of <code>[basic-controllers](#module_basic-controllers)</code>  
 
+* [~DragAndDrop](#module_basic-controllers..DragAndDrop)
+    * [new DragAndDrop(config)](#new_module_basic-controllers..DragAndDrop_new)
+    * [.value](#module_basic-controllers..DragAndDrop+value) : <code>Array.&lt;AudioBuffer&gt;</code>
+
+
 -
 
 <a name="new_module_basic-controllers..DragAndDrop_new"></a>
@@ -248,6 +255,16 @@ const dragNDrop = new controllers.DragAndDrop({
   callback: (audioFiles) => console.log(audioFiles),
 });
 ```
+
+-
+
+<a name="module_basic-controllers..DragAndDrop+value"></a>
+
+#### dragAndDrop.value : <code>Array.&lt;AudioBuffer&gt;</code>
+Get the last decoded `AudioBuffer`s
+
+**Kind**: instance property of <code>[DragAndDrop](#module_basic-controllers..DragAndDrop)</code>  
+**Read only**: true  
 
 -
 
