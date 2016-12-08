@@ -10,9 +10,9 @@ const controllers = new Set();
 
 /**
  * Change the theme of the controllers, currently 3 themes are available:
- *  - 'light' (default)
- *  - 'grey'
- *  - 'dark'
+ *  - `'light'` (default)
+ *  - `'grey'`
+ *  - `'dark'`
  *
  * @param {String} theme - Name of the theme.
  */
