@@ -100,7 +100,7 @@ controls.addListener((id, value) => console.log(id, value));
     * _inner_
         * [~DragAndDrop](#module_basic-controllers..DragAndDrop)
             * [new DragAndDrop(config)](#new_module_basic-controllers..DragAndDrop_new)
-            * [.value](#module_basic-controllers..DragAndDrop+value) : <code>Object.&lt;AudioBuffer&gt;</code>
+            * [.value](#module_basic-controllers..DragAndDrop+value) : <code>Object.&lt;String, (AudioBuffer\|JSON)&gt;</code>
         * [~Group](#module_basic-controllers..Group)
             * [new Group(config)](#new_module_basic-controllers..Group_new)
             * [.value](#module_basic-controllers..Group+value) : <code>String</code>
@@ -228,7 +228,7 @@ descriptor data.
 
 * [~DragAndDrop](#module_basic-controllers..DragAndDrop)
     * [new DragAndDrop(config)](#new_module_basic-controllers..DragAndDrop_new)
-    * [.value](#module_basic-controllers..DragAndDrop+value) : <code>Object.&lt;AudioBuffer&gt;</code>
+    * [.value](#module_basic-controllers..DragAndDrop+value) : <code>Object.&lt;String, (AudioBuffer\|JSON)&gt;</code>
 
 
 -
@@ -260,8 +260,8 @@ const dragAndDrop = new controllers.DragAndDrop({
 
 <a name="module_basic-controllers..DragAndDrop+value"></a>
 
-#### dragAndDrop.value : <code>Object.&lt;AudioBuffer&gt;</code>
-Get the last decoded `AudioBuffer`s
+#### dragAndDrop.value : <code>Object.&lt;String, (AudioBuffer\|JSON)&gt;</code>
+Get the last results
 
 **Kind**: instance property of <code>[DragAndDrop](#module_basic-controllers..DragAndDrop)</code>  
 **Read only**: true  

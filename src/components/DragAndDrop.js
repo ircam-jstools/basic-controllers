@@ -50,8 +50,8 @@ class DragAndDrop extends display(BaseComponent) {
   }
 
   /**
-   * Get the last decoded `AudioBuffer`s
-   * @type {Object<AudioBuffer>}
+   * Get the last results
+   * @type {Object<String, AudioBuffer|JSON>}
    * @readonly
    */
   get value() {
