@@ -14,7 +14,8 @@ const defaults = {
 };
 
 /**
- * Drag and drop zone for audio files returning `AudioBuffer`s
+ * Drag and drop zone for audio files returning `AudioBuffer`s and/or JSON
+ * descriptor data.
  *
  * @param {Object} config - Override default parameters.
  * @param {String} [config.label='Drag and drop audio files'] - Label of the
@@ -33,7 +34,7 @@ const defaults = {
  *
  * const dragAndDrop = new controllers.DragAndDrop({
  *   container: '#container',
- *   callback: (audioFiles) => console.log(audioFiles),
+ *   callback: (results) => console.log(results),
  * });
  */
 class DragAndDrop extends display(BaseComponent) {
@@ -50,7 +51,7 @@ class DragAndDrop extends display(BaseComponent) {
 
   /**
    * Get the last decoded `AudioBuffer`s
-   * @type {Array<AudioBuffer>}
+   * @type {Object<AudioBuffer>}
    * @readonly
    */
   get value() {
@@ -96,41 +97,60 @@ class DragAndDrop extends display(BaseComponent) {
       e.stopPropagation();
 
       const files = Array.from(e.dataTransfer.files);
-      const audioFiles = files.filter((file) => file.type.match(/^audio/));
-      const buffers = new Array(audioFiles.length);
+      const audioFiles = files.filter((file) => {
+        if (/^audio/.test(file.type)) {
+          file.shortType = 'audio';
+          return true;
+        } else if (/json$/.test(file.type)) {
+          file.shortType = 'json';
+          return true;
+        }
+
+        return false;
+      });
+
+      const results = {};
       let counter = 0;
 
       this.$label.textContent = this.params.labelProcess;
+
+      const testEnd = () => {
+        counter += 1;
+
+        if (counter === audioFiles.length) {
+          this._value = results
+          this.executeListeners(results);
+
+          this.$dropZone.classList.remove('drag');
+          this.$label.textContent = this.params.label;
+        }
+      }
 
       files.forEach((file, index) => {
         const reader = new FileReader();
 
         reader.onload = (e) => {
-          this.params.audioContext
-            .decodeAudioData(e.target.result)
-            .then((audioBuffer) => {
-              buffers[index] = audioBuffer;
-              counter += 1;
-
-              if (counter === audioFiles.length) {
-                this.executeListeners(buffers);
-                this.$dropZone.classList.remove('drag');
-                this.$label.textContent = this.params.label;
-              }
-            })
-            .catch((err) => {
-              buffers[index] = undefined;
-              counter += 1;
-
-              if (counter === audioFiles.length) {
-                this.executeListeners(buffers);
-                this.$dropZone.classList.remove('drag');
-                this.$label.textContent = this.params.label;
-              }
-            });
+          if (file.shortType === 'json') {
+            results[file.name] = JSON.parse(e.target.result);
+            testEnd();
+          } else if (file.shortType === 'audio') {
+            this.params.audioContext
+              .decodeAudioData(e.target.result)
+              .then((audioBuffer) => {
+                results[file.name] = audioBuffer;
+                testEnd();
+              })
+              .catch((err) => {
+                results[file.name] = null;
+                testEnd();
+              });
+          }
         }
 
-        reader.readAsArrayBuffer(file);
+        if (file.shortType === 'json')
+          reader.readAsText(file);
+        else if (file.shortType === 'audio')
+          reader.readAsArrayBuffer(file);
       });
     }, false);
   }

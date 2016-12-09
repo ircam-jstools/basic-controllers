@@ -100,7 +100,7 @@ controls.addListener((id, value) => console.log(id, value));
     * _inner_
         * [~DragAndDrop](#module_basic-controllers..DragAndDrop)
             * [new DragAndDrop(config)](#new_module_basic-controllers..DragAndDrop_new)
-            * [.value](#module_basic-controllers..DragAndDrop+value) : <code>Array.&lt;AudioBuffer&gt;</code>
+            * [.value](#module_basic-controllers..DragAndDrop+value) : <code>Object.&lt;AudioBuffer&gt;</code>
         * [~Group](#module_basic-controllers..Group)
             * [new Group(config)](#new_module_basic-controllers..Group_new)
             * [.value](#module_basic-controllers..Group+value) : <code>String</code>
@@ -221,13 +221,14 @@ Disable default styling (expect a broken ui)
 <a name="module_basic-controllers..DragAndDrop"></a>
 
 ### basic-controllers~DragAndDrop
-Drag and drop zone for audio files returning `AudioBuffer`s
+Drag and drop zone for audio files returning `AudioBuffer`s and/or JSON
+descriptor data.
 
 **Kind**: inner class of <code>[basic-controllers](#module_basic-controllers)</code>  
 
 * [~DragAndDrop](#module_basic-controllers..DragAndDrop)
     * [new DragAndDrop(config)](#new_module_basic-controllers..DragAndDrop_new)
-    * [.value](#module_basic-controllers..DragAndDrop+value) : <code>Array.&lt;AudioBuffer&gt;</code>
+    * [.value](#module_basic-controllers..DragAndDrop+value) : <code>Object.&lt;AudioBuffer&gt;</code>
 
 
 -
@@ -251,7 +252,7 @@ import * as controllers from 'basic-controllers';
 
 const dragAndDrop = new controllers.DragAndDrop({
   container: '#container',
-  callback: (audioFiles) => console.log(audioFiles),
+  callback: (results) => console.log(results),
 });
 ```
 
@@ -259,7 +260,7 @@ const dragAndDrop = new controllers.DragAndDrop({
 
 <a name="module_basic-controllers..DragAndDrop+value"></a>
 
-#### dragAndDrop.value : <code>Array.&lt;AudioBuffer&gt;</code>
+#### dragAndDrop.value : <code>Object.&lt;AudioBuffer&gt;</code>
 Get the last decoded `AudioBuffer`s
 
 **Kind**: instance property of <code>[DragAndDrop](#module_basic-controllers..DragAndDrop)</code>  
