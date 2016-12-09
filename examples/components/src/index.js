@@ -170,5 +170,5 @@ const title3 = new controllers.Title({
 
 const dragNDrop = new controllers.DragAndDrop({
   container: '#container',
-  callback: (audioFiles) => console.log(audioFiles),
+  callback: (results) => console.log(results),
 });
