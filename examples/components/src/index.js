@@ -47,7 +47,7 @@ const toggle = new controllers.Toggle({
     console.log('Toggle =>', active);
 
     if (active)
-      numberBox.value = 0;
+      numberBox.value = Math.PI;
   }
 });
 
