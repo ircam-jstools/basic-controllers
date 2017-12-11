@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 var pkg = require('../package.json');
-var colors = require('colors');
+var chalk = require('chalk');
 var path = require('path');
 
 'use strict';
@@ -19,14 +19,14 @@ function getDeltaTime(time) {
 var log = {
   transpileSuccess: function(src, dest, startTime) {
     var time = getDeltaTime(startTime);
-    var msg = prefix + '%s: successfully transpiled to "%s" (%sms)'.green;
+    var msg = prefix + chalk.green('%s: successfully transpiled to "%s" (%sms)');
 
     console.log(msg, toRel(src), toRel(dest), time);
   },
 
   transpileError: function(err) {
     var parts = err.message.split(':');
-    var msg = prefix + '%s'.red;
+    var msg = prefix + chalk.red('%s'.red);
 
     console.log(msg, toRel(err.message));
     console.log(err.codeFrame);
@@ -34,12 +34,12 @@ var log = {
 
   uglifySuccess: function(src, dest, startTime) {
     var time = getDeltaTime(startTime);
-    var msg = prefix + '%s: successfully uglified to "%s" (%sms)'.green;
+    var msg = prefix + chalk.green('%s: successfully uglified to "%s" (%sms)');
     console.log(msg, toRel(src), toRel(dest), time);
   },
 
   deleteFile: function(filename) {
-    var msg = prefix + '%s: successfully removed'.yellow;
+    var msg = prefix + chalk.yellow('%s: successfully removed');
     console.log(msg, toRel(filename));
   }
 };

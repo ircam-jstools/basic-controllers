@@ -5,6 +5,7 @@ var path = require('path');
 var pkg = require('../package.json');
 var util = require('util');
 var sass = require('node-sass');
+var klaw = require('klaw');
 
 var javascripts = require('./javascripts');
 var log = require('./log');
@@ -98,7 +99,7 @@ function isJs(filename) {
 function _getJsFileList(folder, callback) {
   var files = [];
 
-  fse.walk(folder)
+  klaw(folder)
     .on('data', function(item) {
       if (item.stats.isFile() && isAllowed(item.path) && isJs(item.path))
         files.push(item.path);
@@ -162,7 +163,7 @@ function transpileCss(src, target) {
       res = res.css.toString();
 
       // replace `_prefix_` keyword in css file with `package.name`
-      res = res.replace(/_prefix_/gm, '.' + pkg.name);
+      res = res.replace(/_prefix_/gm, '.' + pkg.name.replace('@ircam/', ''));
       // remove comments - http://upshots.org/javascript/javascript-regexp-to-remove-comments
       res = res.replace(/(\/\*([\s\S]*?)\*\/)|(\/\/(.*)$)/gm, ''); // not so reliable
       // // clean white spaces

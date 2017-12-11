@@ -1,7 +1,7 @@
 import { name } from '../../package.json';
 import styles from './styles-declarations.js';
 
-export const ns = name;
+export const ns = name.replace('@ircam/', '');
 
 const nsClass = `.${ns}`;
 let _disabled = false;

@@ -7,7 +7,7 @@
 ## Install
 
 ```
-npm install [--save] ircam-jstools/basic-controllers
+npm install [--save] @ircam/basic-controllers
 ```
 
 ## Examples
@@ -30,10 +30,10 @@ npm install [--save] ircam-jstools/basic-controllers
 
 ## Usage
 
-Controllers can be instanciated individually :
+Controllers can be instanciated individually:
 
 ```js
-import * as controllers from 'basic-controllers';
+import * as controllers from '@ircam/basic-controllers';
 
 // instanciate individual components
 const slider = new controllers.Slider({
@@ -49,10 +49,10 @@ const slider = new controllers.Slider({
 });
 ```
 
-Or through a factory using a json definition :
+Or through a factory using a `json` definition:
 
 ```js
-import * as controllers from 'basic-controllers';
+import * as controllers from '@ircam/basic-controllers';
 
 const definitions = [
   {

@@ -1,6 +1,6 @@
 import BaseComponent from './BaseComponent';
 import display from '../mixins/display';
-import * as guiComponents from 'gui-components';
+import * as guiComponents from '@ircam/gui-components';
 
 /** @module basic-controllers */
 
