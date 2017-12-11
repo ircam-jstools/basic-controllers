@@ -11,7 +11,7 @@
   "scripts": {
     "bundle": "node ./bin/runner --bundle",
     "deploy": "np --yolo",
-    "doc": "jsdoc2md -t tmpl/README.hbs src/*.js > README.md",
+    "doc": "jsdoc2md -t tmpl/README.hbs src/**/*.js > README.md",
     "transpile": "node ./bin/runner --transpile",
     "version": "npm run transpile && npm run doc && git add README.md",
     "prewatch": "npm run transpile",
