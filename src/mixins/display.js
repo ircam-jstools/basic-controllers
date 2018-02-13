@@ -30,14 +30,11 @@ const display = (superclass) => class extends superclass {
   constructor(...args) {
     super(...args);
 
-    // insert styles and listen window resize when the first controller is created
-    if (controllers.size === 0) {
+    // insert styles when the first controller is created
+    if (controllers.size === 0)
       styles.insertStyleSheet();
 
-      window.addEventListener('resize', function() {
-        controllers.forEach((controller) => controller.resize());
-      });
-    }
+    this.resize = this.resize.bind(this);
 
     controllers.add(this);
   }
@@ -66,16 +63,21 @@ const display = (superclass) => class extends superclass {
     this.$el = document.createElement('div');
     this.$el.classList.add(styles.ns, theme, this.type);
 
+    window.removeEventListener('resize', this.resize);
+    window.addEventListener('resize', this.resize);
+
     return this.$el;
   }
 
   /** @private */
   resize() {
-    const boundingRect = this.$el.getBoundingClientRect();
-    const width = boundingRect.width;
-    const method = width > 600 ? 'remove' : 'add';
+    if (this.$el) {
+      const boundingRect = this.$el.getBoundingClientRect();
+      const width = boundingRect.width;
+      const method = width > 600 ? 'remove' : 'add';
 
-    this.$el.classList[method]('small');
+      this.$el.classList[method]('small');
+    }
   }
 }
 

@@ -1,6 +1,6 @@
 import BaseComponent from './BaseComponent';
 import display from '../mixins/display';
-import * as guiComponents from 'gui-components';
+import * as guiComponents from '@ircam/gui-components';
 
 /** @module basic-controllers */
 
@@ -125,6 +125,8 @@ class Slider extends display(BaseComponent) {
       // the slider propagates the value
       this.slider.value = value;
       this._value = value;
+
+      this.executeListeners(this._value);
     }, false);
   }
 
