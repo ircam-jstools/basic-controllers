@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "babel-runtime": "^6.18.0",
-    "gui-components": "ircam-jstools/gui-components#v1.0.0"
+    "@ircam/gui-components": "^1.0.3"
   },
   "devDependencies": {
     "babel-core": "^6.18.2",
