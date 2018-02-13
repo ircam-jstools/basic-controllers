@@ -125,6 +125,8 @@ class Slider extends display(BaseComponent) {
       // the slider propagates the value
       this.slider.value = value;
       this._value = value;
+
+      this.executeListeners(this._value);
     }, false);
   }
 
